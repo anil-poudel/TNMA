@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/PrimaryDark"
+    tools:context=".LoginTab"
+    >
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_mail"
+        android:drawablePadding="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:ems="15"
+        android:fontFamily="@font/raleway_regular"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/White"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/passcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_passcode"
+        android:drawablePadding="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/email"
+        android:layout_marginTop="40dp"
+        android:ems="15"
+        android:fontFamily="@font/raleway_regular"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="@color/White"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passcode"
+        android:layout_alignEnd="@id/passcode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="@string/forgot_password"
+        android:textColor="@color/AccentLight"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/forgot"
+        android:layout_marginTop="40dp"
+        android:background="@color/Primary"
+        android:clickable="true"
+        android:ems="10"
+        android:fontFamily="@font/raleway_bold"
+        android:hapticFeedbackEnabled="false"
+        android:text="Login"
+        android:textColor="@color/White"
+        android:textColorHighlight="@color/AccentLight"
+        android:textColorLink="@color/White" />
+
+
+</RelativeLayout>

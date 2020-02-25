@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/PrimaryDark"
+    tools:context=".SignupTab"
+    >
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_mail"
+        android:drawablePadding="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:ems="15"
+        android:fontFamily="@font/raleway_regular"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/White"
+        android:textSize="20sp" />
+
+
+<!--Email Confirmation-->
+    <Button
+        android:id="@+id/confirm_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/email"
+        android:layout_marginTop="40dp"
+        android:background="@color/Primary"
+        android:ems="10"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/confirm"
+        android:textColor="@color/White"
+        android:textColorHighlight="@color/AccentLight"
+        android:textColorLink="@color/White" />
+
+    <TextView
+        android:id="@+id/text001"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="Please enter the verification code below."
+        android:textColor="@color/AccentLight"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
+<!--Verification Code-->
+    <EditText
+        android:id="@+id/verification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:drawableStart="@drawable/ic_code"
+        android:drawablePadding="20dp"
+        android:ems="15"
+        android:fontFamily="@font/raleway_regular"
+        android:hint="@string/verification_code"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+<!--Verify Code-->
+    <Button
+        android:id="@+id/verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/verification"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@color/Primary"
+        android:ems="10"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/verify"
+        android:textColor="@color/White"
+        android:textColorHighlight="@color/AccentLight"
+        android:textColorLink="@color/White"
+        android:visibility="invisible" />
+
+<!--    Password Confirmation-->
+    <EditText
+        android:id="@+id/passcode1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:drawableStart="@drawable/ic_passcode"
+        android:drawablePadding="20dp"
+        android:ems="15"
+        android:fontFamily="@font/raleway_regular"
+        android:hint="@string/password"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/passcode2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passcode1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:drawableStart="@drawable/ic_passcode"
+        android:drawablePadding="20dp"
+        android:ems="15"
+        android:fontFamily="@font/raleway_regular"
+        android:hint="@string/confirm_password"
+        android:textColor="@color/White"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+<!--Create Account-->
+    <Button
+        android:id="@+id/create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passcode2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@color/Primary"
+        android:ems="10"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/signup"
+        android:textColor="@color/White"
+        android:textColorHighlight="@color/AccentLight"
+        android:textColorLink="@color/White"
+        android:visibility="invisible" />
+</RelativeLayout>
