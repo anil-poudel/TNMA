@@ -1,12 +1,22 @@
 package com.csce4901.tnma;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.csce4901.tnma.Connector.FirebaseConnector;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /**
@@ -19,6 +29,12 @@ public class LoginTab extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Unbinder unbinder;
+    private FirebaseAuth firebaseAuth;
+    FirebaseConnector fbConnector = new FirebaseConnector();
+
+    @BindView(R.id.email) EditText email;
+    @BindView(R.id.passcode) EditText password;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,6 +75,43 @@ public class LoginTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login_tab, container, false);
+        View v = inflater.inflate(R.layout.fragment_login_tab, container, false);
+        unbinder = ButterKnife.bind(this, v);
+        return v;
+    }
+
+    @OnClick(R.id.loginButton)
+    public void submit() {
+        firebaseAuth = fbConnector.getFirebaseAuthInstance();
+        String user = email.getText().toString();
+        String pass = password.getText().toString();
+        firebaseAuth.signInWithEmailAndPassword(user, pass)
+                .addOnCompleteListener(
+                        task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(MainActivity.getAppContext(),
+                                        "Login successful!!",
+                                        Toast.LENGTH_LONG)
+                                        .show();
+
+                                // if sign-in is successful
+                                // intent to home activity
+                                Intent intent
+                                        = new Intent(MainActivity.getAppContext(),
+                                        MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // sign-in failed
+                                Toast.makeText(MainActivity.getAppContext(),
+                                        "Login failed!!",
+                                        Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

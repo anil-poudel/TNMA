@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.View;
@@ -24,11 +25,14 @@ public class MainActivity extends AppCompatActivity{
 //    TextView txt1;
 //    EditText edit1, edit2, edit3;
 //    Button btn1, btn2, btn3;
+    private static Context context;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
@@ -82,5 +86,9 @@ public class MainActivity extends AppCompatActivity{
 //
 
         }
+
+    public static Context getAppContext() {
+        return MainActivity.context;
+    }
 }
 

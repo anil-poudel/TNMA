@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "891854072029",
+    "firebase_url": "https://tnma-375e2.firebaseio.com",
+    "project_id": "tnma-375e2",
+    "storage_bucket": "tnma-375e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891854072029:android:e5db7ec5d4b342efa2d334",
+        "android_client_info": {
+          "package_name": "com.csce4901.tnma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891854072029-aj7lc2n2mvth869nk7hh51pnjgippo77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCISbJIMm3R0zmaBuM69GsBM-hnBok-U-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891854072029-aj7lc2n2mvth869nk7hh51pnjgippo77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

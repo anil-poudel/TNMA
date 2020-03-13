@@ -1,13 +1,23 @@
 package com.csce4901.tnma;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.csce4901.tnma.Connector.FirebaseConnector;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class SignupTab extends Fragment {
@@ -15,6 +25,11 @@ public class SignupTab extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Unbinder unbinder;
+    private FirebaseAuth firebaseAuth;
+    FirebaseConnector fbConnector = new FirebaseConnector();
+    @BindView(R.id.emailSignup) EditText userEmail;
+    @BindView(R.id.passcode1) EditText userPass;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -43,10 +58,49 @@ public class SignupTab extends Fragment {
         }
     }
 
+    @OnClick(R.id.signupButton)
+    public void signup(){
+        Context context = MainActivity.getAppContext();
+        firebaseAuth = fbConnector.getFirebaseAuthInstance();
+        String user = userEmail.getText().toString();
+        String pass = userPass.getText().toString();
+        firebaseAuth
+                .createUserWithEmailAndPassword(user, pass)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(context,
+                                "Registration successful!",
+                                Toast.LENGTH_LONG)
+                                .show();
+
+                        // if the user created intent to login activity
+                        Intent intent
+                                = new Intent(context,
+                                MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        // Registration failed
+                        Toast.makeText(
+                                context,
+                                "Registration failed!!"
+                                        + " Please try again later",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup_tab, container, false);
+        View v = inflater.inflate(R.layout.fragment_signup_tab, container, false);
+        unbinder = ButterKnife.bind(this, v);
+        return v;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
