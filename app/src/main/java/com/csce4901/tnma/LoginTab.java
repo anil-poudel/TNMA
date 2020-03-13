@@ -89,17 +89,23 @@ public class LoginTab extends Fragment {
                 .addOnCompleteListener(
                         task -> {
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.getAppContext(),
-                                        "Login successful!!",
-                                        Toast.LENGTH_LONG)
-                                        .show();
-
-                                // if sign-in is successful
-                                // intent to home activity
-                                Intent intent
-                                        = new Intent(MainActivity.getAppContext(),
-                                        MainActivity.class);
-                                startActivity(intent);
+                                if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                    Toast.makeText(MainActivity.getAppContext(),
+                                            "Login successful!!",
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                    // if sign-in is successful
+                                    // intent to home activity
+                                    Intent intent
+                                            = new Intent(MainActivity.getAppContext(),
+                                            MainActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(MainActivity.getAppContext(),
+                                            "Please verify your email address",
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                }
                             } else {
                                 // sign-in failed
                                 Toast.makeText(MainActivity.getAppContext(),

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -68,11 +71,21 @@ public class SignupTab extends Fragment {
                 .createUserWithEmailAndPassword(user, pass)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(context,
-                                "Registration successful!",
-                                Toast.LENGTH_LONG)
-                                .show();
-
+                        firebaseAuth.getCurrentUser().sendEmailVerification()
+                                .addOnCompleteListener(task1 -> {
+                                    if(task1.isSuccessful()){
+                                        Toast.makeText(context,
+                                                "Registration successful. Please check email for verification.",
+                                                Toast.LENGTH_LONG)
+                                                .show();
+                                    }
+                                    else{
+                                        Toast.makeText(context,
+                                                task1.getException().getMessage(),
+                                                Toast.LENGTH_LONG)
+                                                .show();
+                                    }
+                                });
                         // if the user created intent to login activity
                         Intent intent
                                 = new Intent(context,
