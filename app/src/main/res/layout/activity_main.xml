@@ -9,6 +9,14 @@
     android:background="@color/PrimaryDark"
     >
 
+    <ImageView
+        android:id="@+id/tnmaLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7sp"
+        />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -43,17 +51,17 @@
     >
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabLayout"
-            />
-
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:id="@+id/pager"
-            />
+            >
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.viewpager.widget.ViewPager>
 
     </LinearLayout>
 
