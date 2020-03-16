@@ -31,13 +31,20 @@
         android:textColor="@color/AccentLight"
         android:textSize="32sp" />
 
+<!--    TODO: Add Logo From Firebase Storage-->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/subtitle"
+        android:layout_below="@id/logo"
         android:layout_marginTop="30dp"
         android:id="@+id/linear"
     >

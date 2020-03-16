@@ -19,11 +19,6 @@ import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginTab#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +27,10 @@ public class LoginTab extends Fragment {
     private Unbinder unbinder;
     private FirebaseAuth firebaseAuth;
     FirebaseConnector fbConnector = new FirebaseConnector();
+
+
+    //for Guest Login bypass
+    boolean bypass = false;
 
     @BindView(R.id.email) EditText email;
     @BindView(R.id.passcode) EditText password;
@@ -80,38 +79,66 @@ public class LoginTab extends Fragment {
         return v;
     }
 
+    @OnClick(R.id.guestLoginButton)
+    public void guestbypass()
+    {
+        Toast.makeText(getContext(), "Logging in as Guest.", Toast.LENGTH_LONG).show();
+        Intent intent1 = new Intent(getContext(),Dashboard.class);
+        startActivity(intent1);
+    }
+
+
     @OnClick(R.id.loginButton)
     public void submit() {
         firebaseAuth = fbConnector.getFirebaseAuthInstance();
         String user = email.getText().toString();
         String pass = password.getText().toString();
-        firebaseAuth.signInWithEmailAndPassword(user, pass)
-                .addOnCompleteListener(
-                        task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.getAppContext(),
-                                        "Login successful!!",
-                                        Toast.LENGTH_LONG)
-                                        .show();
 
-                                // if sign-in is successful
-                                // intent to home activity
-                                Intent intent
-                                        = new Intent(MainActivity.getAppContext(),
-                                        MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                // sign-in failed
-                                Toast.makeText(MainActivity.getAppContext(),
-                                        "Login failed!!",
-                                        Toast.LENGTH_LONG)
-                                        .show();
-                            }
-                        });
+
+        //TODO: Error Checking for Email and Password Syntax
+        if(user.isEmpty() || pass.isEmpty())
+        {
+            Toast.makeText(getContext(), "Email or Password field cannot be empty. ", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            firebaseAuth.signInWithEmailAndPassword(user, pass)
+                    .addOnCompleteListener(
+                            task -> {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(MainActivity.getAppContext(),
+                                            "Login successful!!",
+                                            Toast.LENGTH_LONG)
+                                            .show();
+
+                                    // if sign-in is successful
+
+                                    //TODO:
+                                    //If email not verified, ask to verify
+                                    //If email verified, first time login
+                                    //Goto Questionnaire intent
+
+                                    //If not first login, goto dashboard
+                                    Intent intent
+                                            = new Intent(MainActivity.getAppContext(),
+                                            Dashboard.class);
+                                    startActivity(intent);
+                                } else {
+                                    // sign-in failed
+                                    Toast.makeText(MainActivity.getAppContext(),
+                                            "Unable to sign in.\nPlease check your email and/or password.",
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                }
+                            });
+        }
     }
 
     @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public interface OnFragmentInteractionListener {
     }
 }
