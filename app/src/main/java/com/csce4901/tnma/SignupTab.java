@@ -86,15 +86,10 @@ public class SignupTab extends Fragment {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 Toast.makeText(context,
-                                        "Registration successful!",
+                                        "Registration successful!" +
+                                                "\nPlease check your email for the verification link.",
                                         Toast.LENGTH_LONG)
                                         .show();
-
-                                // if the user created intent to login activity
-                                Intent intent
-                                        = new Intent(context,
-                                        MainActivity.class);
-                                startActivity(intent);
                             } else {
                                 // Registration failed
                                 Toast.makeText(

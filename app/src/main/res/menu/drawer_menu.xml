@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profileMenu"
+        android:title="Profile"
+        android:icon="@drawable/ic_menu_camera"/>
+
+    <item
+        android:id="@+id/contactMenu"
+        android:title="Contact Us"
+        android:icon="@drawable/ic_menu_camera"/>
+
+    <item
+        android:id="@+id/donateMenu"
+        android:title="Donate"
+        android:icon="@drawable/ic_menu_camera"/>
+
+    <item
+        android:id="@+id/logoutMenu"
+        android:title="Log Out"
+        android:icon="@drawable/ic_menu_camera"/>
+
+</menu>

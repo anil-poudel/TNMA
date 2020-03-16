@@ -83,7 +83,7 @@ public class LoginTab extends Fragment {
     public void guestbypass()
     {
         Toast.makeText(getContext(), "Logging in as Guest.", Toast.LENGTH_LONG).show();
-        Intent intent1 = new Intent(MainActivity.getAppContext(),MainActivity.class);
+        Intent intent1 = new Intent(getContext(),Dashboard.class);
         startActivity(intent1);
     }
 
@@ -112,10 +112,16 @@ public class LoginTab extends Fragment {
                                             .show();
 
                                     // if sign-in is successful
-                                    // intent to home activity
+
+                                    //TODO:
+                                    //If email not verified, ask to verify
+                                    //If email verified, first time login
+                                    //Goto Questionnaire intent
+
+                                    //If not first login, goto dashboard
                                     Intent intent
                                             = new Intent(MainActivity.getAppContext(),
-                                            MainActivity.class);
+                                            Dashboard.class);
                                     startActivity(intent);
                                 } else {
                                     // sign-in failed

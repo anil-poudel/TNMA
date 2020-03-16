@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sideDrawer"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/Gray"
+    tools:openDrawer="end"
+    tools:context=".Dashboard">
+    
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/PrimaryDark">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="@color/Primary"
+        />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/dashboardPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="50dp"/>
+
+</RelativeLayout>
+
+
+<!--Bottom Navigation-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_bar"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/Primary"
+        app:fabAlignmentMode="center"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="5dp"
+        app:hideOnScroll="true" >
+
+
+        <LinearLayout
+            android:id="@+id/bottomBarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="15"
+            android:layout_marginEnd="10dp"
+            >
+
+<!--            News &amp; Events-->
+        <LinearLayout
+            android:id="@+id/newsButton"
+            android:layout_weight="5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:padding="0dp"
+                android:src="@drawable/ic_events"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News &amp; Events"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/White"
+                />
+        </LinearLayout>
+
+<!--WhiteSpace-->
+            <LinearLayout
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+<!--Questions and Answers-->
+        <LinearLayout
+            android:id="@+id/blogButton"
+            android:layout_weight="5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:padding="0dp"
+                android:src="@drawable/ic_blog"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blog Posts"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/White"
+                />
+        </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/White"
+            app:fabSize="normal"
+            app:layout_anchor="@id/bottom_bar"
+            app:srcCompat="@drawable/ic_home" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:id="@+id/navigationView"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/header"
+        android:background="@color/Gray"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

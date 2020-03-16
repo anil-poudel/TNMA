@@ -22,10 +22,6 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements LoginTab.OnFragmentInteractionListener, SignupTab.OnFragmentInteractionListener{
 
-//    Variables For Signup Transitions
-//    TextView txt1;
-//    EditText edit1, edit2, edit3;
-//    Button btn1, btn2, btn3;
     private static Context context;
 
 
