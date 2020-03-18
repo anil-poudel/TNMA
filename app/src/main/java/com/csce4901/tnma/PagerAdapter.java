@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    int numTabs;
+    private int numTabs;
 
-    public PagerAdapter (FragmentManager fm, int numberOfTabs) {
+    PagerAdapter(FragmentManager fm, int numberOfTabs) {
         super(fm);
         this.numTabs = numberOfTabs;
     }

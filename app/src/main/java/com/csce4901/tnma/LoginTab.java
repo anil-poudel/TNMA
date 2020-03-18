@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.google.firebase.auth.FirebaseAuth;
 
-
 public class LoginTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +26,6 @@ public class LoginTab extends Fragment {
     private Unbinder unbinder;
     private FirebaseAuth firebaseAuth;
     FirebaseConnector fbConnector = new FirebaseConnector();
-
 
     //for Guest Login bypass
     boolean bypass = false;
@@ -94,35 +92,36 @@ public class LoginTab extends Fragment {
         String user = email.getText().toString();
         String pass = password.getText().toString();
 
-
         //TODO: Error Checking for Email and Password Syntax
         if(user.isEmpty() || pass.isEmpty())
         {
             Toast.makeText(getContext(), "Email or Password field cannot be empty. ", Toast.LENGTH_LONG).show();
-        }
-        else {
-
+        } else {
             firebaseAuth.signInWithEmailAndPassword(user, pass)
                     .addOnCompleteListener(
                             task -> {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(MainActivity.getAppContext(),
-                                            "Login successful!!",
-                                            Toast.LENGTH_LONG)
-                                            .show();
-
                                     // if sign-in is successful
+                                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                        Toast.makeText(MainActivity.getAppContext(),
+                                                "Login successful!!",
+                                                Toast.LENGTH_LONG)
+                                                .show();
+                                        //If email verified, first time login
+                                        //TODO: Goto Questionnaire intent
 
-                                    //TODO:
-                                    //If email not verified, ask to verify
-                                    //If email verified, first time login
-                                    //Goto Questionnaire intent
-
-                                    //If not first login, goto dashboard
-                                    Intent intent
-                                            = new Intent(MainActivity.getAppContext(),
-                                            Dashboard.class);
-                                    startActivity(intent);
+                                        //If not first login, goto dashboard
+                                        Intent intent
+                                                = new Intent(MainActivity.getAppContext(),
+                                                Dashboard.class);
+                                        startActivity(intent);
+                                    } else {
+                                        //If email not verified, ask to verify
+                                        Toast.makeText(MainActivity.getAppContext(),
+                                                "Please verify your email address",
+                                                Toast.LENGTH_LONG)
+                                                .show();
+                                    }
                                 } else {
                                     // sign-in failed
                                     Toast.makeText(MainActivity.getAppContext(),
