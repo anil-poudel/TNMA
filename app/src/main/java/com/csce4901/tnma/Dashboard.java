@@ -47,6 +47,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         viewPager = findViewById(R.id.dashboardPager);
         adapter = new DashboardSwipeAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1);
 
         drawerLayout = findViewById(R.id.sideDrawer);
         toolbar = findViewById(R.id.toolbar);
