@@ -11,18 +11,17 @@
 
     <ImageView
         android:id="@+id/tnmaLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="7sp"
         />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tnmaLogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
         android:fontFamily="@font/raleway_bold"
         android:text="T N M A"
         android:textColor="@color/Accent"
@@ -38,6 +37,8 @@
         android:text="Connect"
         android:textColor="@color/AccentLight"
         android:textSize="32sp" />
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +59,16 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" >
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.tabs.TabLayout>
         </androidx.viewpager.widget.ViewPager>
 
     </LinearLayout>
