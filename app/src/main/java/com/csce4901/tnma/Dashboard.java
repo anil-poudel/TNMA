@@ -1,42 +1,40 @@
 package com.csce4901.tnma;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
-public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    //Items
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
     ActionBarDrawerToggle toggleDrawer;
-    Fragment selectedfragment;
-
     private ViewPager viewPager;
-    private DashboardSwipeAdapter adapter;
+    Snackbar snackbar;
+
+    //User Role
+    private int role = 1;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -45,21 +43,24 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.activity_dashboard);
 
         viewPager = findViewById(R.id.dashboardPager);
-        adapter = new DashboardSwipeAdapter(getSupportFragmentManager());
+        DashboardSwipeAdapter adapter = new DashboardSwipeAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        //Set home as default fragment
+        viewPager.setCurrentItem(1);
 
-        drawerLayout = findViewById(R.id.sideDrawer);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
         setSupportActionBar(toolbar);
-
+        toolbar.inflateMenu(R.menu.quickaction_menu);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        drawerLayout = findViewById(R.id.sideDrawer);
         toggleDrawer = new ActionBarDrawerToggle(Dashboard.this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toggleDrawer);
         toggleDrawer.syncState();
 
-        //TODO:Set home as default fragment
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
         homeBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,14 +91,18 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
+        //Double click back to logout
+        snackbar = Snackbar.make(drawerLayout, "Please press Back again to Logout.", Snackbar.LENGTH_SHORT);
+
     }
 
+
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public boolean onNavigationItemSelected( MenuItem menuItem) {
         switch (menuItem.getItemId())
         {
             case (R.id.profileMenu):
-                Toast.makeText(this, "TODO: Profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "TODO: Profile", Toast.LENGTH_SHORT).show();
                 break;
             case (R.id.contactMenu):
                 Toast.makeText(Dashboard.this, "TODO: Contact", Toast.LENGTH_SHORT).show();
@@ -106,9 +111,51 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
                 break;
             case (R.id.logoutMenu):
-                Toast.makeText(Dashboard.this, "TODO: LogOut", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                finish();
                 break;
         }
-        return false;
+        return true;
+    }
+
+    //Setup Actionbar with Quick Actions depending on User Roles
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.quickaction_menu, menu);
+
+        //For Guest
+        if (role == 0)
+        {
+                menu.getItem(0).setVisible(false);
+                menu.getItem(1).setVisible(false);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        switch (menuItem.getItemId())
+        {
+            case (R.id.ask_Action):
+                Toast.makeText(Dashboard.this, "TODO: Ask a Question", Toast.LENGTH_SHORT).show();
+                break;
+
+            case (R.id.message_Action):
+                Toast.makeText(Dashboard.this, "TODO: Direct Messaging", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
+
+    //Double press back button to exit
+    @Override
+    public void onBackPressed() {
+        if(snackbar.isShown())
+        {
+            FirebaseAuth.getInstance().signOut();
+            super.onBackPressed();
+        }else {
+            snackbar.show();
+        }
     }
 }
