@@ -29,4 +29,6 @@
 
     <string name="drawerOpen">Dashboard</string>
     <string name="drawerClose">Dashboard</string>
+
+    <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
 </resources>
