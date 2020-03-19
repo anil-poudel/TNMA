@@ -8,6 +8,7 @@
     <color name="Black">#000</color>
     <color name="Gray">#121F26</color>
 
+
     <color name="YELLOW">#FEBD1B</color>
     <color name="DARKYELLOW">#E4A401</color>
 
@@ -18,4 +19,8 @@
     <color name="DARKGREEN">#006622</color>
 
     <color name="end">#50FFFFFF</color>
+
+
+    
+
 </resources>

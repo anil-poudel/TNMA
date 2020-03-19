@@ -12,24 +12,21 @@ import butterknife.OnClick;
 
 public class Questionnaire extends AppCompatActivity {
 
-    @BindView(R.id.submitAnswer) Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
-
-        //TODO: Retrieve answers...
-
-        //Submit button
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.getAppContext(), Dashboard.class);
-                startActivity(intent);
-            }
-        });
-
-
+        getAnswer();
     }
+
+    public void getAnswer(){
+        Button submitButton = findViewById(R.id.submitAnswer);
+        submitButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.getAppContext(), Dashboard.class);
+            startActivity(intent);
+        });
+    }
+
+
 }
