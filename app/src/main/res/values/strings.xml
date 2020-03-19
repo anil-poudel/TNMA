@@ -13,7 +13,7 @@
     <string name="verify">Verify</string>
     <string name="confirm">Confirm</string>
     <string name="verification_code">Verification Code</string>
-    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_dashboard">TNMA Connect</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -27,8 +27,17 @@
 
     <string name="home_second">Home Second</string>
 
+
     <string name="drawerOpen">Dashboard</string>
     <string name="drawerClose">Dashboard</string>
 
     <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
+
+    <string name="drawerOpen">Dashboard</string>
+    <string name="drawerClose">Dashboard</string>
+
+    <string name="drawerOpen">TNMA</string>
+    <string name="drawerClose">TNMA</string>
+    <string name="donate">Donate</string>
+
 </resources>
