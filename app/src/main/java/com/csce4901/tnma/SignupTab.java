@@ -18,6 +18,9 @@ import android.widget.Toast;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.csce4901.tnma.Validator.InputValidator.EMAIL;
+import static com.csce4901.tnma.Validator.InputValidator.PASSWORD;
+
 public class SignupTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,9 +70,12 @@ public class SignupTab extends Fragment {
         String passConfirm = userPassConfirm.getText().toString();
 
         //TODO: Error Checking for Email and Password Syntax
-        if(user.isEmpty() || pass.isEmpty())
+        if(!EMAIL.validateInput(EMAIL.name(), user))
         {
-            Toast.makeText(getContext(), "Email or Password field cannot be empty. ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Invalid Email", Toast.LENGTH_LONG).show();
+        }
+        else if (!PASSWORD.validateInput(PASSWORD.name(), pass)) {
+            Toast.makeText(getContext(), "Invalid Password", Toast.LENGTH_LONG).show();
         } else {
             if(pass.equals(passConfirm)) {
 
