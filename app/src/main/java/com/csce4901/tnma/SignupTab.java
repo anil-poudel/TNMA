@@ -9,6 +9,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
+import com.csce4901.tnma.models.GeneralUser;
+import com.csce4901.tnma.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.csce4901.tnma.Validator.InputValidator.EMAIL;
 import static com.csce4901.tnma.Validator.InputValidator.PASSWORD;
 
@@ -83,6 +90,7 @@ public class SignupTab extends Fragment {
                         .createUserWithEmailAndPassword(user, pass)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
+                                storeGeneralUserDataToFirestore(user);
                                 firebaseAuth.getCurrentUser().sendEmailVerification()
                                         .addOnCompleteListener(task1 -> {
                                             if(task1.isSuccessful()){
@@ -116,6 +124,19 @@ public class SignupTab extends Fragment {
                 Toast.makeText(getContext(), "Passwords do not match.", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    protected void storeGeneralUserDataToFirestore(String email){
+        User generalUser = new GeneralUser(email, true);
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        db.collection("users").document(email).set(generalUser)
+                .addOnSuccessListener(aVoid -> {
+                    Log.i(TAG, "User detail stored in database for: " + email);
+                })
+                .addOnFailureListener(aVoid -> {
+            Log.e(TAG, "Unable to store user detail for: " + email);
+        });
     }
 
     @Override
