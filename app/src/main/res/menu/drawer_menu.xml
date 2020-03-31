@@ -17,6 +17,11 @@
         android:icon="@drawable/ic_menu_camera"/>
 
     <item
+        android:id="@+id/registerMenu"
+        android:title="Register"
+        android:icon="@drawable/ic_menu_camera"/>
+
+    <item
         android:id="@+id/logoutMenu"
         android:title="Log Out"
         android:icon="@drawable/ic_menu_camera"/>
