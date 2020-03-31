@@ -49,7 +49,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //Set home as default fragment
         viewPager.setCurrentItem(1);
 
-
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -57,11 +56,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toolbar.inflateMenu(R.menu.quickaction_menu);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         drawerLayout = findViewById(R.id.sideDrawer);
         toggleDrawer = new ActionBarDrawerToggle(Dashboard.this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toggleDrawer);
         toggleDrawer.syncState();
+
+        //Setup visibility of menu items in navigation drawer based on roles
+        Menu drawer_menu = navigationView.getMenu();
+        if(role!=0)
+            drawer_menu.findItem(R.id.registerMenu).setVisible(false);
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
         homeBottomNav.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +81,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         newsBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Dashboard.this, "News Clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(Dashboard.this, "News Clicked", Toast.LENGTH_SHORT).show();
                viewPager.setCurrentItem(0);
             }
         });
@@ -88,7 +91,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         blogBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Dashboard.this, "Blog Clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(Dashboard.this, "Blog Clicked", Toast.LENGTH_SHORT).show();
               viewPager.setCurrentItem(2);
             }
         });
@@ -113,7 +116,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
                 break;
             case (R.id.registerMenu):
-                Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "TODO: Register for Events", Toast.LENGTH_SHORT).show();
                 break;
             case (R.id.logoutMenu):
                 FirebaseAuth.getInstance().signOut();
@@ -127,7 +130,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.quickaction_menu, menu);
-
         //For Guest
         if (role == 0)
         {
