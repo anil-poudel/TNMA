@@ -112,6 +112,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             case (R.id.donateMenu):
                 Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
                 break;
+            case (R.id.registerMenu):
+                Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
+                break;
             case (R.id.logoutMenu):
                 FirebaseAuth.getInstance().signOut();
                 finish();
