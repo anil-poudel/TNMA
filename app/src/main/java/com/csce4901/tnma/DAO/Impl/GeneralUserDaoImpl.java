@@ -44,7 +44,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
-    public void enableRegisterForGeneralUser(String email, MenuItem registerMenu){
+    public void disableRegisterOptionCheck(String email, MenuItem registerMenu){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection("users").document(email);

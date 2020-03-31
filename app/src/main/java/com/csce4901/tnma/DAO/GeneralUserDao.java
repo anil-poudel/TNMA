@@ -6,5 +6,5 @@ import java.util.concurrent.ExecutionException;
 
 public interface GeneralUserDao {
     public void createGeneralUser(String email);
-    public void enableRegisterForGeneralUser(String email, MenuItem menuItem);
+    public void disableRegisterOptionCheck(String email, MenuItem menuItem);
 }
