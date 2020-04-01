@@ -67,8 +67,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         GeneralUserDao user = new GeneralUserDaoImpl();
         Menu drawer_menu = navigationView.getMenu();
         MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        user.disableRegisterOptionCheck(email, registerUserItem);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            user.disableRegisterOptionCheck(email, registerUserItem);
+        }
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
         homeBottomNav.setOnClickListener(new View.OnClickListener() {
