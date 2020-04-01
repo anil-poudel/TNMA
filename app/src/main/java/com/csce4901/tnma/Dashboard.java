@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.csce4901.tnma.DAO.GeneralUserDao;
+import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -62,9 +64,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toggleDrawer.syncState();
 
         //Setup visibility of menu items in navigation drawer based on roles
+        GeneralUserDao user = new GeneralUserDaoImpl();
         Menu drawer_menu = navigationView.getMenu();
-        if(role!=0)
-            drawer_menu.findItem(R.id.registerMenu).setVisible(false);
+        MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        user.disableRegisterOptionCheck(email, registerUserItem);
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
         homeBottomNav.setOnClickListener(new View.OnClickListener() {

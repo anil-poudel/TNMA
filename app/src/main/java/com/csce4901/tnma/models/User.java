@@ -3,6 +3,7 @@ package com.csce4901.tnma.models;
 import java.util.List;
 
 public abstract class User {
+
     private String email;
     // role 0 -> admin, 1 -> general user, 2 -> student, 3 -> mentor
     private int role;
@@ -13,6 +14,9 @@ public abstract class User {
         this.email = email;
         this.role = 1;  //default role set to general user
         this.roleVerified = roleVerified;
+    }
+
+    public User() {
     }
 
     public String getEmail() {
