@@ -64,12 +64,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toggleDrawer.syncState();
 
         //Setup visibility of menu items in navigation drawer based on roles
-        GeneralUserDao user = new GeneralUserDaoImpl();
         Menu drawer_menu = navigationView.getMenu();
-        MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
+            GeneralUserDao generalUser = new GeneralUserDaoImpl();
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-            user.disableRegisterOptionCheck(email, registerUserItem);
+            generalUser.disableVerifiedMemberFeature(email, registerUserItem, null);
         }
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
@@ -137,10 +137,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.quickaction_menu, menu);
         //For Guest
-        if (role == 0)
-        {
-                menu.getItem(0).setVisible(false);
-                menu.getItem(1).setVisible(false);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+            GeneralUserDao generalUser = new GeneralUserDaoImpl();
+            generalUser.disableVerifiedMemberFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                    null, menu);
         }
         return true;
     }
