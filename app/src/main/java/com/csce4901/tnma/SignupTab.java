@@ -9,7 +9,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +18,8 @@ import android.widget.Toast;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.GeneralUserDao;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
-import com.csce4901.tnma.models.GeneralUser;
-import com.csce4901.tnma.models.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.csce4901.tnma.Validator.InputValidator.EMAIL;
 import static com.csce4901.tnma.Validator.InputValidator.PASSWORD;
 

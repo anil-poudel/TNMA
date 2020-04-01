@@ -8,8 +8,8 @@ import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.Constants.UserConstant;
 import com.csce4901.tnma.DAO.GeneralUserDao;
 import com.csce4901.tnma.MainActivity;
-import com.csce4901.tnma.models.GeneralUser;
-import com.csce4901.tnma.models.User;
+import com.csce4901.tnma.Models.GeneralUser;
+import com.csce4901.tnma.Models.User;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,6 +49,8 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                         // disable register option in menu for general user
                         if(registerMenu != null)
                             registerMenu.setVisible(false);
+                    }
+                    else {
                         // disable ask a question & messaging for general user
                         if(menu != null){
                             menu.getItem(0).setVisible(false);

@@ -1,4 +1,4 @@
-package com.csce4901.tnma.models;
+package com.csce4901.tnma.Models;
 
 import java.util.List;
 

@@ -3,8 +3,8 @@ package com.csce4901.tnma.DAO.Impl;
 import android.util.Log;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
-import com.csce4901.tnma.models.Student;
-import com.csce4901.tnma.models.User;
+import com.csce4901.tnma.Models.Student;
+import com.csce4901.tnma.Models.User;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 

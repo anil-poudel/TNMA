@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.StudentDao;
-import com.csce4901.tnma.models.Student;
-import com.csce4901.tnma.models.User;
+import com.csce4901.tnma.Models.Student;
+import com.csce4901.tnma.Models.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
