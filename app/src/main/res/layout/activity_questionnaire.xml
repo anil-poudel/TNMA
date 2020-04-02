@@ -4,19 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/PrimaryDark"
+    android:background="@drawable/mainback"
     tools:context=".Questionnaire">
 
-<!--    TODO: Add Questionnaire-->
+    <!--    TODO: Add Questionnaire-->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/SlideViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="459dp" />
 
-    <Button
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
+
+    <LinearLayout
+        android:id="@+id/dotsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/submitAnswer"
-        android:text="Submit"
-        android:backgroundTint="@color/Primary"/>
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        android:padding="30dp"
+        android:layout_alignParentBottom="true">
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/prevBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Back"
+        android:visibility="invisible" />
+    <Button
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Next" />
+
+    <Spinner
+        android:id="@+id/userrole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/role_arrays"
+        android:prompt="@string/role_prompt"
+        android:layout_below="@+id/SlideViewPager"
+        android:layout_marginTop="15dp"
+        android:layout_centerInParent="true"/>
+
+    <EditText
+        android:id="@+id/fnamefield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SlideViewPager"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:singleLine="true"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/lnamefield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fnamefield"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:singleLine="true"
+        android:visibility="invisible" />
+
+    <EditText
+    android:id="@+id/cityfield"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/SlideViewPager"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="15dp"
+    android:ems="10"
+    android:hint="city"
+    android:singleLine="true"
+    android:visibility="invisible"
+    />
+    <EditText
+        android:id="@+id/statefield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cityfield"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:visibility="invisible"
+        android:singleLine="true"
+        android:hint="state"
+        />
+
+
+
+    <EditText
+        android:id="@+id/phonefield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SlideViewPager"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:singleLine="true"
+        android:visibility="invisible"
+        />
 
 
 </RelativeLayout>
