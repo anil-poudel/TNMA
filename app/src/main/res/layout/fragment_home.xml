@@ -259,11 +259,31 @@
 
               </androidx.cardview.widget.CardView>
 
+              <androidx.constraintlayout.widget.ConstraintLayout
+                  android:layout_height="match_parent"
+                  android:layout_width="match_parent"
+                  >
+
+
+                  <Button
+                      android:id="@+id/memberBtn"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Member"
+                      android:layout_marginTop="20dp"
+                      app:layout_constraintBottom_toBottomOf="parent"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      app:layout_constraintRight_toRightOf="parent"
+                      app:layout_constraintTop_toTopOf="parent"/>
+              </androidx.constraintlayout.widget.ConstraintLayout>
+
           </LinearLayout>
 
 
 
       </androidx.core.widget.NestedScrollView>
+
+
 
 
 </LinearLayout>

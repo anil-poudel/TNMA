@@ -28,10 +28,24 @@
     <string name="home_second">Home Second</string>
 
 
+
+
+    <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
+
+
     <string name="drawerOpen">Dashboard</string>
     <string name="drawerClose">Dashboard</string>
 
-    <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
+
+
     <string name="donate">Donate</string>
+
+    <string name="role_prompt">Choose your role</string>
+
+    <string-array name="role_arrays">
+        <item>Mentor</item>
+        <item>Student</item>
+        <item>Guest</item>
+    </string-array>
 
 </resources>
