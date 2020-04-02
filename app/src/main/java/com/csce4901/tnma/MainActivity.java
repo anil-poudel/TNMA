@@ -5,11 +5,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.google.android.material.tabs.TabLayout;
