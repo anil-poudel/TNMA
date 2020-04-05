@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +18,14 @@ import android.widget.Toast;
 
 import com.csce4901.tnma.DAO.Impl.StudentDaoImpl;
 import com.csce4901.tnma.DAO.Impl.MentorDaoImpl;
+import com.csce4901.tnma.DAO.MentorDao;
+import com.csce4901.tnma.DAO.StudentDao;
 import com.csce4901.tnma.Models.Mentor;
 import com.csce4901.tnma.Models.Student;
+import com.csce4901.tnma.Models.User;
+import com.google.firebase.auth.FirebaseAuth;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class Questionnaire extends AppCompatActivity  {
@@ -97,20 +104,26 @@ public class Questionnaire extends AppCompatActivity  {
                 {
                     phone = nphonefield.getText().toString();
 
-                    if ( user_type.equals("Student"))
-                    {
-                        //TO DO - abiral
-                           /*create a Student
-                         first_name,last_name,city,state,phone
-                           */
-                    }else if (user_type.equals("Mentor"))
-                    {
-                          /*create a mentor
-                        first_name,last_name,city,state,phone
-                        */
+                    if ( user_type.equals("Student")) {
+                        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                            String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            StudentDao student = new StudentDaoImpl();
+                            student.createStudent(userEmail, first_name, last_name, phone, city, state, null, null);
+                        }
+                        else{
+                            Log.e(TAG, "Logged in user instance not found");
+                        }
+                    }else if (user_type.equals("Mentor")) {
+                        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                            String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            MentorDao mentor = new MentorDaoImpl();
+                            mentor.createMentor(userEmail, first_name, last_name, phone, city, state, null, null);
+                        }
+                        else {
+                            Log.e(TAG, "Logged in user instance not found");
+                        }
                     }
                    //Toast.makeText(getApplicationContext(),user_type + " Created",Toast.LENGTH_LONG).show(); //display toast message
-
                     finish();
                 }}
 
