@@ -13,6 +13,8 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.csce4901.tnma.Constants.UserConstant.FS_EVENTS_COLLECTION;
+import static com.csce4901.tnma.Constants.UserConstant.FS_EVENT_ENROLLED_USERS;
 
 public class EventDaoImpl implements EventDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
@@ -22,7 +24,7 @@ public class EventDaoImpl implements EventDao {
         Event newEvent = new Event(title, description, address, date, time);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        db.collection("events").document(title).set(newEvent)
+        db.collection(FS_EVENTS_COLLECTION).document(title).set(newEvent)
                 .addOnSuccessListener(aVoid -> {
                     Log.i(TAG, "Event detail stored in database for: " + title);
                 })
@@ -35,22 +37,18 @@ public class EventDaoImpl implements EventDao {
     public void addUserToEvent(String newUserEmail, String eventTitle) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        DocumentReference docRef = db.collection("events").document(eventTitle);
+        DocumentReference docRef = db.collection(FS_EVENTS_COLLECTION).document(eventTitle);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 assert document != null;
                 if (document.exists()) {
                     Event event = document.toObject(Event.class);
-                    System.out.println("EVENT RETRIEVED ----> " + event.toString());
                     List<String> existingUsersForEvent = event.getEnrolledUsers();
-                    if(existingUsersForEvent == null){
-                        System.out.println("<<<<< EVENTS USER LIST WAS NULL >>>>");
-                    }
                     existingUsersForEvent.add(newUserEmail);
-                    db.collection("events")
+                    db.collection(FS_EVENTS_COLLECTION)
                             .document(eventTitle)
-                            .set(event, SetOptions.mergeFields("enrolledUsers"));
+                            .set(event, SetOptions.mergeFields(FS_EVENT_ENROLLED_USERS));
                 } else {
                     Log.e(TAG, "Event does not exist: " + eventTitle);
                 }

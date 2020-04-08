@@ -9,6 +9,7 @@ import com.csce4901.tnma.Models.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.csce4901.tnma.Constants.UserConstant.FS_USERS_COLLECTION;
 
 public class MentorDaoImpl implements MentorDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
@@ -19,7 +20,7 @@ public class MentorDaoImpl implements MentorDao {
         User mentor = new Mentor(email, fname, lname, phone, city, state);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        db.collection("users").document(email).set(mentor)
+        db.collection(FS_USERS_COLLECTION).document(email).set(mentor)
                 .addOnSuccessListener(aVoid -> {
                     Log.i(TAG, "Mentor detail stored in database for: " + email);
                 })

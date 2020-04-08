@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.csce4901.tnma.Constants.UserConstant.FS_USERS_COLLECTION;
 
 public class GeneralUserDaoImpl implements GeneralUserDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
@@ -26,7 +27,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
         User generalUser = new GeneralUser(email, true);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        db.collection("users").document(email).set(generalUser)
+        db.collection(FS_USERS_COLLECTION).document(email).set(generalUser)
                 .addOnSuccessListener(aVoid -> {
                     Log.i(TAG, "User detail stored in database for: " + email);
                 })
@@ -39,7 +40,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     public void manageVisibilityForGuestUsrFeature(String email, MenuItem registerMenu, Menu menu, Button btn){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        DocumentReference docRef = db.collection("users").document(email);
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
