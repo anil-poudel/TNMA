@@ -62,4 +62,12 @@ public class EventDaoImpl implements EventDao {
     public void listAllEvents() {
 
     }
+
+    @Override
+    public void deleteEvent(String eventTitle) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_EVENTS_COLLECTION).document(eventTitle);
+        docRef.delete();
+    }
 }
