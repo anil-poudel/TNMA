@@ -17,7 +17,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+
 import java.util.Objects;
+
+import static com.csce4901.tnma.Constants.UserConstant.FS_LOGO;
+import static com.csce4901.tnma.Constants.UserConstant.FS_LOGO_DOC;
 
 public class MainActivity extends AppCompatActivity implements LoginTab.OnFragmentInteractionListener, SignupTab.OnFragmentInteractionListener{
 
@@ -32,14 +36,11 @@ public class MainActivity extends AppCompatActivity implements LoginTab.OnFragme
         MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
-
         //set logo dynamically
         retrieveDynamicLogoFromDB();
         //set tabs
         setupTabs();
     }
-
-
 
     public static Context getAppContext() {
         return MainActivity.context;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LoginTab.OnFragme
         tnmaLogo = findViewById(R.id.tnmaLogo);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        DocumentReference docRef = db.collection("dynamic-logo").document("TNMA_LOGO");
+        DocumentReference docRef = db.collection(FS_LOGO).document(FS_LOGO_DOC);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -73,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements LoginTab.OnFragme
         final String command = "ping -c 1 google.com";
         return Runtime.getRuntime().exec(command).waitFor() == 0;
     }
-
 
     private void setupTabs(){
         //Login/Signup Tabs

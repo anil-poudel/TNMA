@@ -14,6 +14,15 @@ public class UserConstant {
     public static final String QUESTIONS = "questions";
     public static final String BLOG_POST = "blogPost";
 
+    public static final String EVENT_DATE_FORMAT = "yyyy-MM-dd";
+
+    public static final String FS_EVENTS_COLLECTION = "events";
+    public static final String FS_EVENT_ENROLLED_USERS = "enrolledUsers";
+    public static final String FS_USERS_COLLECTION = "users";
+    public static final String FS_LOGO = "dynamic-logo";
+    public static final String FS_LOGO_DOC = "TNMA_LOGO";
+
+
     public static final int GENERAL_USER_ROLE = 1;
     public static final int STUDENT_ROLE = 2;
     public static final int MENTOR_ROLE = 3;
