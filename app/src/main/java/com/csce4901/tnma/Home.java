@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.csce4901.tnma.DAO.GeneralUserDao;
+import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
+import com.google.firebase.auth.FirebaseAuth;
+
 import butterknife.OnClick;
 
 /**
@@ -56,7 +60,12 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         Button memberButton = (Button) v.findViewById(R.id.memberBtn);
-
+        memberButton.setVisibility(View.INVISIBLE);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+            GeneralUserDao user = new GeneralUserDaoImpl();
+            user.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                    null, null, memberButton);
+        }
         memberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

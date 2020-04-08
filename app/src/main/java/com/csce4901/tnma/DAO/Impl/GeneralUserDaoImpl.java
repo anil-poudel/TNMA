@@ -3,6 +3,8 @@ package com.csce4901.tnma.DAO.Impl;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.Constants.UserConstant;
@@ -34,7 +36,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
-    public void disableVerifiedMemberFeature(String email, MenuItem registerMenu, Menu menu){
+    public void manageVisibilityForGuestUsrFeature(String email, MenuItem registerMenu, Menu menu, Button btn){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection("users").document(email);
@@ -55,6 +57,9 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                         if(menu != null){
                             menu.getItem(0).setVisible(false);
                             menu.getItem(1).setVisible(false);
+                        }
+                        if(btn != null){
+                            btn.setVisibility(View.VISIBLE);
                         }
                     }
                 } else {
