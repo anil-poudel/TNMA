@@ -14,6 +14,8 @@ public class UserConstant {
     public static final String QUESTIONS = "questions";
     public static final String BLOG_POST = "blogPost";
 
+    public static final String EVENT_DATE_FORMAT = "yyyy-MM-dd";
+
     public static final int GENERAL_USER_ROLE = 1;
     public static final int STUDENT_ROLE = 2;
     public static final int MENTOR_ROLE = 3;

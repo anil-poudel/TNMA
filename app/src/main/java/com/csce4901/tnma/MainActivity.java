@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements LoginTab.OnFragmentInteractionListener, SignupTab.OnFragmentInteractionListener{
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements LoginTab.OnFragme
         super.onCreate(savedInstanceState);
         MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
-
 
         //set logo dynamically
         retrieveDynamicLogoFromDB();
