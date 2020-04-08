@@ -3,6 +3,8 @@ package com.csce4901.tnma.DAO.Impl;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.Constants.UserConstant;
@@ -55,6 +57,33 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                         if(menu != null){
                             menu.getItem(0).setVisible(false);
                             menu.getItem(1).setVisible(false);
+                        }
+                    }
+                } else {
+                    Log.d(MainActivity.class.getName(), "No such document with email " + email);
+                }
+            } else {
+                Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
+            }
+        });
+    }
+
+    @Override
+    public void enableBtnForGuestUser(String email, Button button){
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection("users").document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    User user = document.toObject(GeneralUser.class);
+                    if(user.getRole() == UserConstant.GENERAL_USER_ROLE){
+                        Log.i(TAG, email + " : Not a general user.");
+                        // enable register option in dashboard if not general user
+                        if(button != null) {
+                            button.setVisibility(View.VISIBLE);
                         }
                     }
                 } else {

@@ -14,8 +14,9 @@ public class UserConstant {
     public static final String QUESTIONS = "questions";
     public static final String BLOG_POST = "blogPost";
 
-    public static final int ADMIN_ROLE = 0;
     public static final int GENERAL_USER_ROLE = 1;
     public static final int STUDENT_ROLE = 2;
     public static final int MENTOR_ROLE = 3;
+    public static final int ADMIN_ROLE = 4;
+
 }
