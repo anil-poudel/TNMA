@@ -19,7 +19,7 @@ public class MentorDaoImpl implements MentorDao {
         User mentor = new Mentor(email, fname, lname, phone, city, state);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
-        db.collection("mentors").document(email).set(mentor)
+        db.collection("users").document(email).set(mentor)
                 .addOnSuccessListener(aVoid -> {
                     Log.i(TAG, "Mentor detail stored in database for: " + email);
                 })
