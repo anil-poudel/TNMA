@@ -36,7 +36,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
-    public void disableVerifiedMemberFeature(String email, MenuItem registerMenu, Menu menu){
+    public void manageVisibilityForGuestUsrFeature(String email, MenuItem registerMenu, Menu menu, Button btn){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection("users").document(email);
@@ -58,32 +58,8 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                             menu.getItem(0).setVisible(false);
                             menu.getItem(1).setVisible(false);
                         }
-                    }
-                } else {
-                    Log.d(MainActivity.class.getName(), "No such document with email " + email);
-                }
-            } else {
-                Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
-            }
-        });
-    }
-
-    @Override
-    public void enableBtnForGuestUser(String email, Button button){
-        fbConnector.firebaseSetup();
-        FirebaseFirestore db = fbConnector.getDb();
-        DocumentReference docRef = db.collection("users").document(email);
-        docRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                assert document != null;
-                if (document.exists()) {
-                    User user = document.toObject(GeneralUser.class);
-                    if(user.getRole() == UserConstant.GENERAL_USER_ROLE){
-                        Log.i(TAG, email + " : Not a general user.");
-                        // enable register option in dashboard if not general user
-                        if(button != null) {
-                            button.setVisibility(View.VISIBLE);
+                        if(btn != null){
+                            btn.setVisibility(View.VISIBLE);
                         }
                     }
                 } else {

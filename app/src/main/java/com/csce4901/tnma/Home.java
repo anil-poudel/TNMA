@@ -63,8 +63,8 @@ public class Home extends Fragment {
         memberButton.setVisibility(View.INVISIBLE);
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao user = new GeneralUserDaoImpl();
-            user.enableBtnForGuestUser(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    memberButton);
+            user.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                    null, null, memberButton);
         }
         memberButton.setOnClickListener(new View.OnClickListener() {
             @Override

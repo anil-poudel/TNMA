@@ -69,7 +69,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-            generalUser.disableVerifiedMemberFeature(email, registerUserItem, null);
+            generalUser.manageVisibilityForGuestUsrFeature(email, registerUserItem, null, null);
         }
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
@@ -139,8 +139,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //For Guest
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
-            generalUser.disableVerifiedMemberFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    null, menu);
+            generalUser.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
+                    null, menu, null);
         }
         return true;
     }
