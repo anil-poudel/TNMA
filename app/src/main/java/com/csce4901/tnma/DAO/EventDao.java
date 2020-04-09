@@ -7,4 +7,6 @@ public interface EventDao {
     public void addUserToEvent(String email, String eventTitle);
     // retrieve all events
     public void listAllEvents();
+    // delete an event
+    public void deleteEvent(String eventTitle);
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
+import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements LoginTab.OnFragme
         MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
+        EventDaoImpl eventDao = new EventDaoImpl();
+        eventDao.deleteEvent("Physical Day");
         //set logo dynamically
         retrieveDynamicLogoFromDB();
         //set tabs
