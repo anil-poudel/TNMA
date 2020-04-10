@@ -70,8 +70,8 @@
                     app:cardElevation="6dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_width="match_parent"
                         android:background="@drawable/dashboard_item_1">
 
                         <View
@@ -80,33 +80,31 @@
                             android:background="@drawable/dashboard_end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                        <!--
+                            app:layout_constraintTop_toTopOf="parent"/>
                         <ImageView
                             android:id="@+id/image_1"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/icon_background"
                             android:contentDescription="@string/app_name"
                             android:padding="10dp"
-                            android:src="@drawable/bellcon"
+                            android:src="@drawable/info"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
-                        -->
                         <TextView
                             android:id="@+id/item_title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
-                            android:text="My information"
+                            android:text="My profile information"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/image_1"
-                            app:layout_constraintTop_toTopOf="@id/image_1" />
+                            app:layout_constraintTop_toTopOf="@id/image_1"/>
 
                         <TextView
                             android:id="@+id/item_description"
@@ -115,11 +113,11 @@
                             android:layout_marginBottom="12dp"
                             android:ellipsize="end"
                             android:maxLines="3"
-                            android:text="@string/dummy_text"
+                            android:text="Information will be displayed here. Click on the icon to edit."
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title"
                             app:layout_constraintStart_toStartOf="@id/item_title"
-                            app:layout_constraintTop_toBottomOf="@id/item_title" />
+                            app:layout_constraintTop_toBottomOf="@id/item_title"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
