@@ -33,11 +33,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
-                    android:drawableTop="@drawable/logo_1"
+                    android:drawableTop="@drawable/profile"
                     android:gravity="center"
-                    android:text="My name"
+                    android:text="Hello, user!"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Change Avatar" />
+
 
             </LinearLayout>
 
@@ -62,8 +70,8 @@
                     app:cardElevation="6dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:background="@drawable/dashboard_item_1">
 
                         <View
@@ -72,7 +80,7 @@
                             android:background="@drawable/dashboard_end"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
                         <!--
                         <ImageView
                             android:id="@+id/image_1"
@@ -98,7 +106,7 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/image_1"
-                            app:layout_constraintTop_toTopOf="@id/image_1"/>
+                            app:layout_constraintTop_toTopOf="@id/image_1" />
 
                         <TextView
                             android:id="@+id/item_description"
@@ -111,7 +119,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title"
                             app:layout_constraintStart_toStartOf="@id/item_title"
-                            app:layout_constraintTop_toBottomOf="@id/item_title"/>
+                            app:layout_constraintTop_toBottomOf="@id/item_title" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
