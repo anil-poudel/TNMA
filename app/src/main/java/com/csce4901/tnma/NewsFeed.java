@@ -3,6 +3,8 @@ package com.csce4901.tnma;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,19 @@ public class NewsFeed extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView recyclerView;
+
+    String s1[],s2[],s3[],s4[],s5[];
+
+    //getting image for recycler view
+    int images[] = {
+            R.drawable.eat,
+            R.drawable.sleep,
+            R.drawable.code,
+            R.drawable.code
+    };
+
 
     public NewsFeed() {
         // Required empty public constructor
@@ -53,12 +68,31 @@ public class NewsFeed extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_feed, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_news_feed, container, false);
+        recyclerView = rootView.findViewById(R.id.eventmenu);
+
+        //getting data for the recycler view from strings
+        s1 = getResources().getStringArray(R.array.event_title);
+        s2 = getResources().getStringArray(R.array.event_description);
+        s3 = getResources().getStringArray(R.array.event_address);
+        s4 = getResources().getStringArray(R.array.event_time);
+        s5 = getResources().getStringArray(R.array.event_date);
+
+
+        EventAdapter eventAdapter = new EventAdapter(getActivity(),s1,s2,s3,s4,s5,images);
+        recyclerView.setAdapter(eventAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return rootView;
+
+
+
+
     }
 }
