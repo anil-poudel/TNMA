@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="News &amp; Events"
+                android:text="News Feed"
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/White"
                 />

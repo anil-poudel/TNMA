@@ -27,8 +27,10 @@
 
     <string name="home_second">Home Second</string>
 
-
-
+    <string name="TNMA">Welcome! If you are a registered member, you can add or edit your information below. Check out our Q and A, Events, Profile, News Feed, and Blogs!</string>
+    <string name="QA">Ask a doctor a question, right within this app!</string>
+    <string name="Events">Click here to see a list of recent/upcoming health camps, fundraising events, cultural programs, and more!</string>
+    <string name="Profile">Check out your profile here!</string>
 
     <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
 
