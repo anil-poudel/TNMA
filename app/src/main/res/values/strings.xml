@@ -75,10 +75,10 @@
     </string-array>
 
     <string-array name="event_date">
-    <item>12/03/2020</item>
-    <item>23/04/2020</item>
-    <item>17/05/2020</item>
-    <item>07/08/2020</item>
+        <item>12/03/2020</item>
+        <item>23/04/2020</item>
+        <item>17/05/2020</item>
+        <item>07/08/2020</item>
 
     </string-array>
 

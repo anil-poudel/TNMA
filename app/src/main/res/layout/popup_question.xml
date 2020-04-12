@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="300dp"
+    android:layout_height="360dp" android:background="@drawable/mainback" android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            android:text="Ask a Doctor"
+            android:textSize="24sp"
+            android:fontFamily="@font/raleway_bold"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_ask"
+            android:layout_gravity="center"/>
+        <EditText
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint=" Enter your question here"
+            android:textColor="@color/White"
+            android:textColorHint="@color/White"/>
+
+        <Button
+            android:id="@+id/ask_questionBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_style3"
+            android:text="ASK"
+            android:textColor="@color/White"
+            android:fontFamily="@font/raleway_bold"/>
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/view_questionsBtn"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/ic_logout"
+            android:text="View Previous Questions"
+            android:textColor="@color/White"
+            android:fontFamily="@font/raleway_bold"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

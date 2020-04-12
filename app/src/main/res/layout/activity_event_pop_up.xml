@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/PrimaryDark"
+    tools:context=".EventPopUp">
+
+<LinearLayout
+    android:layout_centerInParent="true"
     android:layout_width="350dp"
     android:layout_height="520dp"
     android:layout_gravity="center"
-    android:background="@color/Primary"
+    android:background="@color/Gray"
     android:orientation="vertical"
-    android:padding="5dp"
-    tools:context=".EventPopUp">
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/txt_close"
@@ -17,7 +24,7 @@
         android:layout_gravity="end"
         android:gravity="center"
         android:text="X"
-        android:textColor="@color/White"
+        android:textColor="@color/Black"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -40,8 +47,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:text="Title"
+            android:fontFamily="@font/raleway_bold"
             android:textSize="22sp"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -50,13 +58,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/end">
 
         <LinearLayout
             android:layout_width="326dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/Gray"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -71,8 +79,9 @@
                     android:padding="5sp"
                     android:text="Address: "
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:textColor="@color/White"
+                    android:gravity="end"
+                    android:fontFamily="@font/raleway_bold"
+                    android:textColor="@color/Black"
                     android:textSize="18sp"
                     />
 
@@ -84,7 +93,8 @@
                     android:layout_weight="1"
                     android:padding="5sp"
                     android:text="Denton"
-                    android:textColor="@color/White"
+                    android:fontFamily="@font/raleway_regular"
+                    android:textColor="@color/Black"
                     android:textSize="18sp" />
             </LinearLayout>
             <LinearLayout
@@ -96,9 +106,10 @@
                 android:layout_height="wrap_content"
                 android:padding="5sp"
                 android:text="Time: "
+                android:fontFamily="@font/raleway_bold"
                 android:layout_weight="1.5"
-                android:gravity="right"
-                android:textColor="@color/White"
+                android:gravity="end"
+                android:textColor="@color/Black"
                 android:textSize="18sp"
                 />
 
@@ -108,8 +119,9 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="10:00 pm"
+                android:fontFamily="@font/raleway_regular"
                 android:layout_weight="1"
-                android:textColor="@color/White"
+                android:textColor="@color/Black"
                 android:textSize="18sp" />
             </LinearLayout>
             <LinearLayout
@@ -120,9 +132,10 @@
                 android:layout_height="wrap_content"
                 android:padding="5sp"
                 android:text="Date: "
+                android:fontFamily="@font/raleway_bold"
                 android:layout_weight="2.1"
-                android:gravity="right"
-                android:textColor="@color/White"
+                android:gravity="end"
+                android:textColor="@color/Black"
                 android:textSize="18sp"
                 />
             <TextView
@@ -132,7 +145,8 @@
                 android:padding="5dp"
                 android:layout_weight="1"
                 android:text="12/20/2020"
-                android:textColor="@color/White"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/Black"
                 android:textSize="18sp" />
             </LinearLayout>
 
@@ -144,7 +158,8 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="This ia dummy text which descibes the vent that is being hosyed in this palce at time"
-                android:textColor="@color/White"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/Black"
                 android:lines="3"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -157,6 +172,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:text="Join Event"
+        android:fontFamily="@font/raleway_bold"
+        android:background="@drawable/btn_style3"
         android:textColor="@color/White" />
 
 </LinearLayout>
+</RelativeLayout>

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/main_layout"
     android:gravity="center"
-
+    android:background="@color/PrimaryDark"
     >
 
     <androidx.cardview.widget.CardView
@@ -17,7 +17,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_green_light">
+        app:cardBackgroundColor="@color/Gray">
 
 
         <ImageView
@@ -36,8 +36,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:text="Tile"
-
-            android:textColor="@color/White"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/Black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,8 @@
             android:layout_marginTop="235dp"
             android:lines="1"
             android:text="Description"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
+            android:fontFamily="@font/raleway_regular"
             android:textSize="14sp"
             android:textStyle="bold" />
         <TextView
@@ -59,7 +60,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="235dp"
             android:lines="1"
-            android:textColor="@color/White"
+            android:textColor="@color/Accent"
+            android:fontFamily="@font/raleway_regular"
             android:textSize="14sp"
             android:textStyle="bold"
             android:visibility="invisible"/>
@@ -70,7 +72,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="235dp"
             android:lines="1"
-            android:textColor="@color/White"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@color/Gray"
             android:textSize="14sp"
             android:textStyle="bold"
             android:visibility="invisible"/>
@@ -81,7 +84,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="235dp"
             android:lines="1"
-            android:textColor="@color/White"
+            android:textColor="@color/Gray"
             android:textSize="14sp"
             android:textStyle="bold"
             android:visibility="invisible"/>
