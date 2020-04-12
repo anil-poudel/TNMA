@@ -41,6 +41,7 @@ public class EventPopUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getBaseContext(), "Event Joined", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
         getdata();

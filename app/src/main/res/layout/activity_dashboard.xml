@@ -6,7 +6,7 @@
     android:id="@+id/sideDrawer"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/Gray"
+    android:background="@color/PrimaryDark"
     tools:openDrawer="end"
     tools:context=".Dashboard">
 
@@ -144,6 +144,6 @@
         android:id="@+id/navigationView"
         app:headerLayout="@layout/header"
         app:menu="@menu/drawer_menu"
-        android:background="@color/Gray"/>
+        android:background="@color/PrimaryDark"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
