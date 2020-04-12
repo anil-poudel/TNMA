@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_layout"
+    android:gravity="center"
+    android:background="@color/PrimaryDark"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="267dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/Gray">
+
+
+        <ImageView
+            android:id="@+id/imgEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/eat"
+
+            />
+
+        <TextView
+            android:id="@+id/evTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="Tile"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/Black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/evDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="235dp"
+            android:lines="1"
+            android:text="Description"
+            android:textColor="@color/Black"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/evAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="235dp"
+            android:lines="1"
+            android:textColor="@color/Accent"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/evTime"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="235dp"
+            android:lines="1"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@color/Gray"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/evDate"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="235dp"
+            android:lines="1"
+            android:textColor="@color/Gray"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

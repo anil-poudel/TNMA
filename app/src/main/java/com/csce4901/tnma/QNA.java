@@ -3,8 +3,6 @@ package com.csce4901.tnma;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +11,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NewsFeed#newInstance} factory method to
+ * Use the {@link QNA#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewsFeed extends Fragment {
+public class QNA extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,20 +24,7 @@ public class NewsFeed extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    RecyclerView recyclerView;
-
-    String s1[],s2[],s3[],s4[],s5[];
-
-    //getting image for recycler view
-    int images[] = {
-            R.drawable.eat,
-            R.drawable.sleep,
-            R.drawable.code,
-            R.drawable.code
-    };
-
-
-    public NewsFeed() {
+    public QNA() {
         // Required empty public constructor
     }
 
@@ -49,11 +34,11 @@ public class NewsFeed extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NewsFeed.
+     * @return A new instance of fragment QNA.
      */
     // TODO: Rename and change types and number of parameters
-    public static NewsFeed newInstance(String param1, String param2) {
-        NewsFeed fragment = new NewsFeed();
+    public static QNA newInstance(String param1, String param2) {
+        QNA fragment = new QNA();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,31 +53,12 @@ public class NewsFeed extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_news_feed, container, false);
-        recyclerView = rootView.findViewById(R.id.eventmenu);
-
-        //getting data for the recycler view from strings
-        s1 = getResources().getStringArray(R.array.event_title);
-        s2 = getResources().getStringArray(R.array.event_description);
-        s3 = getResources().getStringArray(R.array.event_address);
-        s4 = getResources().getStringArray(R.array.event_time);
-        s5 = getResources().getStringArray(R.array.event_date);
-
-
-        EventAdapter eventAdapter = new EventAdapter(getActivity(),s1,s2,s3,s4,s5,images);
-        recyclerView.setAdapter(eventAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        return rootView;
-
-
-
-
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_qna, container, false);
     }
 }

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/PrimaryDark"
+    tools:context=".EventPopUp">
+
+<LinearLayout
+    android:layout_centerInParent="true"
+    android:layout_width="350dp"
+    android:layout_height="520dp"
+    android:layout_gravity="center"
+    android:background="@color/Gray"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/txt_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:text="X"
+        android:textColor="@color/Black"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="333dp"
+        android:layout_height="208dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/event_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/eat" />
+
+        <TextView
+            android:id="@+id/event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Title"
+            android:fontFamily="@font/raleway_bold"
+            android:textSize="22sp"
+            android:textColor="@color/Black"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:background="@color/end">
+
+        <LinearLayout
+            android:layout_width="326dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5sp"
+                    android:text="Address: "
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:fontFamily="@font/raleway_bold"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/event_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="5sp"
+                    android:text="Denton"
+                    android:fontFamily="@font/raleway_regular"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="Time: "
+                android:fontFamily="@font/raleway_bold"
+                android:layout_weight="1.5"
+                android:gravity="end"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/event_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="10:00 pm"
+                android:fontFamily="@font/raleway_regular"
+                android:layout_weight="1"
+                android:textColor="@color/Black"
+                android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="Date: "
+                android:fontFamily="@font/raleway_bold"
+                android:layout_weight="2.1"
+                android:gravity="end"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:id="@+id/event_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:text="12/20/2020"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/Black"
+                android:textSize="18sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/event_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="This ia dummy text which descibes the vent that is being hosyed in this palce at time"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/Black"
+                android:lines="3"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:text="Join Event"
+        android:fontFamily="@font/raleway_bold"
+        android:background="@drawable/btn_style3"
+        android:textColor="@color/White" />
+
+</LinearLayout>
+</RelativeLayout>

@@ -28,14 +28,11 @@
     <string name="home_second">Home Second</string>
 
 
-
-
     <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
 
 
     <string name="drawerOpen">Dashboard</string>
     <string name="drawerClose">Dashboard</string>
-
 
 
     <string name="donate">Donate</string>
@@ -47,5 +44,43 @@
         <item>Student</item>
         <item>Guest</item>
     </string-array>
+
+    <string-array name="event_title">
+        <item>Eating Contest</item>
+        <item>Coding Contest</item>
+        <item>Sleeping Event</item>
+        <item>Health Campaign</item>
+    </string-array>
+
+    <string-array name="event_description">
+        <item>This is a random eating event</item>
+        <item>This is a random coding event</item>
+        <item>This is a random Sleeping event</item>
+        <item>This is a random Health event</item>
+
+    </string-array>
+    <string-array name="event_address">
+        <item>Denton</item>
+        <item>Frisco</item>
+        <item>Mckenny</item>
+        <item>Dallas</item>
+
+    </string-array>
+    <string-array name="event_time">
+        <item>10:00 pm</item>
+        <item>12:00 pm</item>
+        <item>11:00 pm</item>
+        <item>5:00 pm</item>
+
+    </string-array>
+
+    <string-array name="event_date">
+        <item>12/03/2020</item>
+        <item>23/04/2020</item>
+        <item>17/05/2020</item>
+        <item>07/08/2020</item>
+
+    </string-array>
+
 
 </resources>

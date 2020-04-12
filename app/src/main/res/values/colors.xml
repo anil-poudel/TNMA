@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Primary">#408080</color>
+    <color name="Primary">#028482</color>
     <color name="PrimaryDark">#0E3746</color>
-    <color name="Accent">#FF6432</color>
-    <color name="AccentLight">#FBA170</color>
+    <color name="Accent">#E9573F</color>
+    <color name="AccentLight">#FC6E51</color>
     <color name="White">#FFF</color>
     <color name="Black">#000</color>
-    <color name="Gray">#121F26</color>
+    <color name="Gray">#F5F7FA</color>
 
 
-    <color name="YELLOW">#FEBD1B</color>
-    <color name="DARKYELLOW">#E4A401</color>
+    <color name="YELLOW">#FFCE54</color>
+    <color name="DARKYELLOW">#F6BB42</color>
 
-    <color name="BLUE">#4D79FF</color>
-    <color name="DARKBLUE">#0039E6</color>
+    <color name="BLUE">#5D9CEC</color>
+    <color name="DARKBLUE">#4A89DC</color>
 
-    <color name="GREEN">#00B33C</color>
-    <color name="DARKGREEN">#006622</color>
+    <color name="GREEN">#A0D468</color>
+    <color name="DARKGREEN">#8CC152</color>
 
     <color name="end">#50FFFFFF</color>
 

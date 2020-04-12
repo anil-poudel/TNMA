@@ -7,10 +7,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     ActionBarDrawerToggle toggleDrawer;
     private ViewPager viewPager;
     Snackbar snackbar;
+    Dialog questionDialog;
 
     //User Role
     private int role = 1;
@@ -73,32 +76,76 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
-        homeBottomNav.setOnClickListener(new View.OnClickListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(Dashboard.this,"Home Clicked", Toast.LENGTH_SHORT).show();
-               viewPager.setCurrentItem(1);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                if(position==1 || position==3)
+                {
+                    homeBottomNav.setImageResource(R.drawable.ic_ask);
+                }
+                else
+                {
+                    homeBottomNav.setImageResource(R.drawable.ic_home);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
 
-        //TODO: goto news Fragment
+        homeBottomNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionDialog = new Dialog(v.getContext());
+                questionDialog.setContentView(R.layout.popup_question);
+                Button btn = questionDialog.findViewById(R.id.ask_questionBtn);
+                Button previous = questionDialog.findViewById(R.id.view_questionsBtn);
+
+                if(viewPager.getCurrentItem()==1 || viewPager.getCurrentItem()==3) {
+                    questionDialog.show();
+
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            questionDialog.dismiss();
+                        }
+                    });
+                    previous.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewPager.setCurrentItem(3);
+                            questionDialog.dismiss();
+                        }
+                    });
+                }
+                homeBottomNav.setImageResource(R.drawable.ic_ask);
+                viewPager.setCurrentItem(1);
+            }
+        });
+
         LinearLayout newsBottomNav = findViewById(R.id.newsButton);
         newsBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Dashboard.this, "News Clicked", Toast.LENGTH_SHORT).show();
                viewPager.setCurrentItem(0);
             }
         });
 
-        //TODO: goto blogFragment
+
         LinearLayout blogBottomNav = findViewById(R.id.blogButton);
         blogBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Dashboard.this, "Blog Clicked", Toast.LENGTH_SHORT).show();
-              viewPager.setCurrentItem(2);
+            viewPager.setCurrentItem(2);
             }
         });
 
@@ -150,7 +197,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         switch (menuItem.getItemId())
         {
             case (R.id.ask_Action):
-                Toast.makeText(Dashboard.this, "TODO: Ask a Question", Toast.LENGTH_SHORT).show();
+                questionDialog.show();
+                viewPager.setCurrentItem(3);
                 break;
 
             case (R.id.message_Action):

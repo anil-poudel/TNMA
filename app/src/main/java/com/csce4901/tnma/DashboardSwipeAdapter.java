@@ -27,6 +27,9 @@ public class DashboardSwipeAdapter extends FragmentStatePagerAdapter {
             case 2:
                 Blogs blogs = new Blogs();
                 return blogs;
+            case 3:
+                QNA qna = new QNA();
+                return qna;
             default:
                 return null;
         }
@@ -34,6 +37,6 @@ public class DashboardSwipeAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }
