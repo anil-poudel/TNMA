@@ -9,6 +9,7 @@ public class Event {
     String address; //required
     String date;    //required
     String time;    //required
+    String imageURL;
     boolean isFeatured = false;
     List<String> enrolledUsers;
 
@@ -76,5 +77,13 @@ public class Event {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }

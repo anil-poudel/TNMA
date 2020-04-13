@@ -1,20 +1,29 @@
 package com.csce4901.tnma.DAO.Impl;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.EventDao;
 import com.csce4901.tnma.EventAdapter;
 import com.csce4901.tnma.MainActivity;
 import com.csce4901.tnma.Models.Event;
+import com.csce4901.tnma.R;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,6 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.csce4901.tnma.Constants.UserConstant.FS_EVENTS_COLLECTION;
 import static com.csce4901.tnma.Constants.UserConstant.FS_EVENT_ENROLLED_USERS;
+import static com.csce4901.tnma.Constants.UserConstant.IS_FEATURED;
 
 public class EventDaoImpl implements EventDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
@@ -100,9 +110,44 @@ public class EventDaoImpl implements EventDao {
                         recyclerView.setAdapter(eventAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
+                        Log.e(TAG, "Error getting documents: ", task.getException());
                     }
                 });
+    }
+
+    @Override
+    public void getFeaturedEvents(TextView title, TextView desc, ImageView image) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        Query featuredEventQuery = db.collection(FS_EVENTS_COLLECTION).whereEqualTo(IS_FEATURED, true).limit(1);
+        featuredEventQuery.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                String f_event_title = "No featured event";
+                String f_event_desc = "No featured event";
+                String f_event_img_URL = null;
+                Bitmap bitmap = null; 
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Event featuredEvent = document.toObject(Event.class);
+                     f_event_title = featuredEvent.getTitle();
+                     f_event_desc = featuredEvent.getDescription();
+                     f_event_img_URL = featuredEvent.getImageURL();
+                }
+                title.setText(f_event_title);
+                desc.setText(f_event_desc);
+                if(f_event_img_URL == null || f_event_img_URL.isEmpty()){
+                    image.setImageResource(R.drawable.event_default);
+                } else {
+                    try {
+                        bitmap = BitmapFactory.decodeStream((InputStream)new URL(f_event_img_URL).getContent());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    image.setImageBitmap(bitmap);
+                }
+            } else {
+                Log.e(TAG, "Failed to get featured event ");
+            }
+        });
     }
 
     @Override
@@ -131,10 +176,10 @@ public class EventDaoImpl implements EventDao {
                         Log.i(TAG, "User not yet registered for this event");
                     }
                 } else {
-                    Log.d(MainActivity.class.getName(), "No such document for event " + eventTitle);
+                    Log.e(MainActivity.class.getName(), "No such document for event " + eventTitle);
                 }
             } else {
-                Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
+                Log.e(MainActivity.class.getName(), "get failed with ", task.getException());
             }
         });
     }

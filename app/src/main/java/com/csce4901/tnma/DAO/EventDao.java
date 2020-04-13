@@ -1,6 +1,8 @@
 package com.csce4901.tnma.DAO;
 
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,5 +18,6 @@ public interface EventDao {
     public void deleteEvent(String eventTitle);
     // disable join event button if already registered for event
     public void manageEventBtnVisibility(Button btn, String email, String eventTitle);
-
+    // get featured event, indicator with "featured" field value as true in Firestore event collection
+    public void getFeaturedEvents(TextView title, TextView desc, ImageView image);
     }

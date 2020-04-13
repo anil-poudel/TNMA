@@ -3,9 +3,9 @@ package com.csce4901.tnma;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.csce4901.tnma.DAO.EventDao;
 import com.csce4901.tnma.DAO.GeneralUserDao;
+import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
 import com.google.firebase.auth.FirebaseAuth;
-
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +58,10 @@ public class Home extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
     }
 
     @Override
@@ -77,21 +81,13 @@ public class Home extends Fragment {
             user.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
                     null, null, memberButton);
         }
-        memberButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Questionnaire.class);
-                startActivity(intent);
-            }
+        memberButton.setOnClickListener(v1 -> {
+            Intent intent = new Intent(getContext(), Questionnaire.class);
+            startActivity(intent);
         });
 
-        //to do abiral
-        //set etitle and edesc from feaatured event in database..the eimage can be left for now
-        eimage.setImageResource(R.drawable.eat);
-        etitle.setText("featured title");
-        edesc.setText("featured description");
-
-
+        EventDao eventDao = new EventDaoImpl();
+        eventDao.getFeaturedEvents(etitle, edesc, eimage);
         return v;
     }
 }
