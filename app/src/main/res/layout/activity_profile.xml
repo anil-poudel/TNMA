@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +8,7 @@
 
     <LinearLayout
         android:id="@+id/layout1"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_above="@+id/layout2"
@@ -15,8 +16,8 @@
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
+            android:layout_width="181dp"
+            android:layout_height="150dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
@@ -56,38 +57,46 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
+
             app:cardCornerRadius="10dp"
             app:cardElevation="6dp">
 
             <LinearLayout
-                android:layout_width="181dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/about"
+                android:background="@drawable/dashboard_item_1"
                 android:orientation="vertical"
+
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
 
-                <TextView
-                    android:layout_width="160dp"
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:drawableTop="@drawable/profile"
-                    android:gravity="center"
-                    android:text="Hello, user!"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Email:" />
+
+                <EditText
+                    android:id="@+id/txtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Phone:" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/button2"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_marginLeft="20dp"
-                    android:text="Change Avatar" />
+                    android:layout_marginTop="5dp"
+                    android:text="Edit information" />
 
 
             </LinearLayout>
@@ -98,8 +107,8 @@
     <LinearLayout
         android:id="@+id/layout2"
         android:layout_width="match_parent"
-        android:layout_height="539dp"
-        android:layout_gravity="bottom"
+        android:layout_height="550dp"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <androidx.core.widget.NestedScrollView
@@ -110,6 +119,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/memberBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Become a Member"
+                    android:background="@drawable/btn_anim"
+                    android:drawableStart="@drawable/ic_member"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="120dp"
+                    android:padding="12dp"/>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -123,7 +143,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_item_1">
+                        android:background="@drawable/dashboard_item_4">
 
                         <View
                             android:layout_width="80dp"
@@ -141,7 +161,7 @@
                             android:layout_marginTop="12dp"
                             android:background="@drawable/icon_background"
                             android:contentDescription="@string/app_name"
-                            android:padding="10dp"
+                            android:padding="8dp"
                             android:src="@drawable/info"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -152,7 +172,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
-                            android:text="My profile information"
+                            android:text="Information and Messages"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +186,7 @@
                             android:layout_marginBottom="12dp"
                             android:ellipsize="end"
                             android:maxLines="3"
-                            android:text="Information will be displayed here. Click on the icon to edit."
+                            android:text="@string/proInformation"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title"
                             app:layout_constraintStart_toStartOf="@id/item_title"
@@ -188,7 +208,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_item_3">
+                        android:background="@drawable/dashboard_item_5">
 
                         <View
                             android:layout_width="80dp"
@@ -197,27 +217,27 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-                        <!--
+
                         <ImageView
                             android:id="@+id/image_2"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/icon_background"
                             android:contentDescription="@string/app_name"
-                            android:padding="10dp"
-                            android:src="@drawable/bookcon"
+                            android:padding="8dp"
+                            android:src="@drawable/event"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
-                        -->
+
                         <TextView
                             android:id="@+id/item_title2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
-                            android:text="Latest Blogs"
+                            android:text="Events you have registered for:"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -231,7 +251,7 @@
                             android:layout_marginBottom="12dp"
                             android:ellipsize="end"
                             android:maxLines="3"
-                            android:text="@string/dummy_text"
+                            android:text="@string/proRegisteredEvents"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title2"
                             app:layout_constraintStart_toStartOf="@id/item_title2"
@@ -253,7 +273,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_item_2">
+                        android:background="@drawable/dashboard_item_6">
 
                         <View
                             android:layout_width="80dp"
@@ -262,27 +282,27 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-                        <!--
+
                         <ImageView
                             android:id="@+id/image_3"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/icon_background"
                             android:contentDescription="@string/app_name"
-                            android:padding="10dp"
-                            android:src="@drawable/bugcon"
+                            android:padding="8dp"
+                            android:src="@drawable/questions"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
-                        -->
+
                         <TextView
                             android:id="@+id/item_title3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="80dp"
-                            android:text="Latest News"
+                            android:text="Your Recent Questions:"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -296,7 +316,7 @@
                             android:layout_marginBottom="12dp"
                             android:ellipsize="end"
                             android:maxLines="3"
-                            android:text="@string/dummy_text"
+                            android:text="@string/proRecentQuestions"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title3"
                             app:layout_constraintStart_toStartOf="@id/item_title3"
@@ -312,11 +332,11 @@
 
 
                     <Button
-                        android:id="@+id/memberBtn"
+                        android:id="@+id/homeBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="Member"
+                        android:text="Return to Home"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -331,4 +351,4 @@
 
     </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
