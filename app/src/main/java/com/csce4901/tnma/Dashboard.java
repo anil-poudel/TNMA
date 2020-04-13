@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -161,6 +162,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         {
             case (R.id.profileMenu):
                 Toast.makeText(Dashboard.this, "TODO: Profile", Toast.LENGTH_SHORT).show();
+                //If not first login, goto dashboard
+                Intent intent
+                        = new Intent(this,
+                        Profile.class);
+                startActivity(intent);
                 break;
             case (R.id.contactMenu):
                 Toast.makeText(Dashboard.this, "TODO: Contact", Toast.LENGTH_SHORT).show();
