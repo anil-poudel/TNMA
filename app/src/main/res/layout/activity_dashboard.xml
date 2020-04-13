@@ -6,7 +6,7 @@
     android:id="@+id/sideDrawer"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/Gray"
+    android:background="@color/PrimaryDark"
     tools:openDrawer="end"
     tools:context=".Dashboard">
 
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="News Feed"
+                android:text="News &amp; Events"
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/White"
                 />
@@ -144,6 +144,6 @@
         android:id="@+id/navigationView"
         app:headerLayout="@layout/header"
         app:menu="@menu/drawer_menu"
-        android:background="@color/Gray"/>
+        android:background="@color/PrimaryDark"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

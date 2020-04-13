@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/PrimaryDark"
-    tools:context=".Blogs">
+    tools:context=".QNA">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Blog Fragment" />
+        android:text="This is qna section" />
 
 </FrameLayout>
