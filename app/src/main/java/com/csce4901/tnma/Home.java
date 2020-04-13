@@ -3,12 +3,15 @@ package com.csce4901.tnma;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.csce4901.tnma.DAO.GeneralUserDao;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
@@ -30,6 +33,9 @@ public class Home extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView etitle,edesc;
+    private ImageView eimage;
+
     public Home() {
         // Required empty public constructor
     }
@@ -60,6 +66,11 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         Button memberButton = (Button) v.findViewById(R.id.memberBtn);
+        etitle = (TextView) v.findViewById(R.id.item_title);
+        edesc = (TextView) v.findViewById(R.id.item_description);
+        eimage = (ImageView) v.findViewById(R.id.image_1);
+
+
         memberButton.setVisibility(View.INVISIBLE);
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao user = new GeneralUserDaoImpl();
@@ -73,6 +84,14 @@ public class Home extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //to do abiral
+        //set etitle and edesc from feaatured event in database..the eimage can be left for now
+        eimage.setImageResource(R.drawable.eat);
+        etitle.setText("featured title");
+        edesc.setText("featured description");
+
+
         return v;
     }
 }
