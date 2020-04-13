@@ -4,13 +4,20 @@ import android.util.Log;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.EventDao;
+import com.csce4901.tnma.EventAdapter;
 import com.csce4901.tnma.Models.Event;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.LinkedList;
 import java.util.List;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.csce4901.tnma.Constants.UserConstant.FS_EVENTS_COLLECTION;
@@ -59,8 +66,40 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void listAllEvents() {
+    public void getAllEvents(RecyclerView recyclerView, FragmentActivity activity, int[] images) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        db.collection(FS_EVENTS_COLLECTION)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<String> title_list = new LinkedList<>();
+                        List<String> desc_list = new LinkedList<>();
+                        List<String> addr_list = new LinkedList<>();
+                        List<String> time_list = new LinkedList<>();
+                        List<String> date_list = new LinkedList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Event event = document.toObject(Event.class);
+                            title_list.add(event.getTitle());
+                            desc_list.add(event.getDescription());
+                            addr_list.add(event.getAddress());
+                            time_list.add(event.getTime());
+                            date_list.add(event.getDate());
+                        }
+                        String[] event_title = title_list.toArray(new String[0]);
+                        String[] event_desc = desc_list.toArray(new String[0]);
+                        String[] event_addr = addr_list.toArray(new String[0]);
+                        String[] event_time = time_list.toArray(new String[0]);
+                        String[] event_date = date_list.toArray(new String[0]);
 
+                        EventAdapter eventAdapter = new EventAdapter(activity,
+                                event_title,event_desc,event_addr,event_time,event_date,images);
+                        recyclerView.setAdapter(eventAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
     }
 
     @Override

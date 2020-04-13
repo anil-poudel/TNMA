@@ -65,7 +65,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return data1.length;
     }
 
     public class EventHolder extends RecyclerView.ViewHolder{
