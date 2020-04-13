@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.csce4901.tnma.DAO.EventDao;
+import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class EventPopUp extends AppCompatActivity {
 
     ImageView eimage;
@@ -22,6 +26,8 @@ public class EventPopUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_pop_up);
+        EventDao eventDao = new EventDaoImpl();
+        String curr_user_email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         eimage = findViewById(R.id.event_image);
         etitle = findViewById(R.id.event_title);
@@ -37,15 +43,23 @@ public class EventPopUp extends AppCompatActivity {
                 finish();
             }
         });
-        eBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Event Joined", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+        if(eBtn != null){
+            eBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                        eventDao.addUserToEvent(curr_user_email, data1);
+                        Toast.makeText(getBaseContext(), "Event Joined", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "Unable to join", Toast.LENGTH_LONG).show();
+                    }
+                    finish();
+                }
+            });
+        }
         getdata();
         setData();
+        eventDao.manageEventBtnVisibility(eBtn, curr_user_email, data1);
     }
     private void getdata(){
     if (getIntent().hasExtra("images") && getIntent().hasExtra("data1") && getIntent().hasExtra("data2")&& getIntent().hasExtra("data3")&& getIntent().hasExtra("data4")&& getIntent().hasExtra("data5")){

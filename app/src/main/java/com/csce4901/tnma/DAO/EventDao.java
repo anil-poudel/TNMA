@@ -1,5 +1,7 @@
 package com.csce4901.tnma.DAO;
 
+import android.widget.Button;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,4 +14,7 @@ public interface EventDao {
     public void getAllEvents(RecyclerView recyclerView, FragmentActivity fragmentActivity, int[] images);
     // delete an event
     public void deleteEvent(String eventTitle);
-}
+    // disable join event button if already registered for event
+    public void manageEventBtnVisibility(Button btn, String email, String eventTitle);
+
+    }

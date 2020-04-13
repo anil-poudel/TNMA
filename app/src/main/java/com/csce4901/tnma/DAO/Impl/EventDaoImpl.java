@@ -1,10 +1,13 @@
 package com.csce4901.tnma.DAO.Impl;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.EventDao;
 import com.csce4901.tnma.EventAdapter;
+import com.csce4901.tnma.MainActivity;
 import com.csce4901.tnma.Models.Event;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -108,5 +111,31 @@ public class EventDaoImpl implements EventDao {
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_EVENTS_COLLECTION).document(eventTitle);
         docRef.delete();
+    }
+
+    public void manageEventBtnVisibility(Button btn, String email, String eventTitle){
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_EVENTS_COLLECTION).document(eventTitle);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    List<String> event_attendee = (List<String>) document.get("enrolledUsers");
+                    if(event_attendee.contains(email)){
+                        Log.i(TAG, "User already registered for this event");
+                        btn.setVisibility(View.INVISIBLE);
+                    }
+                    else{
+                        Log.i(TAG, "User not yet registered for this event");
+                    }
+                } else {
+                    Log.d(MainActivity.class.getName(), "No such document for event " + eventTitle);
+                }
+            } else {
+                Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
+            }
+        });
     }
 }
