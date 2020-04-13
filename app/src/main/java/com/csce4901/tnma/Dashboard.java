@@ -161,7 +161,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         switch (menuItem.getItemId())
         {
             case (R.id.profileMenu):
-                Toast.makeText(Dashboard.this, "TODO: Profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "Profile Opened.", Toast.LENGTH_SHORT).show();
                 //If not first login, goto dashboard
                 Intent intent
                         = new Intent(this,
