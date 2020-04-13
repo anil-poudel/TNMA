@@ -18,6 +18,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="181dp"
             android:layout_height="150dp"
+
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
@@ -61,7 +62,6 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-
             app:cardCornerRadius="10dp"
             app:cardElevation="6dp">
 
@@ -97,8 +97,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
                     android:text="Edit information" />
-
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -144,7 +142,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/dashboard_item_4">
-
                         <View
                             android:layout_width="80dp"
                             android:layout_height="0dp"
@@ -209,7 +206,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/dashboard_item_5">
-
                         <View
                             android:layout_width="80dp"
                             android:layout_height="0dp"
@@ -230,7 +226,6 @@
                             android:src="@drawable/event"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
-
                         <TextView
                             android:id="@+id/item_title2"
                             android:layout_width="0dp"
@@ -274,7 +269,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/dashboard_item_6">
-
                         <View
                             android:layout_width="80dp"
                             android:layout_height="0dp"
@@ -282,7 +276,6 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
                         <ImageView
                             android:id="@+id/image_3"
                             android:layout_width="60dp"
@@ -295,7 +288,6 @@
                             android:src="@drawable/questions"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
-
                         <TextView
                             android:id="@+id/item_title3"
                             android:layout_width="0dp"
