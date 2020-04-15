@@ -8,14 +8,18 @@ public class Blog {
     Date dt;
     String title;
     String post;
+    String imageURL;
+    String author;
     Map<String, String> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
     public Blog(){ }
-    public Blog(String title, String post){
+    public Blog(String title, String post, String uri_image, String author){
         this.title = title;
         this.post = post;
+        this.imageURL = uri_image;
         this.dt = new Date();
+        this.author = author;
         this.comments = new HashMap<>();
     }
 
@@ -34,6 +38,18 @@ public class Blog {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getImageURL() {return imageURL;}
+
+    public void setImageURL(String uri_image) {this.imageURL = uri_image;}
 
     public String getPost() {
         return post;

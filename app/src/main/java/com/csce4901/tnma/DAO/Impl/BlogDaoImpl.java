@@ -20,8 +20,8 @@ public class BlogDaoImpl implements BlogDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
 
     @Override
-    public void createNewBlog(String title, String post) {
-        Blog newBlog = new Blog(title, post);
+    public void createNewBlog(String title, String post, String image, String author) {
+        Blog newBlog = new Blog(title, post, image, author);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         db.collection(FS_BLOGS_COLLECTION).document(title).set(newBlog)
