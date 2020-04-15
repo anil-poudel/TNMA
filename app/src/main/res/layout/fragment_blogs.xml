@@ -6,10 +6,38 @@
     android:background="@color/PrimaryDark"
     tools:context=".Blogs">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <LinearLayout
+        android:id="@+id/blogLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Blog Fragment" />
+        android:orientation="vertical" >
+
+        <Button
+        android:id="@+id/createBlogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_style3"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="Create New Post"
+        android:textSize="18sp"
+        android:textColor="@color/White"
+        android:fontFamily="@font/raleway_bold"
+        android:textAllCaps="false"
+        android:drawableStart="@drawable/ic_plus"
+        android:layout_gravity="center_horizontal"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Latest Blog Posts"
+        android:fontFamily="@font/raleway_bold"
+        android:layout_margin="16dp"
+        android:textColor="@color/White"
+        />
+    </LinearLayout>
 
 </FrameLayout>
