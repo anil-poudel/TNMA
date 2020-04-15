@@ -1,6 +1,10 @@
 package com.csce4901.tnma.DAO.Impl;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
@@ -8,13 +12,19 @@ import com.csce4901.tnma.Models.Blog;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.csce4901.tnma.Constants.UserConstant.FS_BLOGS_COLLECTION;
 import static com.csce4901.tnma.Constants.UserConstant.FS_BLOGS_USER_COMMENTS;
+import static com.csce4901.tnma.Constants.UserConstant.IS_FEATURED;
 
 public class BlogDaoImpl implements BlogDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
@@ -54,6 +64,40 @@ public class BlogDaoImpl implements BlogDao {
                 }
             } else {
                 Log.e(TAG, "get failed with ", task.getException());
+            }
+        });
+    }
+
+    @Override
+    public void getFeaturedBlog(TextView title, TextView desc, ImageView image) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        Query featuredEventQuery = db.collection(FS_BLOGS_COLLECTION).whereEqualTo(IS_FEATURED, true).limit(1);
+        featuredEventQuery.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                String f_blog_title = "No featured blog";
+                String f_blog_desc = "No featured blog";
+                String f_blog_img_URL = null;
+                Bitmap bitmap = null;
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    Blog featuredBlog = document.toObject(Blog.class);
+                    f_blog_title = featuredBlog.getTitle();
+                    f_blog_desc = featuredBlog.getPost();
+                    f_blog_img_URL = featuredBlog.getImageURL();
+                }
+                title.setText(f_blog_title);
+                desc.setText(f_blog_desc);
+                if(f_blog_img_URL == null || f_blog_img_URL.isEmpty()){
+                } else {
+                    try {
+                        bitmap = BitmapFactory.decodeStream((InputStream)new URL(f_blog_img_URL).getContent());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    image.setImageBitmap(bitmap);
+                }
+            } else {
+                Log.e(TAG, "Failed to get featured blog");
             }
         });
     }
