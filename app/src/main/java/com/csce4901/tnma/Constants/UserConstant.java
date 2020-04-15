@@ -30,4 +30,6 @@ public class UserConstant {
     public static final int MENTOR_ROLE = 3;
     public static final int ADMIN_ROLE = 4;
 
+    public static final String IS_STUDENT = "Student";
+    public static final String IS_MENTOR = "Mentor";
 }
