@@ -13,7 +13,6 @@ import com.csce4901.tnma.DAO.EventDao;
 import com.csce4901.tnma.EventAdapter;
 import com.csce4901.tnma.MainActivity;
 import com.csce4901.tnma.Models.Event;
-import com.csce4901.tnma.R;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -135,7 +134,6 @@ public class EventDaoImpl implements EventDao {
                 title.setText(f_event_title);
                 desc.setText(f_event_desc);
                 if(f_event_img_URL == null || f_event_img_URL.isEmpty()){
-                    image.setImageResource(R.drawable.event_default);
                 } else {
                     try {
                         bitmap = BitmapFactory.decodeStream((InputStream)new URL(f_event_img_URL).getContent());
