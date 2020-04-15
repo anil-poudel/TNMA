@@ -20,6 +20,8 @@ public class UserConstant {
     public static final String FS_EVENTS_COLLECTION = "events";
     public static final String FS_EVENT_ENROLLED_USERS = "enrolledUsers";
     public static final String FS_USERS_COLLECTION = "users";
+    public static final String FS_BLOGS_COLLECTION = "blogs";
+    public static final String FS_BLOGS_USER_COMMENTS = "comments";
     public static final String FS_LOGO = "dynamic-logo";
     public static final String FS_LOGO_DOC = "TNMA_LOGO";
 

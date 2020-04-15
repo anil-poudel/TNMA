@@ -49,7 +49,7 @@ public class EventDaoImpl implements EventDao {
                     Log.i(TAG, "Event detail stored in database for: " + title);
                 })
                 .addOnFailureListener(aVoid -> {
-                    Log.e(TAG, "Unable to store user detail for: " + title);
+                    Log.e(TAG, "Unable to store event detail for: " + title);
                 });
     }
 
