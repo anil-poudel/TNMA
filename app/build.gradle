@@ -49,7 +49,9 @@ dependencies {
     // Adding the SDKs for any other Firebase products
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.auth:google-auth-library-oauth2-http:0.20.0'
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
 }

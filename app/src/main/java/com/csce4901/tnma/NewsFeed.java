@@ -3,12 +3,16 @@ package com.csce4901.tnma;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.csce4901.tnma.DAO.EventDao;
+import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
 
 
 /**
@@ -79,20 +83,9 @@ public class NewsFeed extends Fragment {
         recyclerView = rootView.findViewById(R.id.eventmenu);
 
         //getting data for the recycler view from strings
-        s1 = getResources().getStringArray(R.array.event_title);
-        s2 = getResources().getStringArray(R.array.event_description);
-        s3 = getResources().getStringArray(R.array.event_address);
-        s4 = getResources().getStringArray(R.array.event_time);
-        s5 = getResources().getStringArray(R.array.event_date);
-
-
-        EventAdapter eventAdapter = new EventAdapter(getActivity(),s1,s2,s3,s4,s5,images);
-        recyclerView.setAdapter(eventAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        FragmentActivity activity = getActivity();
+        EventDao eventDao = new EventDaoImpl();
+        eventDao.getAllEvents(recyclerView, activity, images);
         return rootView;
-
-
-
-
     }
 }

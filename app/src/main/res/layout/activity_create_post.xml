@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreatePost">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/White"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Create a new Blog Post"
+            android:textSize="18sp"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/Black"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/blogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="18dp"
+            android:padding="5dp"
+            android:hint="Enter Title Here"
+            android:textColorHint="@color/Primary"
+            android:textSize="18sp"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/Black"
+            android:textStyle="bold"
+            android:background="@color/Gray"/>
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="@color/Gray">
+
+            <ImageView
+                android:id="@+id/imageBG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/uploadImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/PrimaryDark"
+                android:gravity="center|bottom"
+                android:text="Upload new image"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/Gray">
+
+            <EditText
+                android:id="@+id/blogContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="15dp"
+                android:hint="This ia dummy text that contains the contents of the blog post."
+                android:textColorHint="@color/Primary"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/Black"
+                android:background="@color/Gray"
+                android:lines="3"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="SUBMIT"
+                android:fontFamily="@font/raleway_bold"
+                android:background="@drawable/btn_anim"
+                android:textColor="@color/White" />
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"/>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Cancel"
+                android:fontFamily="@font/raleway_bold"
+                android:background="@drawable/btn_style3"
+                android:textColor="@color/White" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

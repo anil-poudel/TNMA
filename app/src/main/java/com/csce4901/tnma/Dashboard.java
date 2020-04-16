@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -70,9 +71,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         Menu drawer_menu = navigationView.getMenu();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
+            MenuItem profileUserItem = drawer_menu.findItem(R.id.profileMenu);
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-            generalUser.manageVisibilityForGuestUsrFeature(email, registerUserItem, null, null);
+            generalUser.manageVisibilityForGuestUsrFeature(email, registerUserItem, null, null, profileUserItem);
         }
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
@@ -160,7 +162,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         switch (menuItem.getItemId())
         {
             case (R.id.profileMenu):
-                Toast.makeText(Dashboard.this, "TODO: Profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "Profile Opened.", Toast.LENGTH_SHORT).show();
+                //If not first login, goto dashboard
+                Intent intent
+                        = new Intent(this,
+                        Profile.class);
+                startActivity(intent);
                 break;
             case (R.id.contactMenu):
                 Toast.makeText(Dashboard.this, "TODO: Contact", Toast.LENGTH_SHORT).show();
@@ -187,7 +194,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             generalUser.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    null, menu, null);
+                    null, menu, null, null);
         }
         return true;
     }

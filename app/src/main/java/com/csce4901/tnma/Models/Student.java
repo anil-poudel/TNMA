@@ -15,6 +15,7 @@ public class Student extends User {
     private List<Integer> questions;
     private List<Integer> blogPost;
 
+    public Student(){}
     public Student(String email, String fname, String lname, String phone, String city, String state){
         super(email, false);
         super.setRole(2);

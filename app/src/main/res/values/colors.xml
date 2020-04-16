@@ -6,17 +6,32 @@
     <color name="AccentLight">#FC6E51</color>
     <color name="White">#FFF</color>
     <color name="Black">#000</color>
-    <color name="Gray">#F5F7FA</color>
+    <color name="Gray">#D3D3D3</color>
 
 
     <color name="YELLOW">#FFCE54</color>
     <color name="DARKYELLOW">#F6BB42</color>
+
+    <color name="GOLD">#D7Be69</color>
+    <color name="DARKGOLD">#aa6c39</color>
 
     <color name="BLUE">#5D9CEC</color>
     <color name="DARKBLUE">#4A89DC</color>
 
     <color name="GREEN">#A0D468</color>
     <color name="DARKGREEN">#8CC152</color>
+
+    <color name="REALGREEN">#50C878</color>
+    <color name="REALDARKGREEN">#013220</color>
+
+    <color name="PURPLE">#B19CD9</color>
+    <color name="DARKPURPLE">#301934</color>
+
+    <color name="BLACK">#D3D3D3</color>
+    <color name="DARKBLACK">#000000</color>
+
+    <color name="BROWN">#987654</color>
+    <color name="DARKBROWN">#362204</color>
 
     <color name="end">#50FFFFFF</color>
 
