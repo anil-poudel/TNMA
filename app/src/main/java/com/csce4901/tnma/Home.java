@@ -42,6 +42,7 @@ public class Home extends Fragment {
     @BindView(R.id.item_title) TextView fEventitle;
     @BindView(R.id.item_description) TextView fEventDesc;
     @BindView(R.id.image_1) ImageView fEventImg;
+    @BindView(R.id.memberBtn) Button memberButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -81,12 +82,11 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, v);
-        Button memberButton = (Button) v.findViewById(R.id.memberBtn);
         memberButton.setVisibility(View.INVISIBLE);
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao user = new GeneralUserDaoImpl();
             user.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    null, null, memberButton);
+                    null, null, memberButton, null);
         }
         memberButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(getContext(), Questionnaire.class);
