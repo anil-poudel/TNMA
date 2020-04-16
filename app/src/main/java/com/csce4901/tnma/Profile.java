@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.csce4901.tnma.DAO.GeneralUserDao;
+import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
@@ -22,6 +24,7 @@ public class Profile extends AppCompatActivity {
 
     private TextView profileName;
     private TextView profilePhone;
+    private TextView profileRole;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +33,15 @@ public class Profile extends AppCompatActivity {
         profileName = (TextView) findViewById(R.id.profileName);
         profileEmail = (TextView) findViewById(R.id.profileEmail);
         profilePhone = (TextView) findViewById(R.id.profilePhone);
+        profileRole = (TextView) findViewById(R.id.profileRole);
         eventViewer = (CardView) findViewById(R.id.profileEventViewer);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        GeneralUserDao user = new GeneralUserDaoImpl();
+        user.getUserProfileInfo(email, profileName, profilePhone, profileRole);
+
+
+
         eventViewer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

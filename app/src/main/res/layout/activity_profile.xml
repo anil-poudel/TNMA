@@ -119,16 +119,39 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/memberBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Become a Member"
-                    android:background="@drawable/btn_anim"
-                    android:drawableStart="@drawable/ic_member"
-                    android:layout_marginTop="0dp"
-                    android:layout_marginLeft="120dp"
-                    android:padding="12dp"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+
+                    android:layout_marginStart="85dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp">
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dashboard_item_5"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/profileRole"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="Hello, user!"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
