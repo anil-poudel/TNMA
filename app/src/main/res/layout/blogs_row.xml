@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp"
+    app:cardCornerRadius="3dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="5dp"
+    app:cardBackgroundColor="@color/White"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/postHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="10">
+                <TextView
+                    android:id="@+id/postTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title Goes Here"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:textColor="@color/Black"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/postAuthor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Author Name"
+                        android:textSize="14sp"
+                        android:textColor="@color/Accent"
+                        android:layout_marginEnd="16dp"
+                        />
+                    <TextView
+                        android:id="@+id/postDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="04/30/2020 5:00PM"
+                        android:textSize="14sp"
+                        android:textColor="@color/Accent"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/moreLess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/AccentLight"
+                android:src="@drawable/ic_more"
+                android:padding="5dp"
+                android:layout_gravity="center_vertical|end"
+                />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/postExpandedView"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Gray"
+            android:layout_marginTop="3dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/White"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/postImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@null"
+                android:scaleType="center"/>
+
+            <TextView
+                android:id="@+id/postDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dummy_text"
+                android:textSize="14dp"
+                android:textColor="@color/Black"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/boostButton"
+                android:layout_width="wrap_content"
+                android:drawableStart="@drawable/ic_boost1"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical|start"
+                android:text="150"
+                android:textColor="@color/PrimaryDark"
+                android:textAllCaps="false"
+                android:visibility="visible"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/boostedButton"
+                android:layout_width="wrap_content"
+                android:drawableStart="@drawable/ic_boost2"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical|start"
+                android:text="150"
+                android:textColor="@color/Accent"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/commentButton"
+                android:layout_width="wrap_content"
+                android:drawableStart="@drawable/ic_comment"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical|start"
+                android:text="150"
+                android:textColor="@color/PrimaryDark"
+                android:textAllCaps="false"
+                />
+      </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

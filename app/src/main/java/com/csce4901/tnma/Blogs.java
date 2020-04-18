@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.csce4901.tnma.DAO.BlogDao;
+import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
 
 
 public class Blogs extends Fragment {
@@ -24,6 +29,7 @@ public class Blogs extends Fragment {
 
 
     private Button createPostButton;
+    RecyclerView postRecyclerView;
 
     public Blogs() {
         // Required empty public constructor
@@ -51,11 +57,17 @@ public class Blogs extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-                View view = inflater.inflate(R.layout.fragment_blogs, container, false);
+        View view = inflater.inflate(R.layout.fragment_blogs, container, false);
 
         createPostButton = view.findViewById(R.id.createBlogButton);
+        postRecyclerView = view.findViewById(R.id.postsRecyclerView);
+
         createPostButton.setOnClickListener(this::onClick);
 
+        //Recyclerview data
+        FragmentActivity fragmentActivity = getActivity();
+        BlogDao blogDao = new BlogDaoImpl();
+        blogDao.getAllBlogs(postRecyclerView, fragmentActivity);
         return view;
     }
 
