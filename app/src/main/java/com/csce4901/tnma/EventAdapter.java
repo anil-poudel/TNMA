@@ -2,6 +2,7 @@ package com.csce4901.tnma;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.csce4901.tnma.DAO.EventDao;
+import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
+import com.squareup.picasso.Picasso;
+
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder> {
 
-    String data1[], data2[],data3[],data4[],data5[];
-    int images[];
+    String data1[], data2[],data3[],data4[],data5[],data6[];
+    String images[];
     Context context;
 
-    public EventAdapter(Context ct, String[] s1, String[] s2,String[] s3,String[] s4,String[] s5, int[] img){
+    public EventAdapter(Context ct, String[] s1, String[] s2,String[] s3,String[] s4,String[] s5, String[] img){
         context = ct;
         data1 = s1;
         data2 = s2;
@@ -45,7 +50,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
         holder.eaddress.setText(data3[position]);
         holder.etime.setText(data4[position]);
         holder.edate.setText(data5[position]);
-        holder.eimage.setImageResource(images[position]);
+
+        EventDao eventDao = new EventDaoImpl();
+        //Load Blogpost Image from database
+        Picasso.get()
+                .load(images[position])
+                .resize(500,500)
+                .centerCrop(Gravity.START)
+                .into(holder.eimage);
+
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +82,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
     }
 
     public class EventHolder extends RecyclerView.ViewHolder{
+
 
         TextView etile,edesc,eaddress,etime,edate;
         ImageView eimage;
