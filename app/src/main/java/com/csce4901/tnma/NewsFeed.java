@@ -32,17 +32,6 @@ public class NewsFeed extends Fragment {
 
     RecyclerView recyclerView;
 
-    String s1[],s2[],s3[],s4[],s5[];
-
-    //getting image for recycler view
-    int images[] = {
-            R.drawable.eat,
-            R.drawable.sleep,
-            R.drawable.code,
-            R.drawable.code
-    };
-
-
     public NewsFeed() {
         // Required empty public constructor
     }
@@ -85,7 +74,7 @@ public class NewsFeed extends Fragment {
         //getting data for the recycler view from strings
         FragmentActivity activity = getActivity();
         EventDao eventDao = new EventDaoImpl();
-        eventDao.getAllEvents(recyclerView, activity, images);
+        eventDao.getAllEvents(recyclerView, activity);
         return rootView;
     }
 }

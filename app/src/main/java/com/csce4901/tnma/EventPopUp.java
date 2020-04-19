@@ -3,6 +3,7 @@ package com.csce4901.tnma;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.csce4901.tnma.DAO.EventDao;
 import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 public class EventPopUp extends AppCompatActivity {
 
@@ -20,7 +22,7 @@ public class EventPopUp extends AppCompatActivity {
     Button eBtn;
 
     String data1,data2,data3,data4,data5;
-    int images;
+    String images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class EventPopUp extends AppCompatActivity {
         data3 = getIntent().getStringExtra("data3");
         data4 = getIntent().getStringExtra("data4");
         data5 = getIntent().getStringExtra("data5");
-        images = getIntent().getIntExtra("images",1);
+        images = getIntent().getStringExtra("images");
 
     }else{
         Toast.makeText(this,"No data found",Toast.LENGTH_SHORT).show();
@@ -82,6 +84,11 @@ public class EventPopUp extends AppCompatActivity {
         eaddress.setText(data3);
         etime.setText(data4);
         edate.setText(data5);
-        eimage.setImageResource(images);
+        Picasso.get()
+                .load(images)
+                .resize(500,500)
+                .centerCrop(Gravity.START)
+                .into(eimage);
+
     }
 }

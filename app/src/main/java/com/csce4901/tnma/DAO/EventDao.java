@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public interface EventDao {
     // create event
-    public void createNewEvent(String title, String description, String address, String date, String time);
+    public void createNewEvent(String title, String description, String address, String date, String time, String image);
     // add user to event
     public void addUserToEvent(String email, String eventTitle);
     // retrieve all events
-    public void getAllEvents(RecyclerView recyclerView, FragmentActivity fragmentActivity, int[] images);
+    public void getAllEvents(RecyclerView recyclerView, FragmentActivity fragmentActivity);
     // delete an event
     public void deleteEvent(String eventTitle);
     // disable join event button if already registered for event
