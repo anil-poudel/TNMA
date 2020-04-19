@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,8 @@ public class Profile extends AppCompatActivity {
     private TextView profileName;
     private TextView profilePhone;
     private TextView profileRole;
+
+    private Drawable[] compoundDrawables;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,12 @@ public class Profile extends AppCompatActivity {
         GeneralUserDao user = new GeneralUserDaoImpl();
         user.getUserProfileInfo(email, profileName, profilePhone, profileRole);
 
+        compoundDrawables = profileName.getCompoundDrawables();
+        Drawable topCompoundDrawable = compoundDrawables[1];
 
+        Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.bellcon);
+
+        profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
 
         eventViewer.setOnClickListener(new View.OnClickListener() {
                 @Override
