@@ -14,12 +14,13 @@ public class Event {
     List<String> enrolledUsers;
 
     public Event(){ }
-    public Event(String title, String description, String address, String date, String time){
+    public Event(String title, String description, String address, String date, String time,String imageURL){
         this.title = title;
         this.description = description;
         this.address = address;
         this.date = date;
         this.time = time;
+        this.imageURL = imageURL;
         this.enrolledUsers = new ArrayList<>();
     }
 

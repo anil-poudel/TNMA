@@ -39,8 +39,8 @@ public class EventDaoImpl implements EventDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
 
     @Override
-    public void createNewEvent(String title, String description, String address, String date, String time) {
-        Event newEvent = new Event(title, description, address, date, time);
+    public void createNewEvent(String title, String description, String address, String date, String time,String image) {
+        Event newEvent = new Event(title, description, address, date, time, image);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         db.collection(FS_EVENTS_COLLECTION).document(title).set(newEvent)
@@ -78,7 +78,7 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void getAllEvents(RecyclerView recyclerView, FragmentActivity activity, int[] images) {
+    public void getAllEvents(RecyclerView recyclerView, FragmentActivity activity) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         db.collection(FS_EVENTS_COLLECTION)
@@ -90,6 +90,9 @@ public class EventDaoImpl implements EventDao {
                         List<String> addr_list = new LinkedList<>();
                         List<String> time_list = new LinkedList<>();
                         List<String> date_list = new LinkedList<>();
+                        List<String> img_list = new LinkedList<>();
+
+
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Event event = document.toObject(Event.class);
                             title_list.add(event.getTitle());
@@ -97,15 +100,19 @@ public class EventDaoImpl implements EventDao {
                             addr_list.add(event.getAddress());
                             time_list.add(event.getTime());
                             date_list.add(event.getDate());
+                            img_list.add(event.getImageURL());
+
                         }
                         String[] event_title = title_list.toArray(new String[0]);
                         String[] event_desc = desc_list.toArray(new String[0]);
                         String[] event_addr = addr_list.toArray(new String[0]);
                         String[] event_time = time_list.toArray(new String[0]);
                         String[] event_date = date_list.toArray(new String[0]);
+                        String[] event_img = img_list.toArray(new String[0]);
+
 
                         EventAdapter eventAdapter = new EventAdapter(activity,
-                                event_title,event_desc,event_addr,event_time,event_date,images);
+                                event_title,event_desc,event_addr,event_time,event_date,event_img);
                         recyclerView.setAdapter(eventAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
                     } else {
