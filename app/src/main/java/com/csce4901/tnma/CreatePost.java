@@ -135,9 +135,7 @@ public class CreatePost extends AppCompatActivity {
                 }
                 else
                 {
-                    //default image for blogposts
-                    uri = "https://firebasestorage.googleapis.com/v0/b/tnma-375e2.appspot.com/o/Blogs%2Fblog_default.jpg?alt=media&token=985c469f-0127-46d2-9925-7cb1446e25be";
-                    blogDao.createNewBlog(titleText, contentText, uri, uName);
+                    blogDao.createNewBlog(titleText, contentText, "noImage", uName);
                     Toast.makeText(v.getContext(), "Blog successfully posted.", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -10,20 +10,16 @@ public class Blog {
     String post;
     String imageURL;
     String author;
-    Integer boostCount;
-    Integer commentCount;
     Map<String, String> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
     public Blog(){ }
-    public Blog(String title, String post, String uri_image, String author, Integer boostCount, Integer commentCount){
+    public Blog(String title, String post, String uri_image, String author){
         this.title = title;
         this.post = post;
         this.imageURL = uri_image;
         this.dt = new Date();
         this.author = author;
-        this.boostCount = boostCount;
-        this.commentCount = commentCount;
         this.comments = new HashMap<>();
     }
 
@@ -62,14 +58,6 @@ public class Blog {
     public void setPost(String post) {
         this.post = post;
     }
-
-    public Integer getBoostCount(){return boostCount;};
-
-    public void setBoostCount(Integer boostCount) {this.boostCount = boostCount;};
-
-    public Integer getCommentCount(){return commentCount;};
-
-    public void setCommentCount(Integer commentCount) {this.commentCount = commentCount;};
 
     public Map<String, String> getComments() {
         return comments;
