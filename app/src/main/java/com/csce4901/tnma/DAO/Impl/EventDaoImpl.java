@@ -92,7 +92,6 @@ public class EventDaoImpl implements EventDao {
                         List<String> date_list = new LinkedList<>();
                         List<String> img_list = new LinkedList<>();
 
-
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Event event = document.toObject(Event.class);
                             title_list.add(event.getTitle());
