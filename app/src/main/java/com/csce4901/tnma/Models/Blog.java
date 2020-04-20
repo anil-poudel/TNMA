@@ -14,7 +14,7 @@ public class Blog {
     int boostCount = 0;
     int commentCount = 0;
     Map<String, Boolean> boostedByUser;   // Map <Email, hasBoosted?>
-    Map<String, String> comments;   // Map <Email, Comment>
+    Map<String, List<String>> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
     public Blog(){ }
@@ -82,11 +82,11 @@ public class Blog {
         this.commentCount = commentCount;
     }
 
-    public Map<String, String> getComments() {
+    public Map<String, List<String>> getComments() {
         return comments;
     }
 
-    public void setComments(Map<String, String> comments) {
+    public void setComments(Map<String, List<String>> comments) {
         this.comments = comments;
     }
 
