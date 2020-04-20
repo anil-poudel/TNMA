@@ -25,7 +25,8 @@
             android:textColor="@color/White"
             android:padding="5dp"
             android:layout_weight="9"
-            android:background="@color/end"/>
+            android:background="@color/end"
+            android:inputType="textNoSuggestions"/>
 
         <Button
             android:id="@+id/postCommentButton"
