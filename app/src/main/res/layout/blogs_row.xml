@@ -74,95 +74,95 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/postExpandedView"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray"
-            android:layout_marginTop="3dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/White"
-            android:layout_marginTop="10dp">
+            android:visibility="gone"
+            android:id="@+id/postExpandedView"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/postImage"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@null"
-                android:scaleType="center"/>
+                android:layout_height="1dp"
+                android:background="@color/Gray"
+                android:layout_marginTop="3dp"/>
 
-            <TextView
-                android:id="@+id/postDescription"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/dummy_text"
-                android:textSize="14dp"
-                android:textColor="@color/Black"
-                android:padding="10dp"/>
+                android:orientation="vertical"
+                android:background="@color/White"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/postImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@null"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:id="@+id/postDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dummy_text"
+                    android:textSize="14dp"
+                    android:textColor="@color/Black"
+                    android:padding="10dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/Gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:id="@+id/boostButton"
+                    android:layout_width="wrap_content"
+                    android:drawableStart="@drawable/ic_boost1"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:text="150"
+                    android:textColor="@color/PrimaryDark"
+                    android:textAllCaps="false"
+                    android:visibility="visible"
+                    />
+
+                <!--            <Button-->
+                <!--                style="@style/Widget.AppCompat.Button.Borderless"-->
+                <!--                android:id="@+id/boostedButton"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:drawableStart="@drawable/ic_boost2"-->
+                <!--                android:layout_height="35dp"-->
+                <!--                android:layout_gravity="center_vertical|start"-->
+                <!--                android:text="150"-->
+                <!--                android:textColor="@color/Accent"-->
+                <!--                android:textAllCaps="false"-->
+                <!--                android:visibility="gone"-->
+                <!--                />-->
+
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:id="@+id/commentButton"
+                    android:layout_width="wrap_content"
+                    android:drawableStart="@drawable/ic_comment"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:text="150"
+                    android:textColor="@color/PrimaryDark"
+                    android:textAllCaps="false"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/Gray"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:id="@+id/boostButton"
-                android:layout_width="wrap_content"
-                android:drawableStart="@drawable/ic_boost1"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical|start"
-                android:text="150"
-                android:textColor="@color/PrimaryDark"
-                android:textAllCaps="false"
-                android:visibility="visible"
-                />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:id="@+id/boostedButton"
-                android:layout_width="wrap_content"
-                android:drawableStart="@drawable/ic_boost2"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical|start"
-                android:text="150"
-                android:textColor="@color/Accent"
-                android:textAllCaps="false"
-                android:visibility="gone"
-                />
-
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:id="@+id/commentButton"
-                android:layout_width="wrap_content"
-                android:drawableStart="@drawable/ic_comment"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical|start"
-                android:text="150"
-                android:textColor="@color/PrimaryDark"
-                android:textAllCaps="false"
-                />
-      </LinearLayout>
-
-    </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

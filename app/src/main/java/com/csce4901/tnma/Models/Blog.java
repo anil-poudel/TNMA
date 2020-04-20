@@ -1,5 +1,7 @@
 package com.csce4901.tnma.Models;
 
+import com.google.firebase.Timestamp;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,10 +13,10 @@ public class Blog {
     String post;
     String imageURL;
     String author;
-    int boostCount;
+    int boostCount = 0;
     int commentCount = 0;
-    List<String> boostedByUser;
-    Map<String, String> comments;   // Map <Email, Comment>
+    Map<String, Boolean> boostedByUser;   // Map <Email, hasBoosted?>
+    Map<String, Map<String, String>> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
     public Blog(){ }
@@ -25,8 +27,9 @@ public class Blog {
         this.dt = new Date();
         this.author = author;
         this.boostCount = boostCount;
-        this.commentCount = commentCount;
+        this.boostedByUser = new HashMap<>();
         this.comments = new HashMap<>();
+        this.commentCount = commentCount;
     }
 
     public Date getDt() {
@@ -81,27 +84,19 @@ public class Blog {
         this.commentCount = commentCount;
     }
 
-    public Map<String, String> getComments() {
+    public Map<String, Map<String, String>> getComments() {
         return comments;
     }
 
-    public void setComments(Map<String, String> comments) {
+    public void setComments(Map<String, Map<String, String>> comments) {
         this.comments = comments;
     }
 
-    public List<String> getBoostedByUser() {
-        return boostedByUser;
-    }
+    public Map<String, Boolean> getBoostedByUser() { return boostedByUser; }
 
-    public void setBoostedByUser(List<String> boostedByUser) {
-        this.boostedByUser = boostedByUser;
-    }
+    public void setBoosts(Map<String, Boolean> boostedByUser) { this.boostedByUser = boostedByUser; }
 
-    public boolean isFeatured() {
-        return isFeatured;
-    }
+    public boolean isFeatured() { return isFeatured; }
 
-    public void setFeatured(boolean featured) {
-        isFeatured = featured;
-    }
+    public void setFeatured(boolean featured) { isFeatured = featured; }
 }
