@@ -13,5 +13,5 @@ public interface BlogDao {
 
     //retrieve all blogs
     public void getAllBlogs(RecyclerView recyclerView, FragmentActivity fragmentActivity);
-    public  void boostCount(String blogTitle, Integer count);
+    public  void boostCount(String email, String blogTitle, int count);
     }
