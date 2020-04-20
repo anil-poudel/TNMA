@@ -14,6 +14,7 @@ import com.csce4901.tnma.BlogAdapter;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.Models.Blog;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,7 +25,10 @@ import com.google.firebase.firestore.SetOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -67,14 +71,15 @@ public class BlogDaoImpl implements BlogDao {
                 assert document != null;
                 if (document.exists()) {
                     Blog blog = document.toObject(Blog.class);
-                    Map<String, List<String>> existingUserComment = Objects.requireNonNull(blog).getComments();
-                    List<String> commentorList = existingUserComment.get(userEmail);
+                    Map<String, Map<String, String>> existingUserComment = Objects.requireNonNull(blog).getComments();
+                    Map<String, String> commentorList = existingUserComment.get(userEmail);
+                    String currentTime = new Date().toString();
                     //If userEmail has no previous records, create new one.
                     if(commentorList == null)
                     {
-                        commentorList = new LinkedList<>();
+                        commentorList = new HashMap<>();
                     }
-                    commentorList.add(userComment);
+                    commentorList.put(currentTime, userComment);
                     existingUserComment.put(userEmail, commentorList);
 
                     db.collection(FS_BLOGS_COLLECTION)
@@ -221,4 +226,9 @@ public class BlogDaoImpl implements BlogDao {
         });
     }
 
+    @Override
+    public void getAllComments(String blogTitle, RecyclerView recyclerView)
+    {
+
+    }
 }

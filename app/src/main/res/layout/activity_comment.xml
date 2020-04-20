@@ -6,11 +6,23 @@
     android:layout_height="match_parent"
     android:background="@color/PrimaryDark"
     tools:context=".Comment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/commentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@color/Primary"
@@ -19,7 +31,7 @@
         <EditText
             android:id="@+id/addCommentText"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:text=""
             android:hint="Add a comment..."
             android:textColor="@color/White"
@@ -31,7 +43,7 @@
         <Button
             android:id="@+id/postCommentButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Post"
             android:textSize="18sp"
             android:fontFamily="@font/raleway_bold"

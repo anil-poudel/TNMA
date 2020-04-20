@@ -1,5 +1,7 @@
 package com.csce4901.tnma.Models;
 
+import com.google.firebase.Timestamp;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +16,7 @@ public class Blog {
     int boostCount = 0;
     int commentCount = 0;
     Map<String, Boolean> boostedByUser;   // Map <Email, hasBoosted?>
-    Map<String, List<String>> comments;   // Map <Email, Comment>
+    Map<String, Map<String, String>> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
     public Blog(){ }
@@ -82,11 +84,11 @@ public class Blog {
         this.commentCount = commentCount;
     }
 
-    public Map<String, List<String>> getComments() {
+    public Map<String, Map<String, String>> getComments() {
         return comments;
     }
 
-    public void setComments(Map<String, List<String>> comments) {
+    public void setComments(Map<String, Map<String, String>> comments) {
         this.comments = comments;
     }
 
