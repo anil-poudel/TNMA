@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class Blogs extends Fragment {
@@ -59,12 +60,13 @@ public class Blogs extends Fragment {
         createPostButton = view.findViewById(R.id.createBlogButton);
         postRecyclerView = view.findViewById(R.id.postsRecyclerView);
 
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         createPostButton.setOnClickListener(this::onClick);
 
         //Recyclerview data
         FragmentActivity fragmentActivity = getActivity();
         BlogDao blogDao = new BlogDaoImpl();
-        blogDao.getAllBlogs(postRecyclerView, fragmentActivity);
+        blogDao.getAllBlogs(userEmail, postRecyclerView, fragmentActivity);
         return view;
     }
 

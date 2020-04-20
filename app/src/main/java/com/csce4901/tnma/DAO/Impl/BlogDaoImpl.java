@@ -14,6 +14,7 @@ import com.csce4901.tnma.BlogAdapter;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.Models.Blog;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,6 +25,10 @@ import com.google.firebase.firestore.SetOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +46,7 @@ public class BlogDaoImpl implements BlogDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
 
     @Override
-    public void createNewBlog(String title, String post, String image, String author) {
+    public void createNewBlog(String title, String post, String image, String author, Integer boostCount, Integer commentCount) {
         Blog newBlog = new Blog(title, post, image, author, 0, 0);
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
@@ -54,6 +59,7 @@ public class BlogDaoImpl implements BlogDao {
                 });
     }
 
+
     @Override
     public void addUserCommentToBlog(String userEmail, String userComment, String blogTitle) {
         fbConnector.firebaseSetup();
@@ -65,8 +71,17 @@ public class BlogDaoImpl implements BlogDao {
                 assert document != null;
                 if (document.exists()) {
                     Blog blog = document.toObject(Blog.class);
-                    Map<String, String> existingUserComment = Objects.requireNonNull(blog).getComments();
-                    existingUserComment.put(userEmail, userComment);
+                    Map<String, Map<String, String>> existingUserComment = Objects.requireNonNull(blog).getComments();
+                    Map<String, String> commentorList = existingUserComment.get(userEmail);
+                    String currentTime = new Date().toString();
+                    //If userEmail has no previous records, create new one.
+                    if(commentorList == null)
+                    {
+                        commentorList = new HashMap<>();
+                    }
+                    commentorList.put(currentTime, userComment);
+                    existingUserComment.put(userEmail, commentorList);
+
                     db.collection(FS_BLOGS_COLLECTION)
                             .document(blogTitle)
                             .set(blog, SetOptions.mergeFields(FS_BLOGS_USER_COMMENTS));
@@ -121,7 +136,7 @@ public class BlogDaoImpl implements BlogDao {
     }
 
     @Override
-    public void getAllBlogs(RecyclerView recyclerView, FragmentActivity fragmentActivity) {
+    public void getAllBlogs(String userEmail, RecyclerView recyclerView, FragmentActivity fragmentActivity) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         db.collection(FS_BLOGS_COLLECTION)
@@ -137,8 +152,9 @@ public class BlogDaoImpl implements BlogDao {
                     List<String> date_list = new LinkedList<>();
                     List<String> desc_list = new LinkedList<>();
                     List<String> img_list = new LinkedList<>();
-                    List<Integer> boost_list = new LinkedList<>();
-                    List<Integer> comment_list = new LinkedList<>();
+                    List<Integer> boostSize_list = new LinkedList<>();
+                    List<Integer> commentSize_list = new LinkedList<>();
+                    List<Boolean> hasBoosted_list = new LinkedList<>();
 
                     for (QueryDocumentSnapshot document : value) {
                         Blog blog = document.toObject(Blog.class);
@@ -147,8 +163,18 @@ public class BlogDaoImpl implements BlogDao {
                         date_list.add(blog.getDt().toString());
                         desc_list.add(blog.getPost());
                         img_list.add(blog.getImageURL());
-                        boost_list.add(blog.getBoostCount());
-                        comment_list.add(blog.getCommentCount());
+
+                        //Checking for empty map
+                        if(blog.getBoostedByUser() != null) {
+                            boostSize_list.add(blog.getBoostCount());
+                            hasBoosted_list.add((blog.getBoostedByUser().get(userEmail)));
+                        }
+                        else
+                        {
+                            boostSize_list.add(0);
+                            hasBoosted_list.add(false);
+                        }
+                        commentSize_list.add(blog.getCommentCount());
                     }
 
                     String[] post_title = title_list.toArray(new String[0]);
@@ -156,21 +182,22 @@ public class BlogDaoImpl implements BlogDao {
                     String[] post_date = date_list.toArray(new String[0]);
                     String[] post_desc = desc_list.toArray(new String[0]);
                     String[] post_img = img_list.toArray(new String[0]);
-                    Integer[] post_boost = boost_list.toArray(new Integer[0]);
-                    Integer[] post_comment = comment_list.toArray(new Integer[0]);
+                    Integer[] post_boost = boostSize_list.toArray(new Integer[0]);
+                    Integer[] post_comment = commentSize_list.toArray(new Integer[0]);
+                    Boolean[] post_hasBoosted = hasBoosted_list.toArray(new Boolean[0]);
 
                     BlogAdapter blogAdapter = new BlogAdapter(fragmentActivity,
                             post_title, post_author, post_date, post_desc,
-                            post_img,
-                            post_boost, post_comment);
+                            post_img, post_boost, post_comment, post_hasBoosted);
 
                     recyclerView.setAdapter(blogAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(fragmentActivity));
                 });
     }
 
+
     @Override
-    public void boostCount(String email, String blogTitle, int count) {
+    public void boostCount(String blogTitle, int boostCount, String userEmail, Boolean userBoost) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_BLOGS_COLLECTION).document(blogTitle);
@@ -180,15 +207,16 @@ public class BlogDaoImpl implements BlogDao {
                 assert document != null;
                 if (document.exists()) {
                     Blog blog = document.toObject(Blog.class);
-                    List<String> existingUsersForBlogBoost = blog.getBoostedByUser();
-                    if(!existingUsersForBlogBoost.contains(email)){
-                        db.collection(FS_BLOGS_COLLECTION).document(blogTitle)
-                                .update(FS_BLOG_BOOST_COUNT, count);
-                        existingUsersForBlogBoost.add(email);
+                    Map<String, Boolean> existingBoost = Objects.requireNonNull(blog).getBoostedByUser();
+                    existingBoost.put(userEmail,userBoost);
                         db.collection(FS_BLOGS_COLLECTION)
-                                .document(blogTitle)
-                                .set(blog, SetOptions.mergeFields(FS_BLOG_BOOST_USERS));
-                    }
+                            .document(blogTitle)
+                            .set(blog, SetOptions.mergeFields(FS_BLOG_BOOST_USERS));
+
+                    //update boostCount
+                    db.collection(FS_BLOGS_COLLECTION)
+                            .document(blogTitle)
+                            .update(FS_BLOG_BOOST_COUNT, boostCount);
                 } else {
                     Log.e(TAG, "Blog does not exist: " + blogTitle);
                 }
@@ -196,5 +224,11 @@ public class BlogDaoImpl implements BlogDao {
                 Log.e(TAG, "get failed with ", task.getException());
             }
         });
+    }
+
+    @Override
+    public void getAllComments(String blogTitle, RecyclerView recyclerView)
+    {
+
     }
 }
