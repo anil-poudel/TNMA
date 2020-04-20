@@ -174,7 +174,7 @@ public class BlogDaoImpl implements BlogDao {
                             boostSize_list.add(0);
                             hasBoosted_list.add(false);
                         }
-                        commentSize_list.add(blog.getComments().size());
+                        commentSize_list.add(blog.getCommentCount());
                     }
 
                     String[] post_title = title_list.toArray(new String[0]);
