@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,9 +33,6 @@ import java.util.Objects;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.csce4901.tnma.Constants.UserConstant.FS_BLOGS_COLLECTION;
 import static com.csce4901.tnma.Constants.UserConstant.FS_BLOGS_USER_COMMENTS;
-import static com.csce4901.tnma.Constants.UserConstant.FS_BLOGS_USER_COMMENT_COUNT;
-import static com.csce4901.tnma.Constants.UserConstant.FS_BLOG_BOOST_COUNT;
-import static com.csce4901.tnma.Constants.UserConstant.FS_BLOG_BOOST_USERS;
 import static com.csce4901.tnma.Constants.UserConstant.IS_FEATURED;
 
 public class BlogDaoImpl implements BlogDao {
@@ -72,11 +70,11 @@ public class BlogDaoImpl implements BlogDao {
                             .set(blog, SetOptions.mergeFields(FS_BLOGS_USER_COMMENTS));
 
                     //update count as well
-                    int count = blog.getCommentCount();
+                    Long count = (Long) document.get("commentCount");
                     count++;
                     db.collection(FS_BLOGS_COLLECTION)
                             .document(blogTitle)
-                            .update(FS_BLOGS_USER_COMMENT_COUNT, count);
+                            .update("commentCount", count);
                 } else {
                     Log.e(TAG, "Blog does not exist: " + blogTitle);
                 }
@@ -126,51 +124,52 @@ public class BlogDaoImpl implements BlogDao {
         FirebaseFirestore db = fbConnector.getDb();
         db.collection(FS_BLOGS_COLLECTION)
                 .orderBy("dt", Query.Direction.DESCENDING)
-                .addSnapshotListener((value, e) -> {
-                    if (e != null) {
-                        Log.w(TAG, "Listen failed.", e);
-                        return;
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<String> title_list = new LinkedList<>();
+                        List<String> author_list = new LinkedList<>();
+                        List<String> date_list = new LinkedList<>();
+                        List<String> desc_list = new LinkedList<>();
+                        List<String> img_list = new LinkedList<>();
+                        List<Integer> boost_list = new LinkedList<>();
+                        List<Integer> comment_list = new LinkedList<>();
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Blog blog = document.toObject(Blog.class);
+                            title_list.add(blog.getTitle());
+                            author_list.add(blog.getAuthor());
+                            date_list.add(blog.getDt().toString());
+                            desc_list.add(blog.getPost());
+                            img_list.add(blog.getImageURL());
+                            boost_list.add(blog.getBoostCount());
+                            comment_list.add(blog.getCommentCount());
+                        }
+
+                        String[] post_title = title_list.toArray(new String[0]);
+                        String[] post_author = author_list.toArray(new String[0]);
+                        String[] post_date = date_list.toArray(new String[0]);
+                        String[] post_desc = desc_list.toArray(new String[0]);
+                        String[] post_img = img_list.toArray(new String[0]);
+                        Integer[] post_boost = boost_list.toArray(new Integer[0]);
+                        Integer[] post_comment = comment_list.toArray(new Integer[0]);
+
+
+                        BlogAdapter blogAdapter = new BlogAdapter(fragmentActivity,
+                                post_title, post_author, post_date, post_desc,
+                                post_img,
+                                post_boost, post_comment);
+
+                        recyclerView.setAdapter(blogAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(fragmentActivity));
+                    } else {
+                        Log.e(TAG, "Error getting documents: ", task.getException());
                     }
-
-                    List<String> title_list = new LinkedList<>();
-                    List<String> author_list = new LinkedList<>();
-                    List<String> date_list = new LinkedList<>();
-                    List<String> desc_list = new LinkedList<>();
-                    List<String> img_list = new LinkedList<>();
-                    List<Integer> boost_list = new LinkedList<>();
-                    List<Integer> comment_list = new LinkedList<>();
-
-                    for (QueryDocumentSnapshot document : value) {
-                        Blog blog = document.toObject(Blog.class);
-                        title_list.add(blog.getTitle());
-                        author_list.add(blog.getAuthor());
-                        date_list.add(blog.getDt().toString());
-                        desc_list.add(blog.getPost());
-                        img_list.add(blog.getImageURL());
-                        boost_list.add(blog.getBoostCount());
-                        comment_list.add(blog.getCommentCount());
-                    }
-
-                    String[] post_title = title_list.toArray(new String[0]);
-                    String[] post_author = author_list.toArray(new String[0]);
-                    String[] post_date = date_list.toArray(new String[0]);
-                    String[] post_desc = desc_list.toArray(new String[0]);
-                    String[] post_img = img_list.toArray(new String[0]);
-                    Integer[] post_boost = boost_list.toArray(new Integer[0]);
-                    Integer[] post_comment = comment_list.toArray(new Integer[0]);
-
-                    BlogAdapter blogAdapter = new BlogAdapter(fragmentActivity,
-                            post_title, post_author, post_date, post_desc,
-                            post_img,
-                            post_boost, post_comment);
-
-                    recyclerView.setAdapter(blogAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(fragmentActivity));
                 });
     }
 
     @Override
-    public void boostCount(String email, String blogTitle, int count) {
+    public void boostCount(String blogTitle, Integer count) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_BLOGS_COLLECTION).document(blogTitle);
@@ -179,16 +178,8 @@ public class BlogDaoImpl implements BlogDao {
                 DocumentSnapshot document = task.getResult();
                 assert document != null;
                 if (document.exists()) {
-                    Blog blog = document.toObject(Blog.class);
-                    List<String> existingUsersForBlogBoost = blog.getBoostedByUser();
-                    if(!existingUsersForBlogBoost.contains(email)){
-                        db.collection(FS_BLOGS_COLLECTION).document(blogTitle)
-                                .update(FS_BLOG_BOOST_COUNT, count);
-                        existingUsersForBlogBoost.add(email);
-                        db.collection(FS_BLOGS_COLLECTION)
-                                .document(blogTitle)
-                                .set(blog, SetOptions.mergeFields(FS_BLOG_BOOST_USERS));
-                    }
+                    db.collection(FS_BLOGS_COLLECTION).document(blogTitle)
+                            .update("boostCount", count);
                 } else {
                     Log.e(TAG, "Blog does not exist: " + blogTitle);
                 }

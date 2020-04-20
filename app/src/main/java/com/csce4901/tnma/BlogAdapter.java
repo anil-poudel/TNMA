@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
+import com.csce4901.tnma.Models.Blog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -56,6 +60,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogHolder> {
         data7 = s7;
     }
 
+
     @NonNull
     @Override
     public BlogHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,8 +80,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogHolder> {
         holder.commentBtn.setText(String.valueOf(data7[position]));
 
         BlogDao blogDao = new BlogDaoImpl();
-        String email = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
-
         //Load Blogpost Image from database
         Picasso.get()
                 .load(data5[position])
@@ -85,45 +88,57 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogHolder> {
                 .into(holder.pimage);
 
         //Expand view when clicked on dropdown or post itself
-        holder.mainLayout.setOnClickListener(v -> {
-            if(holder.expandedView.getVisibility()==View.GONE)
-            {
-                TransitionManager.beginDelayedTransition(holder.mainLayout, new AutoTransition());
-                holder.expandedView.setVisibility(View.VISIBLE);
-                holder.moreLess.setImageResource(R.drawable.ic_less);
-            }
-            else
-            {
-                TransitionManager.beginDelayedTransition(holder.mainLayout, new AutoTransition());
-                holder.expandedView.setVisibility(View.GONE);
-                holder.moreLess.setImageResource(R.drawable.ic_more);
+        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.expandedView.getVisibility()==View.GONE)
+                {
+                    TransitionManager.beginDelayedTransition(holder.mainLayout, new AutoTransition());
+                    holder.expandedView.setVisibility(View.VISIBLE);
+                    holder.moreLess.setImageResource(R.drawable.ic_less);
+                }
+                else
+                {
+                    TransitionManager.beginDelayedTransition(holder.mainLayout, new AutoTransition());
+                    holder.expandedView.setVisibility(View.GONE);
+                    holder.moreLess.setImageResource(R.drawable.ic_more);
+                }
             }
         });
 
         //Boost Button
-        holder.boostBtn.setOnClickListener(v -> {
-            if(holder.boostedBtn.getVisibility() == View.GONE)
-            {
-                blogDao.boostCount(email, data1[position], data6[position]+1);
-                holder.boostBtn.setVisibility(View.GONE);
-                holder.boostedBtn.setVisibility(View.VISIBLE);
+        holder.boostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.boostedBtn.getVisibility() == View.GONE)
+                {
+                    blogDao.boostCount(data1[position], data6[position]+1);
+                    holder.boostBtn.setVisibility(View.GONE);
+                    holder.boostedBtn.setVisibility(View.VISIBLE);
+                }
             }
         });
         //Boosted Button
-        holder.boostedBtn.setOnClickListener(v -> {
-            if(holder.boostBtn.getVisibility() == View.GONE)
-            {
-                blogDao.boostCount(email, data1[position], data6[position]-1);
-                holder.boostedBtn.setVisibility(View.GONE);
-                holder.boostBtn.setVisibility(View.VISIBLE);
+        holder.boostedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.boostBtn.getVisibility() == View.GONE)
+                {
+                    blogDao.boostCount(data1[position], data6[position]-1);
+                    holder.boostedBtn.setVisibility(View.GONE);
+                    holder.boostBtn.setVisibility(View.VISIBLE);
+                }
             }
         });
 
         //Comment Button
-        holder.commentBtn.setOnClickListener(v -> {
-            Intent comments = new Intent(context, Comment.class);
-            comments.putExtra("title", data1[position]);
-            context.startActivity(comments);
+        holder.commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent comments = new Intent(context, Comment.class);
+                comments.putExtra("title", data1[position]);
+                context.startActivity(comments);
+            }
         });
 
     }
@@ -157,4 +172,5 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.BlogHolder> {
             commentBtn = itemView.findViewById(R.id.commentButton);
         }
     }
+
 }

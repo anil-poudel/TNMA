@@ -3,10 +3,12 @@ package com.csce4901.tnma;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,23 +30,26 @@ public class Comment extends AppCompatActivity {
         if(getIntent().hasExtra("title"))
         {
             titleComment = getIntent().getStringExtra("title");
-        } else {
-            Toast.makeText(this,"Could not find postTitle. Database linking errror.",
-                    Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(this,"Could not find postTitle. Database linking errror.", Toast.LENGTH_SHORT).show();
         }
 
         blogDao1 = new BlogDaoImpl();
-        Button postBtn = findViewById(R.id.postCommentButton);
-        EditText commentText = findViewById(R.id.addCommentText);
+        Button postBtn = (Button) findViewById(R.id.postCommentButton);
+        EditText commentText = (EditText) findViewById(R.id.addCommentText);
         String email = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
 
 
-        postBtn.setOnClickListener(v -> {
-            userComment = commentText.getText().toString();
-            blogDao1.addUserCommentToBlog(email, userComment, titleComment);
-            Toast.makeText(v.getContext(), "Comment successfully posted.",
-                    Toast.LENGTH_SHORT).show();
-            finish();
+        postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userComment = commentText.getText().toString();
+                blogDao1.addUserCommentToBlog(email, userComment, titleComment);
+                Toast.makeText(v.getContext(), "Comment successfully posted.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         });
     }
 }

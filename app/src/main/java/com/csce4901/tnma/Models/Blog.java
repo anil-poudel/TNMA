@@ -2,7 +2,6 @@ package com.csce4901.tnma.Models;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Blog {
@@ -11,9 +10,8 @@ public class Blog {
     String post;
     String imageURL;
     String author;
-    int boostCount;
-    int commentCount = 0;
-    List<String> boostedByUser;
+    Integer boostCount;
+    Integer commentCount;
     Map<String, String> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
@@ -65,21 +63,13 @@ public class Blog {
         this.post = post;
     }
 
-    public int getBoostCount() {
-        return boostCount;
-    }
+    public Integer getBoostCount(){return boostCount;};
 
-    public void setBoostCount(int boostCount) {
-        this.boostCount = boostCount;
-    }
+    public void setBoostCount(Integer boostCount) {this.boostCount = boostCount;};
 
-    public int getCommentCount() {
-        return commentCount;
-    }
+    public Integer getCommentCount(){return commentCount;};
 
-    public void setCommentCount(int commentCount) {
-        this.commentCount = commentCount;
-    }
+    public void setCommentCount(Integer commentCount) {this.commentCount = commentCount;};
 
     public Map<String, String> getComments() {
         return comments;
@@ -87,14 +77,6 @@ public class Blog {
 
     public void setComments(Map<String, String> comments) {
         this.comments = comments;
-    }
-
-    public List<String> getBoostedByUser() {
-        return boostedByUser;
-    }
-
-    public void setBoostedByUser(List<String> boostedByUser) {
-        this.boostedByUser = boostedByUser;
     }
 
     public boolean isFeatured() {

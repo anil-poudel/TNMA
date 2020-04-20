@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
@@ -26,12 +27,14 @@ public class Blogs extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     private Button createPostButton;
     RecyclerView postRecyclerView;
 
     public Blogs() {
         // Required empty public constructor
     }
+
 
     public static Blogs newInstance(String param1, String param2) {
         Blogs fragment = new Blogs();
