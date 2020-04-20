@@ -83,7 +83,7 @@ public class CreatePost extends AppCompatActivity {
                 //Define texts
                 titleText = blogTitle.getText().toString();
                 contentText = blogContent.getText().toString();
-                String uName = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                String uName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
                 //Current Time
                 String timeStamp = String.valueOf(System.currentTimeMillis());
@@ -112,11 +112,11 @@ public class CreatePost extends AppCompatActivity {
                                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                                     while (!uriTask.isSuccessful());
 
-                                    String downloadURI = uriTask.getResult().toString();
+                                    String downloadURI = Objects.requireNonNull(uriTask.getResult()).toString();
 
                                     if(uriTask.isSuccessful())
                                     {
-                                        blogDao.createNewBlog(titleText, contentText, downloadURI, uName);
+                                        blogDao.createNewBlog(titleText, contentText, downloadURI, uName, 0, 0);
                                         Toast.makeText(v.getContext(), "Blog successfully posted.", Toast.LENGTH_SHORT).show();
                                     }
                                     else
@@ -137,7 +137,7 @@ public class CreatePost extends AppCompatActivity {
                 {
                     //default image for blogposts
                     uri = "https://firebasestorage.googleapis.com/v0/b/tnma-375e2.appspot.com/o/Blogs%2Fblog_default.jpg?alt=media&token=985c469f-0127-46d2-9925-7cb1446e25be";
-                    blogDao.createNewBlog(titleText, contentText, uri, uName);
+                    blogDao.createNewBlog(titleText, contentText, uri, uName, 0, 0);
                     Toast.makeText(v.getContext(), "Blog successfully posted.", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -11,9 +11,9 @@ public class Blog {
     String post;
     String imageURL;
     String author;
-    int boostCount;
+    int boostCount = 0;
     int commentCount = 0;
-    List<String> boostedByUser;
+    Map<String, Boolean> boostedByUser;   // Map <Email, hasBoosted?>
     Map<String, String> comments;   // Map <Email, Comment>
     boolean isFeatured = false;
 
@@ -25,8 +25,9 @@ public class Blog {
         this.dt = new Date();
         this.author = author;
         this.boostCount = boostCount;
-        this.commentCount = commentCount;
+        this.boostedByUser = new HashMap<>();
         this.comments = new HashMap<>();
+        this.commentCount = commentCount;
     }
 
     public Date getDt() {
@@ -89,19 +90,11 @@ public class Blog {
         this.comments = comments;
     }
 
-    public List<String> getBoostedByUser() {
-        return boostedByUser;
-    }
+    public Map<String, Boolean> getBoostedByUser() { return boostedByUser; }
 
-    public void setBoostedByUser(List<String> boostedByUser) {
-        this.boostedByUser = boostedByUser;
-    }
+    public void setBoosts(Map<String, Boolean> boostedByUser) { this.boostedByUser = boostedByUser; }
 
-    public boolean isFeatured() {
-        return isFeatured;
-    }
+    public boolean isFeatured() { return isFeatured; }
 
-    public void setFeatured(boolean featured) {
-        isFeatured = featured;
-    }
+    public void setFeatured(boolean featured) { isFeatured = featured; }
 }
