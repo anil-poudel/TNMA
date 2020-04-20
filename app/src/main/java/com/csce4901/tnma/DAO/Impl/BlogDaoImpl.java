@@ -24,6 +24,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +68,15 @@ public class BlogDaoImpl implements BlogDao {
                 if (document.exists()) {
                     Blog blog = document.toObject(Blog.class);
                     Map<String, List<String>> existingUserComment = Objects.requireNonNull(blog).getComments();
-                    List<String> commentor_list = existingUserComment.get(userEmail);
-                    assert commentor_list != null;
-                    commentor_list.add(userComment);
+                    List<String> commentorList = existingUserComment.get(userEmail);
+                    //If userEmail has no previous records, create new one.
+                    if(commentorList == null)
+                    {
+                        commentorList = new LinkedList<>();
+                    }
+                    commentorList.add(userComment);
+                    existingUserComment.put(userEmail, commentorList);
+
                     db.collection(FS_BLOGS_COLLECTION)
                             .document(blogTitle)
                             .set(blog, SetOptions.mergeFields(FS_BLOGS_USER_COMMENTS));
