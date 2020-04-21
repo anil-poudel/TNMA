@@ -88,7 +88,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
-    public void manageVisibilityForGuestUsrFeature(String email, MenuItem registerMenu, Menu menu, Button btn, MenuItem profileMenuItem){
+    public void manageVisibilityForGuestUsrFeature(String email, Menu menu, Button btn, MenuItem profileMenuItem){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
@@ -101,9 +101,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                     int currUserRole = generalUser.getRole();
                     if(currUserRole != GENERAL_USER_ROLE){
                         Log.i(TAG, email + " : Not a general user.");
-                        // disable register option in menu for general user
-                        if(registerMenu != null)
-                            registerMenu.setVisible(false);
+
                     }
                     else {
                         // disable ask a question & messaging for general user

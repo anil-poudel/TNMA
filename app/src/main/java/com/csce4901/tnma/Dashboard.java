@@ -15,14 +15,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.csce4901.tnma.DAO.GeneralUserDao;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
+import com.csce4901.tnma.Models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -67,14 +71,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         drawerLayout.addDrawerListener(toggleDrawer);
         toggleDrawer.syncState();
 
-        //Setup visibility of menu items in navigation drawer based on roles
+        //Set email on Drawer
+        View headerView = navigationView.getHeaderView(0);
+        TextView drawerEmail = headerView.findViewById(R.id.userEmailDrawer);
+        //TextView drawerName = headerView.findViewById(R.id.userNameDrawer);
+
+
+       //Setup visibility of menu items in navigation drawer based on roles
         Menu drawer_menu = navigationView.getMenu();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            MenuItem registerUserItem = drawer_menu.findItem(R.id.registerMenu);
             MenuItem profileUserItem = drawer_menu.findItem(R.id.profileMenu);
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-            generalUser.manageVisibilityForGuestUsrFeature(email, registerUserItem, null, null, profileUserItem);
+            drawerEmail.setText(email);
+            generalUser.manageVisibilityForGuestUsrFeature(email, null, null, profileUserItem);
         }
 
         FloatingActionButton homeBottomNav = findViewById(R.id.homeButton);
@@ -175,9 +185,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             case (R.id.donateMenu):
                 Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
                 break;
-            case (R.id.registerMenu):
-                Toast.makeText(Dashboard.this, "TODO: Register for Events", Toast.LENGTH_SHORT).show();
-                break;
             case (R.id.logoutMenu):
                 FirebaseAuth.getInstance().signOut();
                 finish();
@@ -194,7 +201,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             generalUser.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    null, menu, null, null);
+                     menu, null, null);
         }
         return true;
     }

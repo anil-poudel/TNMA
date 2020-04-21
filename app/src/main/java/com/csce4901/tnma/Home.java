@@ -86,7 +86,7 @@ public class Home extends Fragment {
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao user = new GeneralUserDaoImpl();
             user.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                    null, null, memberButton, null);
+                    null, memberButton, null);
         }
         memberButton.setOnClickListener(v1 -> {
             Intent intent = new Intent(getContext(), Questionnaire.class);
