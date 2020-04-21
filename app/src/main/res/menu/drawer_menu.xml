@@ -9,17 +9,13 @@
     <item
         android:id="@+id/contactMenu"
         android:title="Contact Us"
-        android:icon="@drawable/ic_menu_camera"/>
+        android:icon="@drawable/ic_contact_us"/>
 
     <item
         android:id="@+id/donateMenu"
         android:title="@string/donate"
         android:icon="@drawable/ic_donate"/>
 
-    <item
-        android:id="@+id/registerMenu"
-        android:title="Register"
-        android:icon="@drawable/ic_register"/>
 
     <item
         android:id="@+id/logoutMenu"

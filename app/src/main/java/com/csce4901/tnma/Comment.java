@@ -1,6 +1,8 @@
 package com.csce4901.tnma;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -18,6 +20,8 @@ public class Comment extends AppCompatActivity {
     String userComment;
     String titleComment;
     BlogDao blogDao1;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,13 @@ public class Comment extends AppCompatActivity {
         Button postBtn = findViewById(R.id.postCommentButton);
         EditText commentText = findViewById(R.id.addCommentText);
         String email = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
+
+        recyclerView = findViewById(R.id.commentRecyclerView);
+        BlogDao blogDao = new BlogDaoImpl();
+        blogDao.getAllComments(titleComment, recyclerView, this);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
 
 
         postBtn.setOnClickListener(v -> {

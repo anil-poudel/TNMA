@@ -6,7 +6,7 @@
         android:id="@+id/ask_Action"
         android:title="Ask a Question"
         android:icon="@drawable/ic_ask"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 
 
     <item
