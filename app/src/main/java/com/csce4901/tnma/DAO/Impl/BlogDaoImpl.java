@@ -1,19 +1,24 @@
 package com.csce4901.tnma.DAO.Impl;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.csce4901.tnma.BlogAdapter;
+import com.csce4901.tnma.CommentAdapter;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.Models.Blog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -71,16 +76,21 @@ public class BlogDaoImpl implements BlogDao {
                 assert document != null;
                 if (document.exists()) {
                     Blog blog = document.toObject(Blog.class);
-                    Map<String, Map<String, String>> existingUserComment = Objects.requireNonNull(blog).getComments();
-                    Map<String, String> commentorList = existingUserComment.get(userEmail);
+                    assert blog != null;
+                    String commentID = String.valueOf(blog.getCommentCount());
+
+                    Map<String, List<String>> existingUserComment = Objects.requireNonNull(blog).getComments();
+                    List<String> commentorList = existingUserComment.get(commentID);
                     String currentTime = new Date().toString();
                     //If userEmail has no previous records, create new one.
                     if(commentorList == null)
                     {
-                        commentorList = new HashMap<>();
+                        commentorList = new LinkedList<>();
                     }
-                    commentorList.put(currentTime, userComment);
-                    existingUserComment.put(userEmail, commentorList);
+                    commentorList.add(userComment);
+                    commentorList.add(userEmail);
+                    commentorList.add(currentTime);
+                    existingUserComment.put(commentID, commentorList);
 
                     db.collection(FS_BLOGS_COLLECTION)
                             .document(blogTitle)
@@ -227,8 +237,46 @@ public class BlogDaoImpl implements BlogDao {
     }
 
     @Override
-    public void getAllComments(String blogTitle, RecyclerView recyclerView)
+    public void getAllComments(String blogTitle, RecyclerView recyclerView, Context context)
     {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_BLOGS_COLLECTION).document(blogTitle);
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Blog blog = document.toObject(Blog.class);
+
+                        List<String> commenterEmail = new LinkedList<>();
+                        List<String> commentText = new LinkedList<>();
+                        List<String> commentDate = new LinkedList<>();
+
+                        assert blog != null;
+                        for(int i = blog.getComments().size()-1; i>=0; i--)
+                        {
+                            commentText.add(blog.getComments().get(String.valueOf(i)).get(0));
+                            commenterEmail.add(blog.getComments().get(String.valueOf(i)).get(1));
+                            commentDate.add(blog.getComments().get(String.valueOf(i)).get(2));
+                        }
+
+                        String[] post_comment = commentText.toArray(new String[0]);
+                        String[] commenter_email = commenterEmail.toArray(new String[0]);
+                        String[] comment_date = commentDate.toArray(new String[0]);
+
+                        CommentAdapter commentAdapter = new CommentAdapter(context, post_comment, commenter_email, comment_date);
+                        recyclerView.setAdapter(commentAdapter);
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
 
     }
 }

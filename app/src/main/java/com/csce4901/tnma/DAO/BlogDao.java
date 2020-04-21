@@ -1,10 +1,13 @@
 package com.csce4901.tnma.DAO;
 
+import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.csce4901.tnma.Comment;
 
 public interface BlogDao {
     //create a new blog post
@@ -18,7 +21,7 @@ public interface BlogDao {
     //Boost a blog post
     public  void boostCount(String blogTitle, int boostCount, String userEmail, Boolean userBoost);
     //retrieve all comments to a blog post
-    public void getAllComments(String blogTitle, RecyclerView recyclerView);
+    public void getAllComments(String blogTitle, RecyclerView recyclerView, Context context);
 
 }
 
