@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity implements OnItemSelectedListener{
     private Button homeButton;
+    private Button statusButton;
     private ViewPager viewPager;
     private TextView profileEmail;
     private CardView eventViewer;
@@ -44,6 +45,7 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         homeButton = (Button) findViewById(R.id.profileHomeButton);
+        statusButton = (Button) findViewById(R.id.buttonStatus);
         profileName = (TextView) findViewById(R.id.profileName);
         profileEmail = (TextView) findViewById(R.id.profileEmail);
         profilePhone = (TextView) findViewById(R.id.profilePhone);
@@ -70,14 +72,22 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         });
         profileEmail.setText(email);
         homeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Intent intent
-                        = new Intent(getApplicationContext(),
-                        Dashboard.class);
-                startActivity(intent);
-            }
+                @Override
+                public void onClick(View v) {
+                    Intent intent
+                            = new Intent(getApplicationContext(),
+                            Dashboard.class);
+                    startActivity(intent);
+                }
+        });
+        statusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent
+                            = new Intent(getApplicationContext(),
+                            ContactPage.class);
+                    startActivity(intent);
+                }
         });
         ///------ future buttons
         ///---- updating textview for user information
