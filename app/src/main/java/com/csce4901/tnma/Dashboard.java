@@ -184,6 +184,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 break;
             case (R.id.donateMenu):
                 Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
+                Intent intent3
+                        = new Intent(this,
+                        donations.class);
+                startActivity(intent3);
                 break;
             case (R.id.logoutMenu):
                 FirebaseAuth.getInstance().signOut();

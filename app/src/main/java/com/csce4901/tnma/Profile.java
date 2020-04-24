@@ -33,6 +33,7 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
     private ViewPager viewPager;
     private TextView profileEmail;
     private CardView eventViewer;
+    private CardView questionViewer;
 
     private TextView profileName;
     private TextView profilePhone;
@@ -51,6 +52,7 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         profilePhone = (TextView) findViewById(R.id.profilePhone);
         profileRole = (TextView) findViewById(R.id.profileRole);
         eventViewer = (CardView) findViewById(R.id.profileEventViewer);
+        questionViewer = (CardView) findViewById(R.id.questions);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         GeneralUserDao user = new GeneralUserDaoImpl();
@@ -70,14 +72,20 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
                     startActivity(intent);
                 }
         });
+        questionViewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent
+                        = new Intent(getApplicationContext(),
+                        questions.class);
+                startActivity(intent);
+            }
+        });
         profileEmail.setText(email);
         homeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent
-                            = new Intent(getApplicationContext(),
-                            Dashboard.class);
-                    startActivity(intent);
+                    finish();
                 }
         });
         statusButton.setOnClickListener(new View.OnClickListener() {

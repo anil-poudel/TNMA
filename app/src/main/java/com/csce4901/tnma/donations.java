@@ -8,21 +8,22 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class profile_event_viewer extends AppCompatActivity {
+public class donations extends AppCompatActivity {
 
     ListView listView;
-    String data[];
+    String donations[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_event_viewer);
+        setContentView(R.layout.activity_donations);
 
-        listView = (ListView) findViewById(R.id.list_event);
+        listView = (ListView) findViewById(R.id.list_donations);
 
         // gets array from string.xml- replace this from values in database
-        data = getResources().getStringArray(R.array.event_title);
+        // "donation + amount" for each string in array- concatenate strings
+        donations = getResources().getStringArray(R.array.event_address);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,data);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,donations);
         listView.setAdapter(arrayAdapter);
     }
 }
