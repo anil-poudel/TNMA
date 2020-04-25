@@ -180,10 +180,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(intent);
                 break;
             case (R.id.contactMenu):
-                Toast.makeText(Dashboard.this, "TODO: Contact", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "Contact Page Opened.", Toast.LENGTH_SHORT).show();
+                Intent intent2
+                        = new Intent(this,
+                        ContactPage.class);
+                startActivity(intent2);
                 break;
             case (R.id.donateMenu):
-                Toast.makeText(Dashboard.this, "TODO: Donate", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, "Donation Page Opened.", Toast.LENGTH_SHORT).show();
                 Intent intent3
                         = new Intent(this,
                         donations.class);
