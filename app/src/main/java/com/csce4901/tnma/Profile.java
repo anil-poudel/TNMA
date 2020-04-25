@@ -7,10 +7,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +32,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity implements OnItemSelectedListener{
     private Button homeButton;
+    private Button statusButton;
+    private TextView linkButton;
+
     private ViewPager viewPager;
     private TextView profileEmail;
     private CardView eventViewer;
+    private CardView questionViewer;
+    private CardView popupViewer;
+    private CardView donationViewer;
 
     private TextView profileName;
     private TextView profilePhone;
@@ -44,11 +53,16 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         homeButton = (Button) findViewById(R.id.profileHomeButton);
+        statusButton = (Button) findViewById(R.id.buttonStatus);
+        linkButton = (TextView) findViewById(R.id.buttonPage);
         profileName = (TextView) findViewById(R.id.profileName);
         profileEmail = (TextView) findViewById(R.id.profileEmail);
         profilePhone = (TextView) findViewById(R.id.profilePhone);
         profileRole = (TextView) findViewById(R.id.profileRole);
         eventViewer = (CardView) findViewById(R.id.profileEventViewer);
+        questionViewer = (CardView) findViewById(R.id.questions);
+        popupViewer = (CardView) findViewById(R.id.popup);
+        donationViewer = (CardView) findViewById(R.id.donations);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         GeneralUserDao user = new GeneralUserDaoImpl();
@@ -68,18 +82,53 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
                     startActivity(intent);
                 }
         });
-        profileEmail.setText(email);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Intent intent
+        questionViewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent
                         = new Intent(getApplicationContext(),
-                        Dashboard.class);
+                        questions.class);
                 startActivity(intent);
             }
         });
-        ///------ future buttons
+        donationViewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent
+                        = new Intent(getApplicationContext(),
+                        donations.class);
+                startActivity(intent);
+            }
+        });
+        profileEmail.setText(email);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+        });
+        popupViewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent
+                        = new Intent(getApplicationContext(),
+                        ProfileInfoPopOut.class);
+                startActivity(intent);
+            }
+        });
+
+        statusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent
+                            = new Intent(getApplicationContext(),
+                            ContactPage.class);
+                    startActivity(intent);
+                }
+        });
+
+        TextView getapp = (TextView) findViewById(R.id.buttonPage);
+        getapp.setMovementMethod(LinkMovementMethod.getInstance());
         ///---- updating textview for user information
         profileName = (TextView) findViewById(R.id.profileName);
         profilePhone = (TextView) findViewById(R.id.profilePhone);

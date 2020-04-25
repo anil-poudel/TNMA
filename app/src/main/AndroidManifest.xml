@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ProfileInfoPopOut"></activity>
+        <activity android:name=".questions" />
+        <activity android:name=".donations" />
+        <activity android:name=".ContactPage" />
         <activity android:name=".Comment" />
         <activity android:name=".CreatePost" />
         <activity android:name=".profile_event_viewer" />

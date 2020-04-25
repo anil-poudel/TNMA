@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/PrimaryDark"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home">
 
@@ -95,7 +96,7 @@
                     android:layout_marginTop="2dp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="Change Status" />
+                    android:text="Request Change" />
 
             </LinearLayout>
 
@@ -119,58 +120,9 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/popup"
                     android:layout_width="380dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="15dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="6dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_item_7"
-                        android:orientation="vertical"
-
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
-
-                        <EditText
-                            android:id="@+id/profileEmail"
-                            android:layout_marginLeft="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Email:" />
-
-                        <EditText
-                            android:id="@+id/profilePhone"
-                            android:layout_width="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:text="Phone:" />
-
-                        <Button
-                            android:id="@+id/button2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="38dp"
-                            android:layout_marginLeft="115dp"
-                            android:gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:textStyle="bold"
-                            android:text="Edit information" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="133dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
@@ -179,18 +131,15 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/dashboard_item_4">
-                        <View
-                            android:layout_width="80dp"
-                            android:layout_height="0dp"
-                            android:background="@drawable/dashboard_end"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="133dp"
+                        android:background="@drawable/dashboard_item_7"
+                        android:orientation="vertical"
+
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
 
                         <ImageView
-                            android:id="@+id/image_1"
+                            android:id="@+id/image_0"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_marginStart="12dp"
@@ -203,39 +152,67 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/item_title"
+                            android:id="@+id/blah"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginEnd="80dp"
-                            android:text="Information and Messages"
+                            android:inputType="textPersonName"
+                            android:text="Your information:"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/image_1"
-                            app:layout_constraintTop_toTopOf="@id/image_1" />
+                            app:layout_constraintStart_toEndOf="@id/image_0"
+                            app:layout_constraintTop_toTopOf="@id/image_0" />
+
 
                         <TextView
-                            android:id="@+id/item_description"
+                            android:id="@+id/profileEmail"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
+                            android:inputType="textPersonName"
+                            android:text="Email:"
+                            android:textStyle="italic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/blah"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@id/blah"
+                            app:layout_constraintTop_toBottomOf="@id/blah"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/profilePhone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="3"
-                            android:text="@string/proInformation"
+                            android:text="Phone:"
+                            android:textStyle="italic"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@id/item_title"
-                            app:layout_constraintStart_toStartOf="@id/item_title"
-                            app:layout_constraintTop_toBottomOf="@id/item_title" />
+                            app:layout_constraintEnd_toEndOf="@id/profileEmail"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@id/profileEmail"
+                            app:layout_constraintTop_toBottomOf="@id/profileEmail"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/profileInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="3"
+                            android:text="View and edit your basic and additional information."
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/profilePhone"
+                            app:layout_constraintStart_toStartOf="@id/profilePhone"
+                            app:layout_constraintTop_toBottomOf="@id/profilePhone" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/profileEventViewer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="85dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
@@ -246,7 +223,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/dashboard_item_5">
+
                         <View
+                            android:id="@+id/view"
                             android:layout_width="80dp"
                             android:layout_height="0dp"
                             android:background="@drawable/dashboard_end"
@@ -266,16 +245,16 @@
                             android:src="@drawable/event"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
+
                         <TextView
                             android:id="@+id/item_title2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginEnd="80dp"
                             android:text="Events you have registered for:"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/view"
                             app:layout_constraintStart_toEndOf="@id/image_2"
                             app:layout_constraintTop_toTopOf="@id/image_2" />
 
@@ -289,14 +268,17 @@
                             android:text="@string/proRegisteredEvents"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title2"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@id/item_title2"
-                            app:layout_constraintTop_toBottomOf="@id/item_title2" />
+                            app:layout_constraintTop_toBottomOf="@id/item_title2"
+                            app:layout_constraintVertical_bias="0.0" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/questions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -358,6 +340,87 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/donations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dashboard_item_4">
+                        <View
+                            android:layout_width="80dp"
+                            android:layout_height="0dp"
+                            android:background="@drawable/dashboard_end"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/image_1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@drawable/icon_background"
+                            android:contentDescription="@string/app_name"
+                            android:padding="8dp"
+                            android:src="@drawable/info"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/item_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="80dp"
+                            android:text="View Recent Donations"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/image_1"
+                            app:layout_constraintTop_toTopOf="@id/image_1" />
+
+                        <TextView
+                            android:id="@+id/item_description"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="3"
+                            android:text="@string/proDonations"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/item_title"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@id/item_title"
+                            app:layout_constraintTop_toBottomOf="@id/item_title"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <TextView
+                            android:id="@+id/buttonPage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:gravity="center"
+                            android:text="@string/proSponsor"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/item_description"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@id/item_description"
+                            app:layout_constraintTop_toBottomOf="@id/item_description"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -367,12 +430,15 @@
                         android:id="@+id/profileHomeButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:text="Return to Home"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

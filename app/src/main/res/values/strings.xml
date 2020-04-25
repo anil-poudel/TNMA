@@ -27,9 +27,13 @@
 
     <string name="home_second">Home Second</string>
 
+    <string name="proSponsor"><a href="https://tnmaonline.org/sponsor-tiers/">See Page</a></string>
+
     <string name="proInformation">View additional profile information here, along with your private messages.</string>
     <string name="proRegisteredEvents">View events you have registered for.</string>
     <string name="proRecentQuestions">View questions you have recently asked.</string>
+
+    <string name="proDonations">If you are interested, you can also find out more about our sponsor tiers at www.tnmaonline.org!</string>
 
     <string name="dummy_text">This is a dummy text which will contain event description which will be implemented later. Details of the questions will be implemented later</string>
 

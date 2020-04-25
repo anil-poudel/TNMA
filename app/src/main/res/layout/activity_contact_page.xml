@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/PrimaryDark"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/contact_form_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Contact Form"
+        android:fontFamily="@font/raleway_bold"
+        android:textColor="#ce3232"
+        android:textSize="40sp"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/contact_form_desc"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/raleway_bold"
+        android:orientation="vertical"
+        android:text="You can request a change in user role or send a general message to admin here. After you are done, hit submit to open an email app of your choice. "
+        android:inputType="textMultiLine"
+        android:textSize="18sp"
+        android:typeface="serif" />
+
+    <EditText
+        android:id="@+id/contactEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/raleway_bold"
+        android:hint="Recipient"
+        android:text="info@tnmaonline.org"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/contactSubject"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/raleway_bold"
+        android:hint="Subject"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/contactPhone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/raleway_bold"
+        android:hint="Phone"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/contactMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:gravity="top"
+        android:hint="Your Message"
+        android:fitsSystemWindows="true"
+        android:breakStrategy="balanced"
+        android:inputType="textMultiLine"
+        android:fontFamily="@font/raleway_bold"
+        android:singleLine="false"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/contactButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Submit"
+        android:textColor="#fff" />
+</LinearLayout>
