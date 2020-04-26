@@ -28,14 +28,14 @@ public class DonationsDaoImpl implements DonationsDao {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        List<String> title_list = new LinkedList<>();
+                        List<String> donation_list = new LinkedList<>();
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String detail = (String) document.get(FS_DONATIONS_DETAILS);
-                            title_list.add(detail);
+                            donation_list.add(detail);
                         }
-                        String[] event_title = title_list.toArray(new String[0]);
-                        ArrayAdapter arrayAdapter = new ArrayAdapter(ctx,android.R.layout.simple_list_item_1,event_title);
+                        String[] donation_title = donation_list.toArray(new String[0]);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(ctx,android.R.layout.simple_list_item_1,donation_title);
                         listView.setAdapter(arrayAdapter);
                     } else {
                         Log.e(TAG, "Error getting documents: ", task.getException());
