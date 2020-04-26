@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +16,6 @@ import com.csce4901.tnma.CommentAdapter;
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.Models.Blog;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,10 +26,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -243,38 +236,35 @@ public class BlogDaoImpl implements BlogDao {
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_BLOGS_COLLECTION).document(blogTitle);
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Blog blog = document.toObject(Blog.class);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    Blog blog = document.toObject(Blog.class);
 
-                        List<String> commenterEmail = new LinkedList<>();
-                        List<String> commentText = new LinkedList<>();
-                        List<String> commentDate = new LinkedList<>();
+                    List<String> commenterEmail = new LinkedList<>();
+                    List<String> commentText = new LinkedList<>();
+                    List<String> commentDate = new LinkedList<>();
 
-                        assert blog != null;
-                        for(int i = blog.getComments().size()-1; i>=0; i--)
-                        {
-                            commentText.add(blog.getComments().get(String.valueOf(i)).get(0));
-                            commenterEmail.add(blog.getComments().get(String.valueOf(i)).get(1));
-                            commentDate.add(blog.getComments().get(String.valueOf(i)).get(2));
-                        }
-
-                        String[] post_comment = commentText.toArray(new String[0]);
-                        String[] commenter_email = commenterEmail.toArray(new String[0]);
-                        String[] comment_date = commentDate.toArray(new String[0]);
-
-                        CommentAdapter commentAdapter = new CommentAdapter(context, post_comment, commenter_email, comment_date);
-                        recyclerView.setAdapter(commentAdapter);
-                    } else {
-                        Log.d(TAG, "No such document");
+                    assert blog != null;
+                    for(int i = blog.getComments().size()-1; i>=0; i--)
+                    {
+                        commentText.add(blog.getComments().get(String.valueOf(i)).get(0));
+                        commenterEmail.add(blog.getComments().get(String.valueOf(i)).get(1));
+                        commentDate.add(blog.getComments().get(String.valueOf(i)).get(2));
                     }
+
+                    String[] post_comment = commentText.toArray(new String[0]);
+                    String[] commenter_email = commenterEmail.toArray(new String[0]);
+                    String[] comment_date = commentDate.toArray(new String[0]);
+
+                    CommentAdapter commentAdapter = new CommentAdapter(context, post_comment, commenter_email, comment_date);
+                    recyclerView.setAdapter(commentAdapter);
                 } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+                    Log.d(TAG, "No such document");
                 }
+            } else {
+                Log.d(TAG, "get failed with ", task.getException());
             }
         });
 

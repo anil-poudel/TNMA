@@ -1,11 +1,14 @@
 package com.csce4901.tnma.DAO.Impl;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
@@ -114,6 +117,30 @@ public class EventDaoImpl implements EventDao {
                                 event_title,event_desc,event_addr,event_time,event_date,event_img);
                         recyclerView.setAdapter(eventAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                    } else {
+                        Log.e(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    @Override
+    public void getAllEventsListView(ListView listView, Context ctx) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        db.collection(FS_EVENTS_COLLECTION)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<String> title_list = new LinkedList<>();
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Event event = document.toObject(Event.class);
+                            title_list.add(event.getTitle());
+
+                        }
+                        String[] event_title = title_list.toArray(new String[0]);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(ctx,android.R.layout.simple_list_item_1,event_title);
+                        listView.setAdapter(arrayAdapter);
                     } else {
                         Log.e(TAG, "Error getting documents: ", task.getException());
                     }
