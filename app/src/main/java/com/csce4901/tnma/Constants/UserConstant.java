@@ -14,6 +14,8 @@ public class UserConstant {
     public static final String FS_BLOGS_USER_COMMENT_COUNT = "commentCount";
     public static final String FS_BLOG_BOOST_COUNT = "boostCount";
     public static final String FS_BLOG_BOOST_USERS = "boostedByUser";
+    public static final String FS_DONATIONS_COLLECTION = "donations";
+    public static final String FS_DONATIONS_DETAILS= "details";
     public static final String FS_LOGO = "dynamic-logo";
     public static final String FS_LOGO_DOC = "TNMA_LOGO";
 

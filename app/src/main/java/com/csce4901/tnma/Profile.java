@@ -10,16 +10,10 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -52,17 +46,17 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        homeButton = (Button) findViewById(R.id.profileHomeButton);
-        statusButton = (Button) findViewById(R.id.buttonStatus);
-        linkButton = (TextView) findViewById(R.id.buttonPage);
-        profileName = (TextView) findViewById(R.id.profileName);
-        profileEmail = (TextView) findViewById(R.id.profileEmail);
-        profilePhone = (TextView) findViewById(R.id.profilePhone);
-        profileRole = (TextView) findViewById(R.id.profileRole);
-        eventViewer = (CardView) findViewById(R.id.profileEventViewer);
-        questionViewer = (CardView) findViewById(R.id.questions);
-        popupViewer = (CardView) findViewById(R.id.popup);
-        donationViewer = (CardView) findViewById(R.id.donations);
+        homeButton = findViewById(R.id.profileHomeButton);
+        statusButton = findViewById(R.id.buttonStatus);
+        linkButton = findViewById(R.id.buttonPage);
+        profileName = findViewById(R.id.profileName);
+        profileEmail = findViewById(R.id.profileEmail);
+        profilePhone = findViewById(R.id.profilePhone);
+        profileRole = findViewById(R.id.profileRole);
+        eventViewer = findViewById(R.id.profileEventViewer);
+        questionViewer = findViewById(R.id.questions);
+        popupViewer = findViewById(R.id.popup);
+        donationViewer = findViewById(R.id.donations);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         GeneralUserDao user = new GeneralUserDaoImpl();
@@ -73,58 +67,38 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.bellcon);
 
         profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
-        eventViewer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent
-                            = new Intent(getApplicationContext(),
-                            profile_event_viewer.class);
-                    startActivity(intent);
-                }
+        eventViewer.setOnClickListener(v -> {
+            Intent intent
+                    = new Intent(getApplicationContext(),
+                    profile_event_viewer.class);
+            startActivity(intent);
         });
-        questionViewer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent
-                        = new Intent(getApplicationContext(),
-                        questions.class);
-                startActivity(intent);
-            }
+        questionViewer.setOnClickListener(v -> {
+            Intent intent
+                    = new Intent(getApplicationContext(),
+                    questions.class);
+            startActivity(intent);
         });
-        donationViewer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent
-                        = new Intent(getApplicationContext(),
-                        donations.class);
-                startActivity(intent);
-            }
+        donationViewer.setOnClickListener(v -> {
+            Intent intent
+                    = new Intent(getApplicationContext(),
+                    donations.class);
+            startActivity(intent);
         });
         profileEmail.setText(email);
-        homeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-        });
-        popupViewer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent
-                        = new Intent(getApplicationContext(),
-                        ProfileInfoPopOut.class);
-                startActivity(intent);
-            }
+        homeButton.setOnClickListener(v -> finish());
+        popupViewer.setOnClickListener(v -> {
+            Intent intent
+                    = new Intent(getApplicationContext(),
+                    ProfileInfoPopOut.class);
+            startActivity(intent);
         });
 
-        statusButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent
-                            = new Intent(getApplicationContext(),
-                            ContactPage.class);
-                    startActivity(intent);
-                }
+        statusButton.setOnClickListener(v -> {
+            Intent intent
+                    = new Intent(getApplicationContext(),
+                    ContactPage.class);
+            startActivity(intent);
         });
 
         TextView getapp = (TextView) findViewById(R.id.buttonPage);

@@ -1,7 +1,9 @@
 package com.csce4901.tnma.DAO;
 
+import android.content.Context;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -20,4 +22,6 @@ public interface EventDao {
     public void manageEventBtnVisibility(Button btn, String email, String eventTitle);
     // get featured event, indicator with "featured" field value as true in Firestore event collection
     public void getFeaturedEvents(TextView title, TextView desc, ImageView image);
+    // get list of event for profile events list view
+    public void getAllEventsListView(ListView listView, Context ctx);
     }
