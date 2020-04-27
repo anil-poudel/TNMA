@@ -6,9 +6,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
-import com.csce4901.tnma.Constants.UserConstant;
 import com.csce4901.tnma.DAO.GeneralUserDao;
 import com.csce4901.tnma.MainActivity;
 import com.csce4901.tnma.Models.GeneralUser;
@@ -88,7 +88,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     //For profile pop-up information card. Not an ideal approach, but I could not get this to work for string parameters.
-    public void getUserProfileInfo2(String email, TextView editfName, TextView editlName, TextView editName, TextView editPhone, TextView editCity, TextView editState){
+    public void getUserProfileEditInfo(String email, TextView editfName, TextView editlName, TextView editName, TextView editPhone, TextView editCity, TextView editState){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
@@ -184,6 +184,49 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                 }
             } else {
                 Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
+            }
+        });
+    }
+
+    @Override
+    public void updateUserProfileInfo(String email, String fname, String lname, String phone, String city, String state) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    User generalUser = document.toObject(GeneralUser.class);
+                    //update user info
+                    if(generalUser.getRole() == STUDENT_ROLE){
+                        Student student = document.toObject(Student.class);
+                        student.setFname(fname);
+                        student.setLname(lname);
+                        student.setPhone(phone);
+                        student.setCity(city);
+                        student.setState(state);
+                        db.collection(FS_USERS_COLLECTION)
+                                .document(email)
+                                .set(student);
+                    }
+                    if(generalUser.getRole() == MENTOR_ROLE) {
+                        Mentor mentor = document.toObject(Mentor.class);
+                        mentor.setFname(fname);
+                        mentor.setLname(lname);
+                        mentor.setPhone(phone);
+                        mentor.setCity(city);
+                        mentor.setState(state);
+                        db.collection(FS_USERS_COLLECTION)
+                                .document(email)
+                                .set(mentor);
+                    }
+                } else {
+                    Log.e(TAG, "User does not exist: " + email);
+                }
+            } else {
+                Log.e(TAG, "get failed with ", task.getException());
             }
         });
     }
