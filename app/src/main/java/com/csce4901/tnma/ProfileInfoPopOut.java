@@ -50,6 +50,7 @@ public class ProfileInfoPopOut extends AppCompatActivity {
         changeInfo.setOnClickListener(v -> {
             //change values in the database here- using profilefName, profilelName, profilePhone, profileCity, profileState
             //profileName is not editable= can only change first and last name
+
         });
     }
 }
