@@ -23,5 +23,5 @@ public interface EventDao {
     // get featured event, indicator with "featured" field value as true in Firestore event collection
     public void getFeaturedEvents(TextView title, TextView desc, ImageView image);
     // get list of event for profile events list view
-    public void getAllEventsListView(ListView listView, Context ctx);
+    public void getAllEventsListView(String email, ListView listView, Context ctx);
     }

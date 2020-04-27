@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.csce4901.tnma.DAO.EventDao;
 import com.csce4901.tnma.DAO.Impl.EventDaoImpl;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class profile_event_viewer extends AppCompatActivity {
 
@@ -18,9 +19,10 @@ public class profile_event_viewer extends AppCompatActivity {
         setContentView(R.layout.activity_profile_event_viewer);
 
         listView = findViewById(R.id.list_event);
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         // gets array from string.xml- replace this from values in database
         EventDao eventDao = new EventDaoImpl();
-        eventDao.getAllEventsListView(listView, this);
+        eventDao.getAllEventsListView(email, listView, this);
     }
 }
