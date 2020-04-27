@@ -87,6 +87,67 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
         });
     }
 
+    //For profile pop-up information card. Not an ideal approach, but I could not get this to work for string parameters.
+    public void getUserProfileInfo2(String email, TextView editfName, TextView editlName, TextView editName, TextView editPhone, TextView editCity, TextView editState){
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    StringBuilder fName = null;
+                    StringBuilder lName = null;
+                    StringBuilder name = null;
+                    String phone = null;
+                    String city = null;
+                    String state = null;
+                    User generalUser = document.toObject(GeneralUser.class);
+                    if(generalUser.getRole() == STUDENT_ROLE){
+                        Student student = document.toObject(Student.class);
+                        fName = new StringBuilder()
+                                .append(student.getFname());
+                        lName = new StringBuilder()
+                                .append(student.getLname());
+                        name = new StringBuilder()
+                                .append(fName)
+                                .append(" ")
+                                .append(lName);
+                        phone = student.getPhone();
+                        city = student.getCity();
+                        state = student.getState();
+                    }
+                    if(generalUser.getRole() == MENTOR_ROLE){
+                        Mentor mentor = document.toObject(Mentor.class);
+                        fName = new StringBuilder()
+                                .append(mentor.getFname());
+                        lName = new StringBuilder()
+                                .append(mentor.getLname());
+                        name = new StringBuilder()
+                                .append(fName)
+                                .append(" ")
+                                .append(lName);
+                        phone = mentor.getPhone();
+                        city = mentor.getCity();
+                        state = mentor.getState();
+                    }
+                    editfName.setText(fName);
+                    editlName.setText(lName);
+                    editName.setText(name);
+                    editPhone.setText(phone);
+                    editCity.setText(city);
+                    editState.setText(state);
+                } else {
+                    Log.d(MainActivity.class.getName(), "No such document with email " + email);
+                }
+            } else {
+                Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
+            }
+        });
+    }
+
+
     @Override
     public void manageVisibilityForGuestUsrFeature(String email, Menu menu, Button btn, MenuItem profileMenuItem){
         fbConnector.firebaseSetup();

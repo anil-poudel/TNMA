@@ -219,8 +219,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         switch (menuItem.getItemId())
         {
             case (R.id.ask_Action):
-                questionDialog.show();
-                viewPager.setCurrentItem(3);
+                //questionDialog.show();
+                //viewPager.setCurrentItem(3);
                 break;
 
             case (R.id.message_Action):

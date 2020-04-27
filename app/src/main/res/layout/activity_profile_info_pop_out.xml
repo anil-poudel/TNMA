@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="348dp"
-        android:layout_height="567dp"
+        android:layout_height="600dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:background="@color/Gray"
@@ -41,7 +41,7 @@
                 android:src="@drawable/eat" />
 
             <TextView
-                android:id="@+id/event_title"
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="29dp"
                 android:layout_gravity="center_horizontal"
@@ -74,24 +74,23 @@
                     android:layout_gravity="center">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="96dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
                         android:fontFamily="@font/raleway_bold"
-                        android:gravity="end"
                         android:padding="5sp"
-                        android:text="Field 1: "
+                        android:text="First Name: "
                         android:textColor="@color/Black"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/event_address"
+                    <EditText
+                        android:id="@+id/fName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:fontFamily="@font/raleway_regular"
-                        android:padding="5sp"
                         android:text="Blah"
+                        android:gravity="right"
                         android:textColor="@color/Black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -101,24 +100,23 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="95dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.15"
                         android:fontFamily="@font/raleway_bold"
-                        android:gravity="end"
                         android:padding="5sp"
-                        android:text="Field 2: "
+                        android:text="Last Name: "
                         android:textColor="@color/Black"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/event_time"
+                    <EditText
+                        android:id="@+id/lName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/raleway_regular"
-                        android:padding="5dp"
                         android:text="Blah"
+                        android:gravity="right"
                         android:textColor="@color/Black"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -132,47 +130,97 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.16"
                         android:fontFamily="@font/raleway_bold"
-                        android:gravity="end"
                         android:padding="5sp"
-                        android:text="Field 3: "
+                        android:text="Phone Number: "
                         android:textColor="@color/Black"
                         android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/event_date"
+                    <EditText
+                        android:id="@+id/phoneNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/raleway_regular"
-                        android:padding="5dp"
                         android:text="Blah"
+                        android:gravity="right"
                         android:textColor="@color/Black"
                         android:textSize="18sp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="62dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:fontFamily="@font/raleway_bold"
+                        android:padding="5sp"
+                        android:text="City: "
+                        android:textColor="@color/Black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="Blah"
+                        android:gravity="right"
+                        android:textColor="@color/Black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="62dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:fontFamily="@font/raleway_bold"
+                        android:padding="5sp"
+                        android:text="State: "
+                        android:textColor="@color/Black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/raleway_regular"
+                        android:text="Blah"
+                        android:gravity="right"
+                        android:textColor="@color/Black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/event_desc"
+                    android:id="@+id/desc"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="36dp"
                     android:fontFamily="@font/raleway_regular"
                     android:lines="5"
                     android:padding="8dp"
-                    android:text="Dummy text to change some profile info."
+                    android:text="Edit your information here!"
                     android:textColor="@color/Black"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_joinz"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnChangeInfo"
+            android:layout_width="116dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="Update info"
             android:background="@drawable/btn_style3"
             android:fontFamily="@font/raleway_bold"
+            android:text="Update info"
             android:textColor="@color/White" />
 
     </LinearLayout>
