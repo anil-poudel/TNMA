@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 public interface GeneralUserDao {
     public void createGeneralUser(String email);
-    public void getUserAvatar(String email, ImageView avatar, Context ctx);
+    public void getUserAvatar(String email, TextView avatar, Context ctx);
+    public void setUserAvatar(String email, int avatarNum);
+    public void setRoleAvatar(String email, TextView role, Context ctx);
     public void manageVisibilityForGuestUsrFeature(String email, Menu menu, Button btn, MenuItem profileMenuItem);
     public void getUserProfileInfo(String email, TextView profileName, TextView profilePhone, TextView profileRole);
     //For profile pop-up information card. Not an ideal approach, but I could not get this to work for string parameters.
