@@ -80,15 +80,6 @@ public class LoginTab extends Fragment {
         return v;
     }
 
-    @OnClick(R.id.guestLoginButton)
-    public void guestbypass()
-    {
-        Toast.makeText(getContext(), "Logging in as Guest.", Toast.LENGTH_LONG).show();
-        Intent intent1 = new Intent(getContext(),Dashboard.class);
-        startActivity(intent1);
-    }
-
-
     @OnClick(R.id.loginButton)
     public void submit() {
         firebaseAuth = fbConnector.getFirebaseAuthInstance();
