@@ -49,7 +49,7 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
-    public void getUserAvatar(String email, ImageView avatar, Context ctx){
+    public void getUserAvatar(String email, TextView avatar, Context ctx){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
@@ -60,8 +60,31 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                 if (document.exists()) {
                     User generalUser = document.toObject(GeneralUser.class);
                     int selectedAvatar = generalUser.getAvatar();
+                    Drawable[] compoundDrawables;
+                    compoundDrawables = avatar.getCompoundDrawables();
                     //Sid update view based on the integer
-
+                    switch (selectedAvatar) {
+                        case 0: {
+                            Drawable img0 = ctx.getResources().getDrawable(R.drawable.tnma);
+                            avatar.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img0, compoundDrawables[2], compoundDrawables[3]);
+                            break;
+                        }
+                        case 1: {
+                            Drawable img1 = ctx.getResources().getDrawable(R.drawable.profile);
+                            avatar.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img1, compoundDrawables[2], compoundDrawables[3]);
+                            break;
+                        }
+                        case 2: {
+                            Drawable img2 = ctx.getResources().getDrawable(R.drawable.scientist);
+                            avatar.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img2, compoundDrawables[2], compoundDrawables[3]);
+                            break;
+                        }
+                        case 3: {
+                            Drawable img3 = ctx.getResources().getDrawable(R.drawable.goldmedal);
+                            avatar.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img3, compoundDrawables[2], compoundDrawables[3]);
+                            break;
+                        }
+                    }
                 } else {
                     Log.e(TAG, "User does not exist: " + email);
                 }
@@ -245,6 +268,41 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                         mentor.setPhone(phone);
                         mentor.setCity(city);
                         mentor.setState(state);
+                        db.collection(FS_USERS_COLLECTION)
+                                .document(email)
+                                .set(mentor);
+                    }
+                } else {
+                    Log.e(TAG, "User does not exist: " + email);
+                }
+            } else {
+                Log.e(TAG, "get failed with ", task.getException());
+            }
+        });
+    }
+
+    @Override
+    public void setUserAvatar(String email, int avatarNum) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    User generalUser = document.toObject(GeneralUser.class);
+                    //update user info
+                    if(generalUser.getRole() == STUDENT_ROLE){
+                        Student student = document.toObject(Student.class);
+                        student.setAvatar(avatarNum);
+                        db.collection(FS_USERS_COLLECTION)
+                                .document(email)
+                                .set(student);
+                    }
+                    if(generalUser.getRole() == MENTOR_ROLE) {
+                        Mentor mentor = document.toObject(Mentor.class);
+                        mentor.setAvatar(avatarNum);
                         db.collection(FS_USERS_COLLECTION)
                                 .document(email)
                                 .set(mentor);

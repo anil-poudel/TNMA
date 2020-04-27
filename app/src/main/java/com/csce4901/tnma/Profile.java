@@ -61,12 +61,9 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
 
         GeneralUserDao user = new GeneralUserDaoImpl();
         user.getUserProfileInfo(email, profileName, profilePhone, profileRole);
+        user.getUserAvatar(email, profileName, this);
 
         compoundDrawables = profileName.getCompoundDrawables();
-        Drawable topCompoundDrawable = compoundDrawables[1];
-        Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.bellcon);
-
-        profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         eventViewer.setOnClickListener(v -> {
             Intent intent
                     = new Intent(getApplicationContext(),
@@ -130,25 +127,29 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
     }
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (position == 0) {
-            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.profile);
-            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         }
         else {
         // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        GeneralUserDao user = new GeneralUserDaoImpl();
         compoundDrawables = profileName.getCompoundDrawables();
         if (item == "TNMA") {
-            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.tnma);
-            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            user.setUserAvatar(email, 0);
+            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.tnma);
+            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         } else if (item == "Scientist") {
-            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.scientist);
-            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            user.setUserAvatar(email, 2);
+            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.scientist);
+            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         } else if (item == "Mushroom") {
-            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.profile);
-            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            user.setUserAvatar(email, 1);
+            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.profile);
+            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         } else if (item == "Gold Medal") {
-            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.goldmedal);
-            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            user.setUserAvatar(email, 3);
+            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.goldmedal);
+            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         }
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         }
