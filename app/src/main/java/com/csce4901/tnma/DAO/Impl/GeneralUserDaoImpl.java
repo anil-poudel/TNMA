@@ -95,6 +95,36 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
+    public void setRoleAvatar(String email, TextView role, Context ctx){
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    Drawable[] compoundDrawables;
+                    compoundDrawables = role.getCompoundDrawables();
+                    User generalUser = document.toObject(GeneralUser.class);
+                    if(generalUser.getRole() == STUDENT_ROLE){
+                        Drawable img0 = ctx.getResources().getDrawable(R.drawable.student);
+                        role.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img0, compoundDrawables[2], compoundDrawables[3]);
+                    }
+                    if(generalUser.getRole() == MENTOR_ROLE){
+                        Drawable img1 = ctx.getResources().getDrawable(R.drawable.doctor);
+                        role.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img1, compoundDrawables[2], compoundDrawables[3]);
+                    }
+                } else {
+                    Log.e(TAG, "User does not exist: " + email);
+                }
+            } else {
+                Log.e(TAG, "get failed with ", task.getException());
+            }
+        });
+    }
+
+    @Override
     public void getUserProfileInfo(String email, TextView profileName, TextView profilePhone, TextView profileRole){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();

@@ -62,7 +62,7 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         GeneralUserDao user = new GeneralUserDaoImpl();
         user.getUserProfileInfo(email, profileName, profilePhone, profileRole);
         user.getUserAvatar(email, profileName, this);
-
+        user.setRoleAvatar(email, profileRole, this);
         compoundDrawables = profileName.getCompoundDrawables();
         eventViewer.setOnClickListener(v -> {
             Intent intent
@@ -136,20 +136,24 @@ public class Profile extends AppCompatActivity implements OnItemSelectedListener
         compoundDrawables = profileName.getCompoundDrawables();
         if (item == "TNMA") {
             user.setUserAvatar(email, 0);
-            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.tnma);
-            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            //sets hardcoded avatar AND changes database value for real-time effect
+            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.tnma);
+            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         } else if (item == "Scientist") {
             user.setUserAvatar(email, 2);
-            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.scientist);
-            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            //sets hardcoded avatar AND changes database value for real-time effect
+            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.scientist);
+            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         } else if (item == "Mushroom") {
             user.setUserAvatar(email, 1);
-            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.profile);
-            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            //sets hardcoded avatar AND changes database value for real-time effect
+            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.profile);
+            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         } else if (item == "Gold Medal") {
             user.setUserAvatar(email, 3);
-            //Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.goldmedal);
-            //profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
+            //sets hardcoded avatar AND changes database value for real-time effect
+            Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.goldmedal);
+            profileName.setCompoundDrawablesRelativeWithIntrinsicBounds(compoundDrawables[0], img, compoundDrawables[2], compoundDrawables[3]);
         }
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         }

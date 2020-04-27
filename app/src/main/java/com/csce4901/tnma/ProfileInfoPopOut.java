@@ -20,7 +20,6 @@ public class ProfileInfoPopOut extends AppCompatActivity {
     private TextView profilePhone;
     private TextView profileCity;
     private TextView profileState;
-    private ImageView avatar;
     private TextView eclose;
     private Button changeInfo;
     @Override
@@ -33,7 +32,6 @@ public class ProfileInfoPopOut extends AppCompatActivity {
         profilePhone = findViewById(R.id.phoneNum);
         profileCity = findViewById(R.id.city);
         profileState = findViewById(R.id.state);
-        avatar = findViewById(R.id.staticAvatar);
         eclose = findViewById(R.id.txt_close);
         changeInfo = findViewById(R.id.btnChangeInfo);
 
@@ -42,8 +40,7 @@ public class ProfileInfoPopOut extends AppCompatActivity {
 
         GeneralUserDao user = new GeneralUserDaoImpl();
         user.getUserProfileEditInfo(email, profilefName, profilelName, profileName, profilePhone, profileCity, profileState);
-        Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.tnma);
-        avatar.setImageDrawable(img);
+        user.getUserAvatar(email, profileName, this);
 
         changeInfo.setOnClickListener(v -> {
             GeneralUserDao generalUserDao = new GeneralUserDaoImpl();
