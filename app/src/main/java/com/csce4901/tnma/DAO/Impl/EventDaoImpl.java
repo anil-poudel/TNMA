@@ -124,7 +124,7 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void getAllEventsListView(ListView listView, Context ctx) {
+    public void getAllEventsListView(String email, ListView listView, Context ctx) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         db.collection(FS_EVENTS_COLLECTION)
@@ -132,11 +132,12 @@ public class EventDaoImpl implements EventDao {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<String> title_list = new LinkedList<>();
-
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Event event = document.toObject(Event.class);
-                            title_list.add(event.getTitle());
-
+                            List<String> enrolledUsrs = event.getEnrolledUsers();
+                            if(enrolledUsrs.contains(email)){
+                                title_list.add(event.getTitle());
+                            }
                         }
                         String[] event_title = title_list.toArray(new String[0]);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(ctx,android.R.layout.simple_list_item_1,event_title);

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.GeneralUserDao;
