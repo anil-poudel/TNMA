@@ -122,7 +122,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/popup"
                     android:layout_width="380dp"
-                    android:layout_height="133dp"
+                    android:layout_height="143dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
@@ -131,12 +131,19 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="133dp"
+                        android:layout_height="143dp"
                         android:background="@drawable/dashboard_item_7"
                         android:orientation="vertical"
 
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
+                        android:paddingTop="0dp">
+
+                        <View
+                            android:layout_width="80dp"
+                            android:layout_height="0dp"
+                            android:background="@drawable/dashboard_end"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/image_0"
@@ -156,7 +163,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:inputType="textPersonName"
+                            android:ellipsize="end"
+                            android:maxLines="3"
                             android:text="Your information:"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -169,7 +177,8 @@
                             android:id="@+id/profileEmail"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
+                            android:ellipsize="end"
+                            android:maxLines="3"
                             android:text="Email:"
                             android:textStyle="italic"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -371,7 +380,7 @@
                             android:background="@drawable/icon_background"
                             android:contentDescription="@string/app_name"
                             android:padding="8dp"
-                            android:src="@drawable/info"
+                            android:src="@drawable/donation"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
