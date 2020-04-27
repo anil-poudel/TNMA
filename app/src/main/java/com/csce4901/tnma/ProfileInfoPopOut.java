@@ -2,8 +2,10 @@ package com.csce4901.tnma;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.csce4901.tnma.DAO.GeneralUserDao;
@@ -17,8 +19,8 @@ public class ProfileInfoPopOut extends AppCompatActivity {
     private TextView profilePhone;
     private TextView profileCity;
     private TextView profileState;
+    private ImageView avatar;
     private TextView eclose;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class ProfileInfoPopOut extends AppCompatActivity {
         profilePhone = findViewById(R.id.phoneNum);
         profileCity = findViewById(R.id.city);
         profileState = findViewById(R.id.state);
+        avatar = findViewById(R.id.staticAvatar);
         eclose = findViewById(R.id.txt_close);
         eclose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,5 +43,8 @@ public class ProfileInfoPopOut extends AppCompatActivity {
 
         GeneralUserDao user = new GeneralUserDaoImpl();
         user.getUserProfileInfo2(email, profilefName, profilelName, profileName, profilePhone, profileCity, profileState);
+
+        Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.tnma);
+        avatar.setImageDrawable(img);
     }
 }
