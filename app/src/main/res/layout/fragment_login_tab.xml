@@ -67,23 +67,4 @@
         android:textColorHighlight="@color/AccentLight"
         android:textColorLink="@color/White" />
 
-
-    <Button
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:id="@+id/guestLoginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/loginButton"
-        android:layout_marginTop="40dp"
-        android:background="@color/PrimaryDark"
-        android:ems="15"
-        android:fontFamily="@font/raleway_bold"
-        android:hapticFeedbackEnabled="false"
-        android:text="OR Continue as Guest"
-        android:textColor="@color/AccentLight"
-        android:textColorHighlight="@color/AccentLight"
-        android:textColorLink="@color/White" />
-
-
 </RelativeLayout>
