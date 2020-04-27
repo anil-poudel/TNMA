@@ -6,6 +6,7 @@ public abstract class User {
 
     private String email;
     // role 0 -> admin, 1 -> general user, 2 -> student, 3 -> mentor
+    private int avatar;
     private int role;
     private boolean roleVerified;
     private List<Integer> events;
@@ -13,6 +14,7 @@ public abstract class User {
     public User(String email, boolean roleVerified){
         this.email = email;
         this.role = 1;  //default role set to general user
+        this.avatar = 0; //default avatar for any user
         this.roleVerified = roleVerified;
     }
 
@@ -25,6 +27,14 @@ public abstract class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 
     public int getRole() {
