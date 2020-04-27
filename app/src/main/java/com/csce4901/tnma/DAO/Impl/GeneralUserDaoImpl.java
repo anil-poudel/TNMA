@@ -1,6 +1,7 @@
 package com.csce4901.tnma.DAO.Impl;
 
 import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,29 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     @Override
+    public void getUserAvatar(String email, ImageView avatar, Context ctx){
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    User generalUser = document.toObject(GeneralUser.class);
+                    int selectedAvatar = generalUser.getAvatar();
+                    //Sid update view based on the integer
+
+                } else {
+                    Log.e(TAG, "User does not exist: " + email);
+                }
+            } else {
+                Log.e(TAG, "get failed with ", task.getException());
+            }
+        });
+    }
+
+    @Override
     public void getUserProfileInfo(String email, TextView profileName, TextView profilePhone, TextView profileRole){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
@@ -90,7 +114,8 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
     }
 
     //For profile pop-up information card. Not an ideal approach, but I could not get this to work for string parameters.
-    public void getUserProfileEditInfo(String email, TextView editfName, TextView editlName, TextView editName, TextView editPhone, TextView editCity, TextView editState){
+    public void getUserProfileEditInfo(String email, TextView editfName, TextView editlName,
+                                       TextView editName, TextView editPhone, TextView editCity, TextView editState){
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
