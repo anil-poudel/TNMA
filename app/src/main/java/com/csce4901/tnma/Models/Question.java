@@ -1,8 +1,6 @@
 package com.csce4901.tnma.Models;
-import java.util.Date;
 
 public class Question {
-    private Date dt;
     private String question;
     private String answer;
     private String answeredBy;
@@ -10,18 +8,8 @@ public class Question {
 
     public Question(){ }
     public Question(String question) {
-        this.question = question;
-        this.dt = new Date();
         this.answer = null;
         this.answeredBy = null;
-    }
-
-    public Date getDt() {
-        return dt;
-    }
-
-    public void setDt(Date dt) {
-        this.dt = dt;
     }
 
     public String getQuestion() {
