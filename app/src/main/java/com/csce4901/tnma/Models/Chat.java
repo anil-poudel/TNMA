@@ -1,9 +1,12 @@
 package com.csce4901.tnma.Models;
 
+import java.util.Date;
+
 public class Chat {
     String sender;
     String receiver;
     String message;
+    String dt;
 
     public Chat(){
     }
@@ -12,6 +15,7 @@ public class Chat {
         this.sender = publisher;
         this.receiver = consumer;
         this.message = message;
+        this.dt = new Date().toString();
     }
 
     public String getSender() {
@@ -20,6 +24,14 @@ public class Chat {
 
     public void setSender(String sender) {
         this.sender = sender;
+    }
+
+    public String getDt() {
+        return dt;
+    }
+
+    public void setDt(String dt) {
+        this.dt = dt;
     }
 
     public String getReceiver() {
