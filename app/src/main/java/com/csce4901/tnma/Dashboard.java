@@ -23,9 +23,6 @@ import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.GeneralUserDao;
 import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
-import com.csce4901.tnma.DAO.Impl.QuestionDaoImpl;
-import com.csce4901.tnma.DAO.QuestionDao;
-import com.csce4901.tnma.Models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,9 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.Objects;
-
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -48,9 +42,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     Snackbar snackbar;
     Dialog questionDialog;
 
-    //User Role
-    private int role = 1;
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +53,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         viewPager.setAdapter(adapter);
 
         viewPager.setCurrentItem(1);
-
 
         //Set home as default fragment
         viewPager.setCurrentItem(1);
@@ -82,8 +72,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //Set email on Drawer
         View headerView = navigationView.getHeaderView(0);
         TextView drawerEmail = headerView.findViewById(R.id.userEmailDrawer);
-        //TextView drawerName = headerView.findViewById(R.id.userNameDrawer);
-
 
         //Setup visibility of menu items in navigation drawer based on roles
         Menu drawer_menu = navigationView.getMenu();
@@ -121,68 +109,31 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        homeBottomNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                questionDialog = new Dialog(v.getContext());
-                questionDialog.setContentView(R.layout.popup_question);
-                Button btn = questionDialog.findViewById(R.id.ask_questionBtn);
-                Button previous = questionDialog.findViewById(R.id.view_questionsBtn);
-                EditText question_text = questionDialog.findViewById(R.id.question_text);
+        homeBottomNav.setOnClickListener(v -> {
+            questionDialog = new Dialog(v.getContext());
+            questionDialog.setContentView(R.layout.popup_question);
+            Button btn = questionDialog.findViewById(R.id.ask_questionBtn);
+            Button previous = questionDialog.findViewById(R.id.view_questionsBtn);
 
-                if(viewPager.getCurrentItem()==1 || viewPager.getCurrentItem()==3) {
-                    //Show Ask a Doctor
-                    questionDialog.show();
+            if(viewPager.getCurrentItem()==1 || viewPager.getCurrentItem()==3) {
+                questionDialog.show();
 
-                    //Submit question
-                    btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v)
-                        {
-                            if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-                                //Question Text -- check if question is valid
-                                String question = (question_text.getText()).toString();
-                                String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-                                QuestionDao questionDao = new QuestionDaoImpl();
-                                questionDao.addQuestion(email, question, false, null, null);
-                                Toast.makeText(getBaseContext(), "Question asked!", Toast.LENGTH_SHORT).show();
-                                questionDialog.dismiss();
-                            } else {
-                                Toast.makeText(getBaseContext(), "Unable to post question", Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-                    });
-                    previous.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            viewPager.setCurrentItem(3);
-                            questionDialog.dismiss();
-                        }
-                    });
-                }
-                homeBottomNav.setImageResource(R.drawable.ic_ask);
-                viewPager.setCurrentItem(1);
+                btn.setOnClickListener(v1 -> questionDialog.dismiss());
+                previous.setOnClickListener(v12 -> {
+                    viewPager.setCurrentItem(3);
+                    questionDialog.dismiss();
+                });
             }
+            homeBottomNav.setImageResource(R.drawable.ic_ask);
+            viewPager.setCurrentItem(1);
         });
 
         LinearLayout newsBottomNav = findViewById(R.id.newsButton);
-        newsBottomNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(0);
-            }
-        });
+        newsBottomNav.setOnClickListener(v -> viewPager.setCurrentItem(0));
 
 
         LinearLayout blogBottomNav = findViewById(R.id.blogButton);
-        blogBottomNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(2);
-            }
-        });
+        blogBottomNav.setOnClickListener(v -> viewPager.setCurrentItem(2));
 
         //Double click back to logout
         snackbar = Snackbar.make(drawerLayout, "Please press Back again to Logout.", Snackbar.LENGTH_SHORT);

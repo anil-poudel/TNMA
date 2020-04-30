@@ -1,5 +1,6 @@
 package com.csce4901.tnma;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +13,9 @@ import butterknife.Unbinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
@@ -35,6 +38,7 @@ public class LoginTab extends Fragment {
 
     @BindView(R.id.email) EditText email;
     @BindView(R.id.passcode) EditText password;
+    @BindView(R.id.forgot) TextView rForgotPassword;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,6 +81,34 @@ public class LoginTab extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login_tab, container, false);
         unbinder = ButterKnife.bind(this, v);
+        rForgotPassword.setOnClickListener(forgotBtn -> {
+            Dialog resetDialog = null;
+            resetDialog = new Dialog(forgotBtn.getContext());
+            resetDialog.setContentView(R.layout.reset_password_popup);
+            Button rCancelBtn = resetDialog.findViewById(R.id.resetPass_CancelBtn);
+            Button resetBtn = resetDialog.findViewById(R.id.resetPass_Btn);
+            resetDialog.show();
+            Dialog finalResetDialog = resetDialog;
+            rCancelBtn.setOnClickListener(cancel -> finalResetDialog.dismiss());
+            resetBtn.setOnClickListener(reset -> {
+                EditText resetEmail = finalResetDialog.findViewById(R.id.reset_email);
+                String emailAddr = resetEmail.getText().toString();
+                firebaseAuth = fbConnector.getFirebaseAuthInstance();
+                if(isNullOrEmpty(emailAddr)){
+                    Toast.makeText(getContext(), "Empty field, try again",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    firebaseAuth.sendPasswordResetEmail(emailAddr).addOnCompleteListener(task -> {
+                        if(task.isSuccessful()){
+                            Toast.makeText(MainActivity.getAppContext(),
+                                    "Reset email sent",
+                                    Toast.LENGTH_LONG).show();
+                            finalResetDialog.dismiss();
+                        }
+                    });
+                }
+            });
+        });
         return v;
     }
 
@@ -133,6 +165,12 @@ public class LoginTab extends Fragment {
     @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.isEmpty())
+            return false;
+        return true;
     }
 
     public interface OnFragmentInteractionListener {
