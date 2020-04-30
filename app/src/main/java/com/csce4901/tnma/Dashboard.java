@@ -140,7 +140,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         @Override
                         public void onClick(View v)
                         {
-                            //if valid input entered was successful
                             if(FirebaseAuth.getInstance().getCurrentUser() != null) {
                                 //Question Text -- check if question is valid
                                 String question = question_text.getText().toString();
