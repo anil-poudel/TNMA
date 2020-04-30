@@ -1,27 +1,20 @@
 package com.csce4901.tnma.Models;
+
 import java.util.Date;
+import java.util.List;
 
 public class Question {
-    private Date dt;
-    private String question;
-    private String answer;
-    private String answeredBy;
-    boolean isAnswered = false;
+    String question;
+    List<String> answers;
+    List<String> answeredBy;
+    Boolean isAnswered = false;
 
     public Question(){ }
-    public Question(String question) {
+    public Question( String question, Boolean isAnswered, List<String> answeredBy, List<String> answer) {
         this.question = question;
-        this.dt = new Date();
-        this.answer = null;
-        this.answeredBy = null;
-    }
-
-    public Date getDt() {
-        return dt;
-    }
-
-    public void setDt(Date dt) {
-        this.dt = dt;
+        this.answers = answer;
+        this.answeredBy = answeredBy;
+        this.isAnswered = isAnswered;
     }
 
     public String getQuestion() {
@@ -32,19 +25,19 @@ public class Question {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
+    public List<String> getAnswer() {
+        return answers;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setAnswer(List<String> answer) {
+        this.answers = answer;
     }
 
-    public String getAnsweredBy() {
+    public List<String> getAnsweredBy() {
         return answeredBy;
     }
 
-    public void setAnsweredBy(String answeredBy) {
+    public void setAnsweredBy(List<String> answeredBy) {
         this.answeredBy = answeredBy;
     }
 

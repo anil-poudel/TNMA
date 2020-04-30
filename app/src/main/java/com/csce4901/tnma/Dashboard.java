@@ -14,16 +14,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.GeneralUserDao;
+import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -67,7 +73,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         View headerView = navigationView.getHeaderView(0);
         TextView drawerEmail = headerView.findViewById(R.id.userEmailDrawer);
 
-       //Setup visibility of menu items in navigation drawer based on roles
+        //Setup visibility of menu items in navigation drawer based on roles
         Menu drawer_menu = navigationView.getMenu();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             MenuItem profileUserItem = drawer_menu.findItem(R.id.profileMenu);
@@ -177,7 +183,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             generalUser.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                     menu, null, null);
+                    menu, null, null);
         }
         return true;
     }
