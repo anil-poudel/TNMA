@@ -26,7 +26,7 @@ public class ChatDaoImpl implements ChatDao {
     FirebaseConnector fbConnector = new FirebaseConnector();
 
     @Override
-    public void storeNewMessage(String sender, String receiver, String message) {
+    public void storeNewMessage(String dt, String sender, String receiver, String message) {
         fbConnector.firebaseSetup();
         FirebaseFirestore db = fbConnector.getDb();
         Chat chat = new Chat(sender, receiver, message);

@@ -198,8 +198,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case (R.id.message_Action):
-                Toast.makeText(Dashboard.this, "TODO: Direct Messaging", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(Dashboard.this, "Direct Messaging", Toast.LENGTH_SHORT).show();
+                //If not first login, goto dashboard
+                Intent intent
+                        = new Intent(this,
+                        messaging.class);
+                startActivity(intent);
                 break;
+
         }
         return true;
     }
