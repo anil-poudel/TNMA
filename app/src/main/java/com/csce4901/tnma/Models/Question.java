@@ -1,17 +1,18 @@
 package com.csce4901.tnma.Models;
+
 import java.util.Date;
 
 public class Question {
-    private Date dt;
-    private String question;
-    private String answer;
-    private String answeredBy;
+    Date dt;
+    String question;
+    String answer;
+    String answeredBy;
     boolean isAnswered = false;
 
     public Question(){ }
     public Question(String question) {
-        this.question = question;
         this.dt = new Date();
+        this.question = question;
         this.answer = null;
         this.answeredBy = null;
     }

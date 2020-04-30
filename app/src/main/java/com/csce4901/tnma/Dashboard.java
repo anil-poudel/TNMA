@@ -14,17 +14,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.GeneralUserDao;
+import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
 import com.csce4901.tnma.DAO.Impl.GeneralUserDaoImpl;
+import com.csce4901.tnma.DAO.Impl.QuestionDaoImpl;
+import com.csce4901.tnma.DAO.QuestionDao;
 import com.csce4901.tnma.Models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
 
@@ -120,15 +128,29 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 questionDialog.setContentView(R.layout.popup_question);
                 Button btn = questionDialog.findViewById(R.id.ask_questionBtn);
                 Button previous = questionDialog.findViewById(R.id.view_questionsBtn);
+                EditText question_text = questionDialog.findViewById(R.id.question_text);
 
+                QuestionDao questionDao = new QuestionDaoImpl();
                 if(viewPager.getCurrentItem()==1 || viewPager.getCurrentItem()==3) {
+                    //Show Ask a Doctor
                     questionDialog.show();
 
+                    //Submit question
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v)
                         {
-                            questionDialog.dismiss();
+                            if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+                                //Question Text -- check if question is valid
+                                String question = question_text.getText().toString();
+
+                                questionDao.addQuestion(question);
+                                Toast.makeText(getBaseContext(), "Question asked!", Toast.LENGTH_SHORT).show();
+                                questionDialog.dismiss();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Unable to post question", Toast.LENGTH_LONG).show();
+                            }
+
                         }
                     });
                     previous.setOnClickListener(new View.OnClickListener() {
