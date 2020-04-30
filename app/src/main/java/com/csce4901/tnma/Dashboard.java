@@ -85,7 +85,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //TextView drawerName = headerView.findViewById(R.id.userNameDrawer);
 
 
-       //Setup visibility of menu items in navigation drawer based on roles
+        //Setup visibility of menu items in navigation drawer based on roles
         Menu drawer_menu = navigationView.getMenu();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             MenuItem profileUserItem = drawer_menu.findItem(R.id.profileMenu);
@@ -130,7 +130,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Button previous = questionDialog.findViewById(R.id.view_questionsBtn);
                 EditText question_text = questionDialog.findViewById(R.id.question_text);
 
-                QuestionDao questionDao = new QuestionDaoImpl();
                 if(viewPager.getCurrentItem()==1 || viewPager.getCurrentItem()==3) {
                     //Show Ask a Doctor
                     questionDialog.show();
@@ -142,9 +141,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         {
                             if(FirebaseAuth.getInstance().getCurrentUser() != null) {
                                 //Question Text -- check if question is valid
-                                String question = question_text.getText().toString();
+                                String question = (question_text.getText()).toString();
+                                String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                                questionDao.addQuestion(question);
+                                QuestionDao questionDao = new QuestionDaoImpl();
+                                questionDao.addQuestion(email, question, false, null, null);
                                 Toast.makeText(getBaseContext(), "Question asked!", Toast.LENGTH_SHORT).show();
                                 questionDialog.dismiss();
                             } else {
@@ -170,7 +171,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         newsBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0);
             }
         });
 
@@ -179,7 +180,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         blogBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            viewPager.setCurrentItem(2);
+                viewPager.setCurrentItem(2);
             }
         });
 
@@ -231,7 +232,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             GeneralUserDao generalUser = new GeneralUserDaoImpl();
             generalUser.manageVisibilityForGuestUsrFeature(FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                     menu, null, null);
+                    menu, null, null);
         }
         return true;
     }
