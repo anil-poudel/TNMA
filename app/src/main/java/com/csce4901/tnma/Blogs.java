@@ -11,10 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.BlogDao;
 import com.csce4901.tnma.DAO.Impl.BlogDaoImpl;
+import com.csce4901.tnma.Models.GeneralUser;
+import com.csce4901.tnma.Models.Mentor;
+import com.csce4901.tnma.Models.Student;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import static com.csce4901.tnma.Constants.UserConstant.FS_USERS_COLLECTION;
+import static com.csce4901.tnma.Constants.UserConstant.GENERAL_USER_ROLE;
+import static com.csce4901.tnma.Constants.UserConstant.MENTOR_ROLE;
+import static com.csce4901.tnma.Constants.UserConstant.STUDENT_ROLE;
 
 
 public class Blogs extends Fragment {
@@ -29,6 +40,8 @@ public class Blogs extends Fragment {
 
     private Button createPostButton;
     RecyclerView postRecyclerView;
+    private int userRole;
+    ImageView img;
 
     public Blogs() {
         // Required empty public constructor
@@ -60,7 +73,43 @@ public class Blogs extends Fragment {
         createPostButton = view.findViewById(R.id.createBlogButton);
         postRecyclerView = view.findViewById(R.id.postsRecyclerView);
 
+        FirebaseConnector fbconnector = new FirebaseConnector();
+        fbconnector.firebaseSetup();
+
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        //Setup Visibility
+        FirebaseFirestore db = fbconnector.getDb();
+        db.collection(FS_USERS_COLLECTION)
+                .document(userEmail)
+                .get()
+                .addOnCompleteListener(task -> {
+                    GeneralUser generalUser = task.getResult().toObject(GeneralUser.class);
+                    userRole = generalUser.getRole();
+
+                    if(userRole == GENERAL_USER_ROLE)
+                    {
+                        createPostButton.setVisibility(View.GONE);
+                    }
+
+                    if(userRole == STUDENT_ROLE)
+                    {
+                        Student student = task.getResult().toObject(Student.class);
+                        if(!student.isRoleVerified())
+                        {
+                            createPostButton.setVisibility(View.GONE);
+                        }
+                    }
+                    if(userRole == MENTOR_ROLE)
+                    {
+                        Mentor mentor = task.getResult().toObject(Mentor.class);
+                        if(!mentor.isRoleVerified())
+                        {
+                            createPostButton.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
         createPostButton.setOnClickListener(this::onClick);
 
         //Recyclerview data
