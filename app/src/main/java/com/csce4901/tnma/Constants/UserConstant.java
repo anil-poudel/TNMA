@@ -24,6 +24,10 @@ public class UserConstant {
     public static final String FS_QUESTIONS_ANSWER = "answer";
     public static final String FS_QUESTIONS_ANSWERER = "answeredBy";
 
+    public static final String FS_CHATS_COLLECTION = "chats";
+    public static final String FS_CHATS_MSG = "message";
+    public static final String IS_SENDER_CHATS = "sender";
+    public static final String IS_RECEIVER_CHATS = "receiver";
 
     public static final int GENERAL_USER_ROLE = 1;
     public static final int STUDENT_ROLE = 2;

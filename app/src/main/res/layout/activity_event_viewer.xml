@@ -7,6 +7,9 @@
     android:id="@+id/main_layout"
     android:gravity="center"
     android:background="@color/PrimaryDark"
+
+
+
     >
 
     <androidx.cardview.widget.CardView
@@ -17,7 +20,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="@color/Gray">
+        app:cardBackgroundColor="@color/White"
+        app:cardCornerRadius="8dp"
+
+        app:cardElevation="8dp">
 
 
         <ImageView
@@ -111,7 +117,17 @@
             android:textStyle="bold"
             android:visibility="visible" />
 
+
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/thumbpin"
+        android:elevation="180dp"
+        android:visibility="visible" />
 
 
 </RelativeLayout>

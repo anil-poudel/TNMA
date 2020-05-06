@@ -242,7 +242,9 @@ public class GeneralUserDaoImpl implements GeneralUserDao {
                     int currUserRole = generalUser.getRole();
                     if(currUserRole != GENERAL_USER_ROLE){
                         Log.i(TAG, email + " : Not a general user.");
-
+                        if(menu != null && !generalUser.isRoleVerified()){
+                            menu.getItem(1).setVisible(false);
+                        }
                     }
                     else {
                         // disable ask a question & messaging for general user
