@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="News &amp; Events"
+                android:text="Events"
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/White"
                 />
@@ -132,7 +132,7 @@
             android:tint="@color/White"
             app:fabSize="normal"
             app:layout_anchor="@id/bottom_bar"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_ask" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

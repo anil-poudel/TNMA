@@ -33,7 +33,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.util.Objects;
 
 
@@ -48,9 +47,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     Snackbar snackbar;
     Dialog questionDialog;
 
-    //User Role
-    private int role = 1;
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +58,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         viewPager.setAdapter(adapter);
 
         viewPager.setCurrentItem(1);
-
 
         //Set home as default fragment
         viewPager.setCurrentItem(1);
@@ -82,8 +77,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //Set email on Drawer
         View headerView = navigationView.getHeaderView(0);
         TextView drawerEmail = headerView.findViewById(R.id.userEmailDrawer);
-        //TextView drawerName = headerView.findViewById(R.id.userNameDrawer);
-
 
         //Setup visibility of menu items in navigation drawer based on roles
         Menu drawer_menu = navigationView.getMenu();
@@ -121,6 +114,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
+
         homeBottomNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,16 +124,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Button previous = questionDialog.findViewById(R.id.view_questionsBtn);
                 EditText question_text = questionDialog.findViewById(R.id.question_text);
 
-                if(viewPager.getCurrentItem()==1 || viewPager.getCurrentItem()==3) {
+                if (viewPager.getCurrentItem() == 1 || viewPager.getCurrentItem() == 3) {
                     //Show Ask a Doctor
                     questionDialog.show();
 
                     //Submit question
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v)
-                        {
-                            if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        public void onClick(View v) {
+                            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                                 //Question Text -- check if question is valid
                                 String question = (question_text.getText()).toString();
                                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -164,25 +157,19 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 }
                 homeBottomNav.setImageResource(R.drawable.ic_ask);
                 viewPager.setCurrentItem(1);
+
+                homeBottomNav.setImageResource(R.drawable.ic_ask);
+                viewPager.setCurrentItem(1);
             }
         });
 
         LinearLayout newsBottomNav = findViewById(R.id.newsButton);
-        newsBottomNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(0);
-            }
-        });
+
+        newsBottomNav.setOnClickListener(v -> viewPager.setCurrentItem(0));
 
 
         LinearLayout blogBottomNav = findViewById(R.id.blogButton);
-        blogBottomNav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(2);
-            }
-        });
+        blogBottomNav.setOnClickListener(v -> viewPager.setCurrentItem(2));
 
         //Double click back to logout
         snackbar = Snackbar.make(drawerLayout, "Please press Back again to Logout.", Snackbar.LENGTH_SHORT);
@@ -195,22 +182,18 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         switch (menuItem.getItemId())
         {
             case (R.id.profileMenu):
-                Toast.makeText(Dashboard.this, "Profile Opened.", Toast.LENGTH_SHORT).show();
-                //If not first login, goto dashboard
                 Intent intent
                         = new Intent(this,
                         Profile.class);
                 startActivity(intent);
                 break;
             case (R.id.contactMenu):
-                Toast.makeText(Dashboard.this, "Contact Page Opened.", Toast.LENGTH_SHORT).show();
                 Intent intent2
                         = new Intent(this,
                         ContactPage.class);
                 startActivity(intent2);
                 break;
             case (R.id.donateMenu):
-                Toast.makeText(Dashboard.this, "Donation Page Opened.", Toast.LENGTH_SHORT).show();
                 Intent intent3
                         = new Intent(this,
                         donations.class);
@@ -247,8 +230,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case (R.id.message_Action):
-                Toast.makeText(Dashboard.this, "TODO: Direct Messaging", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(Dashboard.this, "Direct Messaging", Toast.LENGTH_SHORT).show();
+                //If not first login, goto dashboard
+                Intent intent
+                        = new Intent(this,
+                        messaging.class);
+                startActivity(intent);
                 break;
+
         }
         return true;
     }
