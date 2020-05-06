@@ -19,6 +19,10 @@ public class UserConstant {
     public static final String FS_LOGO = "dynamic-logo";
     public static final String FS_LOGO_DOC = "TNMA_LOGO";
     public static final String FS_QUESTIONS_COLLECTION = "questions";
+    public static final String FS_QUESTIONS_QUESTION = "question";
+    public static final String FS_QUESTIONS_ISANSWERED = "answered";
+    public static final String FS_QUESTIONS_ANSWER = "answer";
+    public static final String FS_QUESTIONS_ANSWERER = "answeredBy";
 
     public static final String FS_CHATS_COLLECTION = "chats";
     public static final String FS_CHATS_MSG = "message";

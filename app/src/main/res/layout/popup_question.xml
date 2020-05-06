@@ -23,6 +23,7 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_ask"
             android:layout_gravity="center"/>
+
         <EditText
             android:id="@+id/question_text"
             android:layout_margin="16dp"

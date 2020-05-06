@@ -15,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:text="Contact Form"
         android:fontFamily="@font/raleway_bold"
-        android:textColor="#ce3232"
+        android:textColor="@color/Accent"
         android:textSize="40sp"
         android:typeface="serif" />
 
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/btn_style3"
         android:elevation="4dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"

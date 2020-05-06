@@ -25,7 +25,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="@color/Primary"
+        android:background="@color/White"
         android:weightSum="10">
 
         <EditText
@@ -34,7 +34,8 @@
             android:layout_height="60dp"
             android:text=""
             android:hint="Add a comment..."
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/PrimaryDark"
             android:padding="5dp"
             android:layout_weight="9"
             android:background="@color/end"
@@ -47,7 +48,7 @@
             android:text="Post"
             android:textSize="18sp"
             android:fontFamily="@font/raleway_bold"
-            android:background="@drawable/btn_anim"
+            android:background="@drawable/btn_style3"
             android:layout_weight="1"
             />
 

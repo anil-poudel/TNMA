@@ -4,18 +4,24 @@ import java.util.Date;
 import java.util.List;
 
 public class Question {
+    String asker;
     String question;
-    List<String> answers;
-    List<String> answeredBy;
+    String answer;
+    String answeredBy;
     Boolean isAnswered = false;
 
     public Question(){ }
-    public Question( String question, Boolean isAnswered, List<String> answeredBy, List<String> answer) {
+    public Question( String asker, String question, Boolean isAnswered, String answeredBy, String answer) {
+        this.asker = asker;
         this.question = question;
-        this.answers = answer;
+        this.answer = answer;
         this.answeredBy = answeredBy;
         this.isAnswered = isAnswered;
     }
+
+    public String getAsker(){ return  asker;}
+
+    public void setAsker(){this.asker = asker;}
 
     public String getQuestion() {
         return question;
@@ -25,19 +31,17 @@ public class Question {
         this.question = question;
     }
 
-    public List<String> getAnswer() {
-        return answers;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setAnswer(List<String> answer) {
-        this.answers = answer;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    public List<String> getAnsweredBy() {
-        return answeredBy;
-    }
+    public String getAnsweredBy() {return answeredBy;}
 
-    public void setAnsweredBy(List<String> answeredBy) {
+    public void setAnsweredBy(String  answeredBy) {
         this.answeredBy = answeredBy;
     }
 
@@ -45,7 +49,7 @@ public class Question {
         return isAnswered;
     }
 
-    public void setAnswered(boolean answered) {
+    public void setAnswered(Boolean answered) {
         isAnswered = answered;
     }
 }

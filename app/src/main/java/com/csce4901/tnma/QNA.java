@@ -3,10 +3,17 @@ package com.csce4901.tnma;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.csce4901.tnma.DAO.Impl.QuestionDaoImpl;
+import com.csce4901.tnma.DAO.QuestionDao;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /**
@@ -23,6 +30,8 @@ public class QNA extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView qnaRecyclerView;
+    RecyclerView.LayoutManager layoutManagerQuestions;
 
     public QNA() {
         // Required empty public constructor
@@ -58,7 +67,15 @@ public class QNA extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_qna, container, false);
+        View view = inflater.inflate(R.layout.fragment_qna, container, false);
+        qnaRecyclerView = view.findViewById(R.id.qnaRecycler);
+
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        //Recyclerview data
+        FragmentActivity fragmentActivity = getActivity();
+        QuestionDao questionDao = new QuestionDaoImpl();
+        questionDao.getUserQuestions(userEmail, qnaRecyclerView, fragmentActivity, fragmentActivity);
+        return view;
     }
 }
