@@ -21,7 +21,6 @@ public class profile_event_viewer extends AppCompatActivity {
         listView = findViewById(R.id.list_event);
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        // gets array from string.xml- replace this from values in database
         EventDao eventDao = new EventDaoImpl();
         eventDao.getAllEventsListView(email, listView, this);
     }

@@ -3,31 +3,29 @@ package com.csce4901.tnma.DAO.Impl;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.csce4901.tnma.Connector.FirebaseConnector;
 import com.csce4901.tnma.DAO.QuestionDao;
+import com.csce4901.tnma.MainActivity;
 import com.csce4901.tnma.Models.GeneralUser;
-import com.csce4901.tnma.Models.Mentor;
 import com.csce4901.tnma.Models.Question;
-import com.csce4901.tnma.Models.Student;
+import com.csce4901.tnma.Models.User;
 import com.csce4901.tnma.QNA_Adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
+import static com.csce4901.tnma.Constants.UserConstant.ADMIN_ROLE;
 import static com.csce4901.tnma.Constants.UserConstant.FS_QUESTIONS_ANSWER;
 import static com.csce4901.tnma.Constants.UserConstant.FS_QUESTIONS_ANSWERER;
 import static com.csce4901.tnma.Constants.UserConstant.FS_QUESTIONS_COLLECTION;
@@ -50,7 +49,6 @@ public class QuestionDaoImpl implements QuestionDao {
     private FirebaseConnector fbConnector = new FirebaseConnector();
 
     int[] role = new int[1];
-
 
     @Override
     public void addQuestion(String email, String question, Boolean isAnswered, String answer, String answeredBy) {
@@ -234,6 +232,67 @@ public class QuestionDaoImpl implements QuestionDao {
                     }
 
                 }
+            }
+        });
+    }
+
+    @Override
+    public void getAllQuestionsListView(String email, ListView listView, Context ctx) {
+        fbConnector.firebaseSetup();
+        FirebaseFirestore db = fbConnector.getDb();
+        // Check current user role
+        DocumentReference docRef = db.collection(FS_USERS_COLLECTION).document(email);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                assert document != null;
+                if (document.exists()) {
+                    User generalUser = document.toObject(GeneralUser.class);
+                    int currUserRole = generalUser.getRole();
+                    // Display questions asked by current user only
+                    if(currUserRole == STUDENT_ROLE){
+                        db.collection(FS_QUESTIONS_COLLECTION)
+                                .get()
+                                .addOnCompleteListener(t1 -> {
+                                    if (t1.isSuccessful()) {
+                                        List<String> question_list_1 = new LinkedList<>();
+                                        for (QueryDocumentSnapshot doc1 : t1.getResult()) {
+                                            Question question = doc1.toObject(Question.class);
+                                            if(question.getAsker().equals(email)){
+                                                question_list_1.add(question.getQuestion());
+                                            }
+                                        }
+                                        String[] question_title = question_list_1.toArray(new String[0]);
+                                        ArrayAdapter arrayAdapter = new ArrayAdapter(ctx,android.R.layout.simple_list_item_1,question_title);
+                                        listView.setAdapter(arrayAdapter);
+                                    } else {
+                                        Log.e(TAG, "Error getting documents: ", t1.getException());
+                                    }
+                                });
+                        // Display all questions for Mentor/Admin role
+                    } else if (currUserRole == MENTOR_ROLE || currUserRole == ADMIN_ROLE) {
+                        db.collection(FS_QUESTIONS_COLLECTION)
+                                .get()
+                                .addOnCompleteListener(t2 -> {
+                                    if (t2.isSuccessful()) {
+                                        List<String> question_list_2 = new LinkedList<>();
+                                        for (QueryDocumentSnapshot doc2 : t2.getResult()) {
+                                            Question question = doc2.toObject(Question.class);
+                                            question_list_2.add(question.getQuestion());
+                                        }
+                                        String[] question_title = question_list_2.toArray(new String[0]);
+                                        ArrayAdapter arrayAdapter = new ArrayAdapter(ctx,android.R.layout.simple_list_item_1,question_title);
+                                        listView.setAdapter(arrayAdapter);
+                                    } else {
+                                        Log.e(TAG, "Error getting documents: ", t2.getException());
+                                    }
+                                });
+                    }
+                } else {
+                    Log.d(MainActivity.class.getName(), "No such document with email " + email);
+                }
+            } else {
+                Log.d(MainActivity.class.getName(), "get failed with ", task.getException());
             }
         });
     }
