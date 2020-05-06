@@ -29,8 +29,10 @@
             android:id="@+id/list_event"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="2dp" /></LinearLayout>
+            android:outlineAmbientShadowColor="@color/White"
+            android:outlineSpotShadowColor="@color/White"
+            android:elevation="10dp"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="4dp" /></LinearLayout>
 
 </RelativeLayout>

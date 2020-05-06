@@ -46,11 +46,11 @@
         android:id="@+id/userrole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/role_arrays"
-        android:prompt="@string/role_prompt"
         android:layout_below="@+id/SlideViewPager"
+        android:layout_centerInParent="true"
         android:layout_marginTop="15dp"
-        android:layout_centerInParent="true"/>
+        android:entries="@array/role_arrays"
+        android:prompt="@string/role_prompt" />
 
     <EditText
         android:id="@+id/fnamefield"
@@ -84,7 +84,7 @@
     android:layout_centerInParent="true"
     android:layout_marginTop="15dp"
     android:ems="10"
-    android:hint="city"
+    android:hint="City"
     android:singleLine="true"
     android:visibility="invisible"
     />
@@ -98,7 +98,7 @@
         android:ems="10"
         android:visibility="invisible"
         android:singleLine="true"
-        android:hint="state"
+        android:hint="State"
         />
 
 

@@ -6,10 +6,11 @@
     android:padding="10dp">
 
     <ImageView
+        android:id="@+id/profile_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/profile_image"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        app:srcCompat="@drawable/ic_profile" />
 
     <TextView
         android:layout_width="wrap_content"
