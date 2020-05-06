@@ -16,25 +16,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/Primary"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-            >
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/ic_launcher"
-                app:srcCompat="@drawable/ic_profile" />
+                android:src="@drawable/ic_profile"
+                app:srcCompat="@drawable/ic_profile"
+                tools:srcCompat="@drawable/ic_profile" />
 
             <TextView
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/username"
-                android:text="User"
-                android:textSize="18sp"
+                android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
+                android:text="User"
                 android:textColor="#fff"
-                android:textStyle="bold"
-                android:layout_marginStart="25dp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </androidx.appcompat.widget.Toolbar>
 
