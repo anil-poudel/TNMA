@@ -18,6 +18,12 @@ public class UserConstant {
     public static final String FS_DONATIONS_DETAILS= "details";
     public static final String FS_LOGO = "dynamic-logo";
     public static final String FS_LOGO_DOC = "TNMA_LOGO";
+    public static final String FS_QUESTIONS_COLLECTION = "questions";
+    public static final String FS_QUESTIONS_QUESTION = "question";
+    public static final String FS_QUESTIONS_ISANSWERED = "answered";
+    public static final String FS_QUESTIONS_ANSWER = "answer";
+    public static final String FS_QUESTIONS_ANSWERER = "answeredBy";
+
 
     public static final int GENERAL_USER_ROLE = 1;
     public static final int STUDENT_ROLE = 2;

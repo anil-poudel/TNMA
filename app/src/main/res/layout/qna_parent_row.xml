@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/qna_ParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    android:background="@color/PrimaryDark"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/qnaQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question Goes Here"
+            android:textSize="20sp"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/Black"
+            android:drawableStart="@drawable/ic_query"
+            android:drawablePadding="10dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/Gray"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
+        <TextView
+            android:id="@+id/qnaAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Answer goes here"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="18sp"
+            android:textColor="@color/PrimaryDark"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/Gray"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|start"
+                android:text="Answered By:"
+                android:layout_margin="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/Accent"
+                />
+            <TextView
+                android:id="@+id/qnaAnsweredBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|end"
+                android:text="guest@tnma.org"
+                android:layout_margin="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/Accent"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/qnaAnswerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:padding="5dp"
+            android:background="@drawable/btn_anim"
+            android:layout_gravity="center"
+            android:text="Answer this question"
+            android:textSize="12sp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
