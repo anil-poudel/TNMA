@@ -31,7 +31,7 @@
 
     <string name="proInformation">View additional profile information here, along with your private messages.</string>
     <string name="proRegisteredEvents">View events you have registered for.</string>
-    <string name="proRecentQuestions">View questions you have recently asked.</string>
+    <string name="proRecentQuestions">Students: view questions you have recently asked. Mentors: view all questions.</string>
 
     <string name="proDonations">If you are interested, you can also find out more about our sponsor tiers at www.tnmaonline.org!</string>
 
