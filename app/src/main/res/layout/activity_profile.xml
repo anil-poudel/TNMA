@@ -7,14 +7,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home">
 
+    <Toolbar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Primary"
+        android:title="Profile"
+        android:titleTextColor="@color/White"
+        android:titleTextAppearance="@style/TextAppearance.AppCompat.Title"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/titlebar"
+        >
     <LinearLayout
         android:id="@+id/layout1"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/layout2"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        >
 
         <androidx.cardview.widget.CardView
             android:layout_width="180dp"
@@ -106,7 +121,7 @@
     <LinearLayout
         android:id="@+id/layout2"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="580dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
@@ -121,21 +136,21 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/popup"
-                    android:layout_width="380dp"
+                    android:layout_width="match_parent"
                     android:layout_height="143dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="6dp">
+                    app:cardElevation="6dp"
+                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="143dp"
+                        android:layout_height="match_parent"
                         android:background="@drawable/dashboard_item_7"
                         android:orientation="vertical"
-
-                        android:paddingTop="0dp">
+>
 
                         <View
                             android:layout_width="80dp"
@@ -223,7 +238,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="85dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="6dp">
@@ -291,7 +306,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="6dp">
@@ -354,7 +369,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="6dp">
@@ -403,7 +418,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
                             android:ellipsize="end"
-                            android:maxLines="3"
+                            android:maxLines="2"
                             android:text="@string/proDonations"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/item_title"
@@ -415,7 +430,7 @@
                         <TextView
                             android:id="@+id/buttonPage"
                             android:layout_width="wrap_content"
-                            android:layout_height="38dp"
+                            android:layout_height="18dp"
                             android:gravity="center"
                             android:text="@string/proSponsor"
                             android:textStyle="bold"
@@ -430,32 +445,23 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                    <Button
-                        android:id="@+id/profileHomeButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Return to Home"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
 
-
         </androidx.core.widget.NestedScrollView>
-
+    </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/profileHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return to Home"
+        android:textStyle="bold"
+        android:background="@drawable/btn_anim"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        />
 
 </RelativeLayout>
